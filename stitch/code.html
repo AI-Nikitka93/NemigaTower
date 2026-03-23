@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-dim": "#10131a",
+              "on-background": "#e1e2ec",
+              "outline": "#99907c",
+              "on-primary-fixed": "#241a00",
+              "on-primary-container": "#554300",
+              "surface-container-low": "#191b23",
+              "surface-bright": "#363941",
+              "primary-fixed-dim": "#e9c349",
+              "on-primary": "#3c2f00",
+              "surface-variant": "#32353d",
+              "primary-fixed": "#ffe088",
+              "on-surface": "#e1e2ec",
+              "secondary": "#dac58d",
+              "secondary-fixed-dim": "#dac58d",
+              "secondary-fixed": "#f7e1a6",
+              "tertiary-fixed": "#dbe1ff",
+              "on-secondary-fixed-variant": "#544519",
+              "primary": "#f2ca50",
+              "background": "#10131a",
+              "inverse-on-surface": "#2d3038",
+              "primary-container": "#d4af37",
+              "on-secondary": "#3c2f05",
+              "surface-container-lowest": "#0b0e15",
+              "on-surface-variant": "#d0c5af",
+              "tertiary-container": "#97b0ff",
+              "on-tertiary-fixed": "#00174b",
+              "on-error-container": "#ffdad6",
+              "on-error": "#690005",
+              "tertiary": "#bfcdff",
+              "on-tertiary-container": "#254188",
+              "surface": "#10131a",
+              "inverse-primary": "#735c00",
+              "on-tertiary": "#082b72",
+              "secondary-container": "#544519",
+              "on-secondary-container": "#c8b37d",
+              "inverse-surface": "#e1e2ec",
+              "on-primary-fixed-variant": "#574500",
+              "on-tertiary-fixed-variant": "#27438a",
+              "tertiary-fixed-dim": "#b4c5ff",
+              "surface-container-high": "#272a32",
+              "surface-container": "#1d1f27",
+              "error": "#ffb4ab",
+              "surface-container-highest": "#32353d",
+              "error-container": "#93000a",
+              "surface-tint": "#e9c349",
+              "on-secondary-fixed": "#241a00",
+              "outline-variant": "#4d4635"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .text-gradient-gold {
+            background: linear-gradient(to right, #f2ca50, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .bg-gold-gradient {
+            background: linear-gradient(135deg, #f2ca50 0%, #d4af37 100%);
+        }
+        input[type='range'] {
+            -webkit-appearance: none;
+            background: #32353d;
+            height: 4px;
+            border-radius: 2px;
+        }
+        input[type='range']::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 18px;
+            width: 18px;
+            border-radius: 50%;
+            background: #f2ca50;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(242, 202, 80, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary/30">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-[#10131a]/80 backdrop-blur-xl shadow-2xl shadow-black/50">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-8 py-4 relative">
+<div class="text-xl font-bold tracking-tighter text-[#D4AF37] font-headline">НЕМИГА-ТАУЭР</div>
+<div class="hidden md:flex items-center space-x-8 font-headline font-bold tracking-tight">
+<a class="text-slate-400 hover:text-[#D4AF37] transition-colors duration-300" href="#">Арендаторам</a>
+<a class="text-slate-400 hover:text-[#D4AF37] transition-colors duration-300" href="#">Бизнес-центр</a>
+<a class="text-slate-400 hover:text-[#D4AF37] transition-colors duration-300" href="#">Галерея</a>
+<a class="text-slate-400 hover:text-[#D4AF37] transition-colors duration-300" href="#">Новости</a>
+<a class="text-[#D4AF37] border-b-2 border-[#D4AF37] pb-1" href="#">Расчет стоимости</a>
+<a class="text-slate-400 hover:text-[#D4AF37] transition-colors duration-300" href="#">Контакты</a>
+</div>
+<button class="bg-gold-gradient text-on-primary-fixed px-6 py-2 rounded-xl font-headline font-bold text-sm hover:opacity-80 transition-all duration-300 scale-95 active:scale-90">
+            Заказать звонок
+        </button>
+<div class="bg-gradient-to-r from-transparent via-[#D4AF37]/20 to-transparent h-[1px] bottom-0 left-0 right-0 absolute"></div>
+</div>
+</nav>
+<main class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
+<!-- Hero Section -->
+<header class="mb-16 text-center">
+<h1 class="font-headline text-4xl md:text-6xl font-extrabold tracking-tight mb-6">
+            Рассчитайте <span class="text-gradient-gold">инвестицию</span> в ваш успех
+        </h1>
+<p class="text-on-surface-variant max-w-2xl mx-auto text-lg leading-relaxed">
+            Персонализированный калькулятор аренды для вашего будущего офиса в самом сердце деловой активности.
+        </p>
+</header>
+<!-- Main Bento Content -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+<!-- Calculator Panel -->
+<div class="lg:col-span-8 flex flex-col gap-8">
+<div class="glass-panel p-8 rounded-xl bg-surface-container-low shadow-sm">
+<div class="space-y-12">
+<!-- Area Slider -->
+<div class="space-y-6">
+<div class="flex justify-between items-end">
+<label class="font-headline font-bold text-xl uppercase tracking-wider text-on-surface">Выбор площади</label>
+<div class="text-3xl font-headline font-extrabold text-primary">250 <span class="text-sm font-normal text-on-surface-variant">м²</span></div>
+</div>
+<input class="w-full" max="1000" min="50" type="range" value="250"/>
+<div class="flex justify-between text-xs font-label text-on-surface-variant tracking-widest uppercase">
+<span>50 м²</span>
+<span>1000 м²</span>
+</div>
+</div>
+<!-- Options Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<!-- Finish Type -->
+<div class="space-y-4">
+<label class="font-headline font-bold text-sm uppercase tracking-widest text-on-surface-variant">Тип отделки</label>
+<div class="flex flex-col gap-3">
+<button class="flex items-center justify-between p-4 rounded-xl border border-primary/40 bg-primary/5 text-primary">
+<span class="font-semibold">Shell &amp; Core</span>
+<span class="material-symbols-outlined text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</button>
+<button class="flex items-center justify-between p-4 rounded-xl border border-white/5 bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface-variant">
+<span class="font-semibold">Turnkey (Под ключ)</span>
+<span class="material-symbols-outlined text-sm" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</button>
+</div>
+</div>
+<!-- Floor Type -->
+<div class="space-y-4">
+<label class="font-headline font-bold text-sm uppercase tracking-widest text-on-surface-variant">Выбор этажа</label>
+<div class="flex flex-col gap-3">
+<button class="flex items-center justify-between p-4 rounded-xl border border-white/5 bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface-variant">
+<span class="font-semibold">Офис (5-20 этажи)</span>
+<span class="material-symbols-outlined text-sm" data-icon="radio_button_unchecked">radio_button_unchecked</span>
+</button>
+<button class="flex items-center justify-between p-4 rounded-xl border border-primary/40 bg-primary/5 text-primary">
+<span class="font-semibold">Sky Office (30+ этажи)</span>
+<span class="material-symbols-outlined text-sm" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Advantages Bento Subgrid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="glass-panel p-6 rounded-xl bg-surface-container-low flex flex-col items-center text-center space-y-3">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="verified">verified</span>
+</div>
+<h3 class="font-headline font-bold text-sm">Прозрачное ценообразование</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed">Никаких скрытых платежей. Все включено в контракт.</p>
+</div>
+<div class="glass-panel p-6 rounded-xl bg-surface-container-low flex flex-col items-center text-center space-y-3">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+</div>
+<h3 class="font-headline font-bold text-sm">Фиксированные ставки</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed">Защита от инфляции и колебаний рынка на весь срок.</p>
+</div>
+<div class="glass-panel p-6 rounded-xl bg-surface-container-low flex flex-col items-center text-center space-y-3">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="handshake">handshake</span>
+</div>
+<h3 class="font-headline font-bold text-sm">Индивидуальные условия</h3>
+<p class="text-xs text-on-surface-variant leading-relaxed">Особые преференции для арендаторов от 500 м².</p>
+</div>
+</div>
+</div>
+<!-- Result Sidebar -->
+<div class="lg:col-span-4">
+<div class="glass-panel rounded-xl bg-surface-container-low sticky top-32 overflow-hidden shadow-2xl">
+<div class="aspect-video w-full bg-surface-container relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-low to-transparent z-10"></div>
+<img alt="Luxury Office Interior" class="w-full h-full object-cover" data-alt="Interior of a luxury modern glass office at sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC253o2PRpFeQF99rk5g80zaGkxcZKVWFUYtxXJVspawhfwfbAZG-po_o9ewHKbM62YZJk6P_Bse0o8jDwd6_XHM2TgzW-czKAzsQYJSQU_0wy_QETOdnA2KfcuwdOnzqtSb-rtYX1NhSprTGra9iNBCBazDhq-F-Fz0RhkaNp1bUkJnLwvPZfSHd9z1ccr6ooO0iWMhmgbclCq8d45O0wjMEcYNi56DdI9pFHSDtOjdqT-j7NXzgiTNysy3itrfETF51CZriyCcx28"/>
+<div class="absolute bottom-4 left-6 z-20">
+<span class="bg-primary text-on-primary text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest">Premium Choice</span>
+</div>
+</div>
+<div class="p-8 space-y-8">
+<div>
+<span class="font-label text-xs uppercase tracking-widest text-on-surface-variant">Предварительный расчет</span>
+<div class="mt-4 flex flex-col gap-1">
+<div class="text-5xl font-headline font-extrabold text-gradient-gold tracking-tight">8 250</div>
+<div class="text-on-surface-variant font-medium flex items-center gap-2">
+<span>BYN / месяц</span>
+<span class="w-1 h-1 rounded-full bg-outline-variant"></span>
+<span>≈ 2 540 USD</span>
+</div>
+</div>
+</div>
+<div class="space-y-4 pt-6 border-t border-white/5">
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Базовая ставка (м²)</span>
+<span class="font-semibold text-on-surface">33 BYN</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Коэффициент этажности</span>
+<span class="font-semibold text-on-surface">x 1.15</span>
+</div>
+<div class="flex justify-between text-sm">
+<span class="text-on-surface-variant">Обслуживание (OPEX)</span>
+<span class="font-semibold text-on-surface">Включено</span>
+</div>
+</div>
+<button class="w-full bg-gold-gradient text-on-primary-fixed py-5 rounded-xl font-headline font-extrabold text-base hover:shadow-[0_0_20px_rgba(212,175,55,0.4)] transition-all duration-300 transform hover:-translate-y-1 active:scale-95">
+                        Забронировать консультацию
+                    </button>
+<p class="text-[10px] text-center text-on-surface-variant uppercase tracking-widest leading-relaxed">
+                        Расчет не является публичной офертой. <br/> Точные условия зависят от срока договора.
+                    </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-white/5 bg-[#10131a]">
+<div class="max-w-7xl mx-auto px-8 py-12">
+<div class="flex flex-col md:flex-row justify-between items-center space-y-8 md:space-y-0">
+<div class="flex flex-col items-center md:items-start gap-4">
+<div class="text-[#D4AF37] font-bold font-headline tracking-tighter text-lg uppercase">Немига-Тауэр</div>
+<div class="flex flex-col items-center md:items-start gap-1">
+<div class="font-['Inter'] text-[10px] tracking-[0.2em] uppercase opacity-70 text-on-surface">
+                        © 2024 Немига-Тауэр. Developed by AI_Nikitka93
+                    </div>
+</div>
+</div>
+<div class="flex flex-wrap justify-center gap-8 font-['Inter'] text-sm tracking-wide uppercase opacity-70 text-on-surface">
+<a class="hover:text-[#D4AF37] transition-colors" href="#">Политика конфиденциальности</a>
+<a class="hover:text-[#D4AF37] transition-colors" href="#">Условия использования</a>
+<a class="hover:text-[#D4AF37] transition-colors" href="#">Карта сайта</a>
+</div>
+<div class="flex gap-6">
+<a class="text-on-surface hover:text-[#D4AF37] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="share">share</span>
+</a>
+<a class="text-on-surface hover:text-[#D4AF37] transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+</a>
+</div>
+</div>
+<!-- Disclaimer -->
+<div class="mt-8 pt-8 border-t border-white/5 text-center">
+<p class="text-[10px] tracking-[0.1em] uppercase text-on-surface-variant opacity-60 leading-relaxed">
+                Тестовый проект AI_Nikitka93. Реального объекта не существует.
+            </p>
+</div>
+</div>
+</footer>
+</body></html>

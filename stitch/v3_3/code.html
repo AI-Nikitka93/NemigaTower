@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-lowest": "#0b0e15",
+                        "primary-container": "#d4af37",
+                        "on-secondary": "#3c2f05",
+                        "inverse-on-surface": "#2d3038",
+                        "background": "#10131a",
+                        "primary": "#f2ca50",
+                        "on-secondary-fixed-variant": "#544519",
+                        "tertiary-fixed": "#dbe1ff",
+                        "secondary-fixed-dim": "#dac58d",
+                        "secondary-fixed": "#f7e1a6",
+                        "secondary": "#dac58d",
+                        "primary-fixed": "#ffe088",
+                        "on-surface": "#e1e2ec",
+                        "surface-variant": "#32353d",
+                        "on-primary": "#3c2f00",
+                        "surface-container-low": "#191b23",
+                        "surface-bright": "#363941",
+                        "primary-fixed-dim": "#e9c349",
+                        "outline": "#99907c",
+                        "on-primary-fixed": "#241a00",
+                        "on-primary-container": "#554300",
+                        "on-background": "#e1e2ec",
+                        "surface-dim": "#10131a",
+                        "outline-variant": "#4d4635",
+                        "on-secondary-fixed": "#241a00",
+                        "surface-tint": "#e9c349",
+                        "surface-container-highest": "#32353d",
+                        "error-container": "#93000a",
+                        "tertiary-fixed-dim": "#b4c5ff",
+                        "surface-container-high": "#272a32",
+                        "surface-container": "#1d1f27",
+                        "error": "#ffb4ab",
+                        "on-tertiary-fixed-variant": "#27438a",
+                        "on-primary-fixed-variant": "#574500",
+                        "on-secondary-container": "#c8b37d",
+                        "inverse-surface": "#e1e2ec",
+                        "secondary-container": "#544519",
+                        "on-tertiary": "#082b72",
+                        "inverse-primary": "#735c00",
+                        "surface": "#10131a",
+                        "on-tertiary-container": "#254188",
+                        "tertiary": "#bfcdff",
+                        "on-error": "#690005",
+                        "on-tertiary-fixed": "#00174b",
+                        "on-error-container": "#ffdad6",
+                        "tertiary-container": "#97b0ff",
+                        "on-surface-variant": "#d0c5af"
+                    },
+                    fontFamily: {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(29, 31, 39, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        .text-glow {
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #f2ca50 0%, #d4af37 100%);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container/30">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#10131a]/80 backdrop-blur-xl border-b border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
+<div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto font-['Manrope'] antialiased tracking-wide">
+<div class="text-xl font-bold tracking-tighter text-[#D4AF37]">
+                НЕМИГА ТАУЭР
+            </div>
+<nav class="hidden md:flex items-center gap-8 text-sm uppercase">
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Арендаторам</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Бизнес-центр</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Галерея</a>
+<a class="text-[#D4AF37] border-b-2 border-[#D4AF37] pb-1 font-semibold" href="#">Новости</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Расчет стоимости</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Контакты</a>
+</nav>
+<button class="px-6 py-2 bg-[#D4AF37] text-[#3c2f00] font-bold text-sm rounded-full active:scale-95 transition-all duration-200 ease-in-out shadow-[0_0_15px_rgba(212,175,55,0.2)]">
+                Личный кабинет
+            </button>
+</div>
+</header>
+<main class="pt-32 pb-24 px-6 md:px-12 max-w-7xl mx-auto">
+<!-- Header Section -->
+<div class="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<span class="text-primary font-label text-[10px] uppercase tracking-[0.2em] mb-4 block">Лента обновлений</span>
+<h1 class="font-headline text-5xl md:text-7xl font-extrabold text-on-surface tracking-tight leading-none">
+                    События <span class="text-[#D4AF37]">&amp;</span> Новости
+                </h1>
+</div>
+<div class="flex items-center gap-4 text-on-surface-variant font-label text-xs uppercase tracking-widest bg-surface-container-low px-4 py-2 rounded-full border border-outline-variant/20">
+<span class="material-symbols-outlined text-[16px]">filter_list</span>
+<span>Архив 2024</span>
+</div>
+</div>
+<!-- Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Main News Card (Hero) -->
+<div class="md:col-span-8 group relative overflow-hidden rounded-xl glass-card aspect-[16/9] flex flex-col justify-end p-8 border border-primary-container/20">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover opacity-40 group-hover:scale-110 transition-transform duration-700" data-alt="Panoramic office workspace with city view" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCDWNuPvN2smSZfqFE4NE9Zsuf1icFV5-0qrV0ohHlvegcN2vtiqS5F_UR6Z_OEi1HTs4y7-r-msjXYKGcU9tCSqOoINp6iCrJ9__P1YRoukUa86N7sF5TLgMTIAwXFPZZ-S5qjSq61_hTaYaSpCpUWuwOLfczQ9Y2piEX6k8EKnc8hy_tgMj5e8M4ktykYyLsyVsE1Ap8hD5awtrctEkBB3SY4IaCwyzcLNdLsUR8t1MZJhIshXF4cimRnFNcy5xI0GvsCN3Z6gMET"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+</div>
+<div class="relative z-10 space-y-4 max-w-2xl">
+<div class="flex items-center gap-3">
+<span class="px-3 py-1 bg-primary text-on-primary text-[10px] font-bold uppercase rounded">Премьера</span>
+<span class="text-on-surface-variant text-xs font-label">24 Октября</span>
+</div>
+<h2 class="font-headline text-3xl md:text-5xl font-bold leading-tight group-hover:text-primary transition-colors duration-300">
+                        Открытие панорамного коворкинга на 35 этаже
+                    </h2>
+<p class="text-on-surface-variant text-base max-w-lg leading-relaxed">
+                        Новое пространство для работы и нетворкинга с обзором 360 градусов на город. Доступно для резидентов круглосуточно.
+                    </p>
+<button class="flex items-center gap-2 text-primary font-bold text-sm tracking-widest uppercase pt-4 hover:translate-x-2 transition-transform">
+                        Подробнее <span class="material-symbols-outlined">arrow_right_alt</span>
+</button>
+</div>
+</div>
+<!-- Medium Card 1 -->
+<div class="md:col-span-4 group relative overflow-hidden rounded-xl glass-card p-8 flex flex-col justify-between hover:bg-surface-container-high transition-all duration-500">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="text-on-surface-variant text-[10px] font-label uppercase">Важное</span>
+</div>
+<div class="space-y-4">
+<h3 class="font-headline text-2xl font-bold leading-snug">График работы в праздничные дни</h3>
+<p class="text-on-surface-variant text-sm line-clamp-2">Информируем об изменениях в работе сервисных служб и администрации в период ноябрьских праздников.</p>
+</div>
+<div class="pt-6 border-t border-white/5 mt-6">
+<span class="text-xs text-on-surface-variant">Обновлено 2 часа назад</span>
+</div>
+</div>
+<!-- Medium Card 2 (Sky Restaurant) -->
+<div class="md:col-span-5 group relative overflow-hidden rounded-xl glass-card p-1 min-h-[400px]">
+<div class="w-full h-full p-8 flex flex-col justify-end relative overflow-hidden rounded-lg">
+<img class="absolute inset-0 w-full h-full object-cover opacity-30 group-hover:scale-105 transition-transform duration-500" data-alt="Evening restaurant setting with warm lights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBoKQosoGGUUSfuYBdXzjKGRsB0RMVfXdeJcjK7yjmAzfcFxVwxclN2lLlkWV68rE7xkiDfibXkDlWgDjF9G3k65UAV-K-OKR-qtzSHzuT9WK4cbbY6bAiU7py46c6DsFzqE1OrWDW2BeXjHsvm6qa7dJsF0O6p4xh5kJdK3jiUIHc0r1VZAEUVfz-x1R1fhUd-4JqP4DKVLt_XDWJP9UVJ49-EFzEVHDbIgzyPfIe9aNAbbEPiWQs6qm_R_uCFqW1vzc3oA0L9td0o"/>
+<div class="absolute inset-0 bg-gradient-to-t from-background to-transparent"></div>
+<div class="relative z-10 space-y-4">
+<span class="text-primary text-[10px] font-bold uppercase tracking-widest">Мероприятие</span>
+<h3 class="font-headline text-2xl font-bold">Вечерний бизнес-нетворкинг в ресторане 'Sky'</h3>
+<div class="flex items-center gap-4 text-xs text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">schedule</span> 19:00</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">location_on</span> 40 Этаж</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Small Card 1 (FaceID) -->
+<div class="md:col-span-3 group rounded-xl glass-card p-8 hover:bg-surface-container-high transition-all">
+<div class="h-full flex flex-col justify-between">
+<div class="w-12 h-12 rounded-lg bg-surface-container-highest flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary" data-icon="face">face</span>
+</div>
+<div class="space-y-3">
+<h4 class="font-headline text-xl font-bold">Обновление системы FaceID</h4>
+<p class="text-on-surface-variant text-xs leading-relaxed">Бесшовный доступ во все зоны БЦ без использования карт и смартфонов.</p>
+</div>
+</div>
+</div>
+<!-- Small Card 2 (Innova) -->
+<div class="md:col-span-4 group rounded-xl glass-card p-8 flex flex-col justify-between border-l-4 border-primary">
+<div>
+<span class="text-[10px] font-bold text-primary uppercase mb-2 block">Новый резидент</span>
+<h4 class="font-headline text-2xl font-bold tracking-tight mb-4">Технологический гигант 'Innova'</h4>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-white/5 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="rocket">rocket</span>
+</div>
+<div class="text-xs">
+<p class="text-on-surface">Занимает 12-14 этажи</p>
+<p class="text-on-surface-variant">Сектор А</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="mt-24 bg-[#10131a] border-t border-white/10 py-12 px-8">
+<div class="w-full flex flex-col md:flex-row justify-between items-center gap-6 max-w-7xl mx-auto">
+<div class="text-center md:text-left">
+<div class="font-manrope font-bold text-lg text-[#D4AF37] mb-2">Немига-Тауэр</div>
+<p class="text-slate-500 text-xs uppercase tracking-widest">The Peak of Business Excellence</p>
+</div>
+<div class="flex gap-8 text-slate-500 text-sm">
+<a class="hover:text-[#D4AF37] transition-colors" href="#">Политика конфиденциальности</a>
+<a class="hover:text-[#D4AF37] transition-colors" href="#">Условия использования</a>
+<a class="hover:text-[#D4AF37] transition-colors" href="#">Документация</a>
+</div>
+<div class="text-slate-500 text-[10px] font-label font-medium opacity-50 mb-1">Тестовый проект AI_Nikitka93. Реального объекта не существует.</div><div class="text-slate-500 text-[10px] font-label font-medium opacity-50">
+                © 2024 Developed by AI_Nikitka93
+            </div>
+</div>
+</footer>
+<!-- Bottom Navigation (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center py-4 px-6 pb-safe bg-[#1d1f27]/90 backdrop-blur-md rounded-t-2xl z-50 border-t border-white/5 shadow-[0_-10px_40px_rgba(0,0,0,0.4)]">
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-inter text-[10px] font-bold uppercase tracking-wider mt-1">Главная</span>
+</a>
+<a class="flex flex-col items-center justify-center text-[#D4AF37] scale-110" href="#">
+<span class="material-symbols-outlined" data-icon="newspaper" style="font-variation-settings: 'FILL' 1;">newspaper</span>
+<span class="font-inter text-[10px] font-bold uppercase tracking-wider mt-1">Новости</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-white transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="font-inter text-[10px] font-bold uppercase tracking-wider mt-1">Связь</span>
+</a>
+</nav>
+</body></html>

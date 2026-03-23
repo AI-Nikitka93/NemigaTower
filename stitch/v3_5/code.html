@@ -1,0 +1,267 @@
+<html class="dark" lang="ru"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+          tailwind.config = {
+            darkMode: "class",
+            theme: {
+              extend: {
+                colors: {
+                  "surface-container-high": "#272a32",
+                  "on-surface-variant": "#d0c5af",
+                  "primary": "#f2ca50",
+                  "surface-container": "#1d1f27",
+                  "on-primary": "#3c2f00",
+                  "on-secondary-fixed": "#241a00",
+                  "surface-variant": "#32353d",
+                  "on-primary-container": "#554300",
+                  "primary-fixed-dim": "#e9c349",
+                  "on-tertiary-container": "#254188",
+                  "secondary-container": "#544519",
+                  "on-tertiary": "#082b72",
+                  "on-error-container": "#ffdad6",
+                  "on-background": "#e1e2ec",
+                  "error": "#ffb4ab",
+                  "outline": "#99907c",
+                  "tertiary": "#bfcdff",
+                  "on-primary-fixed": "#241a00",
+                  "secondary-fixed-dim": "#dac58d",
+                  "surface-container-low": "#191b23",
+                  "on-tertiary-fixed-variant": "#27438a",
+                  "tertiary-fixed-dim": "#b4c5ff",
+                  "secondary-fixed": "#f7e1a6",
+                  "surface-container-lowest": "#0b0e15",
+                  "on-tertiary-fixed": "#00174b",
+                  "on-secondary-fixed-variant": "#544519",
+                  "background": "#10131a",
+                  "on-surface": "#e1e2ec",
+                  "on-secondary-container": "#c8b37d",
+                  "primary-fixed": "#ffe088",
+                  "inverse-primary": "#735c00",
+                  "on-error": "#690005",
+                  "surface-dim": "#10131a",
+                  "primary-container": "#d4af37",
+                  "surface-tint": "#e9c349",
+                  "tertiary-container": "#97b0ff",
+                  "error-container": "#93000a",
+                  "surface": "#10131a",
+                  "on-primary-fixed-variant": "#574500",
+                  "outline-variant": "#4d4635",
+                  "inverse-surface": "#e1e2ec",
+                  "surface-bright": "#363941",
+                  "on-secondary": "#3c2f05",
+                  "inverse-on-surface": "#2d3038",
+                  "secondary": "#dac58d",
+                  "surface-container-highest": "#32353d",
+                  "tertiary-fixed": "#dbe1ff"
+                },
+                fontFamily: {
+                  "headline": ["Manrope"],
+                  "body": ["Inter"],
+                  "label": ["Inter"]
+                },
+                borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+              },
+            },
+          }
+        </script>
+<style>
+            .material-symbols-outlined {
+                font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            }
+            .glass-card {
+                background: rgba(255, 255, 255, 0.03);
+                backdrop-filter: blur(20px);
+            }
+            .glow-hover:hover {
+                box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            }
+        </style>
+</head>
+<body class="bg-background text-on-surface font-body selection:bg-primary-container selection:text-on-primary">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#10131a]/80 backdrop-blur-xl border-b border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.3)] font-['Manrope'] antialiased tracking-wide">
+<div class="flex justify-between items-center px-8 py-4 max-w-[1440px] mx-auto w-full">
+<div class="text-xl font-bold tracking-tighter text-[#D4AF37] uppercase">
+                Немига-Тауэр
+            </div>
+<nav class="hidden md:flex items-center gap-8 font-medium">
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Арендаторам</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Бизнес-центр</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Галерея</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Новости</a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#">Расчет стоимости</a>
+<a class="text-[#D4AF37] border-b-2 border-[#D4AF37] pb-1" href="#">Контакты</a>
+</nav>
+<button class="bg-primary-container text-on-primary px-6 py-2.5 rounded-full font-bold text-sm tracking-tight hover:bg-primary transition-all active:scale-95 duration-200 ease-in-out shadow-lg shadow-primary/10">
+                Личный кабинет
+            </button>
+</div>
+<div class="h-px w-full bg-gradient-to-r from-transparent via-white/5 to-transparent"></div>
+</header>
+<main class="pt-24 pb-16 px-6 max-w-7xl mx-auto">
+<!-- Hero Title Section -->
+<section class="mb-16">
+<h1 class="font-headline font-extrabold text-5xl md:text-7xl tracking-tighter text-on-surface mb-6">
+                Свяжитесь с <span class="text-primary italic">превосходством</span>
+</h1>
+<p class="text-on-surface-variant max-w-2xl text-lg leading-relaxed">
+                Наш отдел по работе с ключевыми клиентами готов обсудить условия аренды и провести персональный тур по Nemiga Tower в любое удобное для вас время.
+            </p>
+</section>
+<!-- Main Bento Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Contact Info Cards -->
+<div class="md:col-span-4 flex flex-col gap-6">
+<!-- Sales Dept -->
+<div class="glass-card p-8 rounded-xl border border-outline-variant/20 group hover:bg-white/5 transition-all">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="hub">hub</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-xl">Отдел аренды</h3>
+<p class="text-xs text-primary uppercase tracking-widest font-label mt-1">Sales Department</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-primary/60" data-icon="call">call</span>
+<span class="font-medium">+375 (29) 123-45-67</span>
+</div>
+<div class="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-primary/60" data-icon="mail">mail</span>
+<span class="font-medium">rent@nemigatower.by</span>
+</div>
+</div>
+</div>
+<!-- Location Info -->
+<div class="glass-card p-8 rounded-xl border border-outline-variant/20 hover:bg-white/5 transition-all">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+</div>
+<div>
+<h3 class="font-headline font-bold text-xl">Наш адрес</h3>
+<p class="text-xs text-primary uppercase tracking-widest font-label mt-1">Headquarters</p>
+</div>
+</div>
+<p class="text-on-surface-variant leading-relaxed">
+                        Республика Беларусь,<br/>
+                        г. Минск, ул. Немига, 5<br/>
+                        Бизнес-центр "Nemiga Tower", 24 этаж
+                    </p>
+<div class="mt-6 flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_rgba(242,202,80,0.8)] animate-pulse"></div>
+<span class="text-sm font-label uppercase tracking-widest opacity-70">Открыто до 20:00</span>
+</div>
+</div>
+</div>
+<!-- Contact Form -->
+<div class="md:col-span-8 glass-card p-10 rounded-xl border border-outline-variant/20 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-[100px] -mr-32 -mt-32"></div>
+<h2 class="font-headline font-bold text-3xl mb-8">Оставить заявку</h2>
+<form class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-xs font-label uppercase tracking-widest text-on-surface-variant ml-1">Ваше имя</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg px-4 py-3 text-on-surface focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-outline-variant" placeholder="Александр Иванов" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-xs font-label uppercase tracking-widest text-on-surface-variant ml-1">Телефон</label>
+<input class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg px-4 py-3 text-on-surface focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-outline-variant" placeholder="+375 (__) ___-__-__" type="tel"/>
+</div>
+<div class="md:col-span-2 space-y-2">
+<label class="text-xs font-label uppercase tracking-widest text-on-surface-variant ml-1">Интересующая площадь (м²)</label>
+<div class="grid grid-cols-3 md:grid-cols-5 gap-3">
+<button class="bg-surface-container hover:bg-surface-variant py-2 rounded border border-outline-variant/10 text-sm transition-colors text-on-surface-variant" type="button">50-100</button>
+<button class="bg-surface-container hover:bg-surface-variant py-2 rounded border border-outline-variant/10 text-sm transition-colors text-on-surface-variant" type="button">100-250</button>
+<button class="bg-primary/10 border border-primary/30 py-2 rounded text-primary text-sm font-medium" type="button">250-500</button>
+<button class="bg-surface-container hover:bg-surface-variant py-2 rounded border border-outline-variant/10 text-sm transition-colors text-on-surface-variant" type="button">500-1000</button>
+<button class="bg-surface-container hover:bg-surface-variant py-2 rounded border border-outline-variant/10 text-sm transition-colors text-on-surface-variant" type="button">1000+</button>
+</div>
+</div>
+<div class="md:col-span-2 space-y-2">
+<label class="text-xs font-label uppercase tracking-widest text-on-surface-variant ml-1">Ваше сообщение</label>
+<textarea class="w-full bg-surface-container-lowest border border-outline-variant/20 rounded-lg px-4 py-3 text-on-surface focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all placeholder:text-outline-variant" placeholder="Опишите ваши требования к офису..." rows="4"></textarea>
+</div>
+<div class="md:col-span-2 mt-4">
+<button class="w-full bg-primary-container text-on-primary font-headline font-bold py-4 rounded-xl hover:bg-primary transition-all glow-hover flex items-center justify-center gap-3">
+                            Отправить запрос
+                            <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</button>
+<p class="text-[10px] text-center mt-4 text-outline-variant uppercase tracking-[0.2em]">
+                            Нажимая кнопку, вы соглашаетесь с политикой конфиденциальности
+                        </p>
+</div>
+</form>
+</div>
+<!-- Full Width Map Section -->
+<div class="md:col-span-12 h-[500px] glass-card rounded-xl border border-outline-variant/20 relative overflow-hidden">
+<div class="absolute inset-0 bg-background/40 z-10 pointer-events-none"></div>
+<div class="absolute top-8 left-8 z-20 glass-card p-6 rounded-lg border border-outline-variant/20 max-w-xs shadow-2xl">
+<h4 class="font-headline font-bold text-lg mb-2">Локация в центре</h4>
+<p class="text-sm text-on-surface-variant mb-4 leading-relaxed">
+                        Прямой доступ к основным транспортным артериям города и станциям метро «Немига» и «Октябрьская».
+                    </p>
+<a class="inline-flex items-center gap-2 text-primary text-sm font-bold uppercase tracking-wider group" href="#">
+                        Открыть в картах
+                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform" data-icon="open_in_new">open_in_new</span>
+</a>
+</div>
+<!-- SVG Vector Dark Map Placeholder -->
+<div class="w-full h-full bg-surface-container-lowest flex items-center justify-center relative overflow-hidden">
+<img class="absolute inset-0 w-full h-full object-cover mix-blend-luminosity opacity-20" data-alt="Dark stylized aerial view of Minsk streets around Nemiga" data-location="Minsk, Nemiga Street" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwQz7TFU11n02Arx31uP93RiQisvQnZxsNcrIQmqeYke5yblcsH8P62vCn8HAhNWuKJSwskj9jH_TFXHHyIiq_GHQ9fyHkJovVMptFV__sV1yYt8smrHEC9QhSLgPviRL401NwhITsuffwtQxQBeTIftSq1gt2vAWtE3_UpRWBSmAd3q_wCxbWqD4u87qw94iIX0LSoxGyUVmHTMlTjEGwfD3ZUdsAmNSvQqT-y9X8Y_GbMhEl1k7vbQwd0hkug_PoT3mG2uLiyo0c"/>
+<svg class="absolute inset-0 w-full h-full opacity-30 stroke-primary/30 fill-none" preserveaspectratio="none" viewbox="0 0 1000 600">
+<path d="M0,100 L200,150 L400,120 L1000,180" stroke-width="2"></path>
+<path d="M0,400 L300,380 L600,450 L1000,420" stroke-width="2"></path>
+<path d="M500,0 L520,600" stroke-width="1"></path>
+<circle class="fill-primary animate-pulse" cx="500" cy="300" r="10"></circle>
+<circle class="stroke-primary/50" cx="500" cy="300" r="30" stroke-dasharray="4 4"></circle>
+</svg>
+<div class="relative z-10 text-center flex flex-col items-center">
+<div class="w-16 h-16 bg-primary-container/20 rounded-full flex items-center justify-center mb-4 ring-2 ring-primary/40 ring-offset-8 ring-offset-background">
+<span class="material-symbols-outlined text-primary text-4xl" data-icon="location_pin" style="font-variation-settings: 'FILL' 1;">location_pin</span>
+</div>
+<span class="font-headline font-black text-2xl text-on-surface/50 tracking-widest uppercase">Nemiga Tower</span>
+</div>
+</div>
+</div>
+<!-- Networking Partners -->
+<div class="md:col-span-12 py-10">
+<div class="flex flex-wrap justify-between items-center gap-8 opacity-40 grayscale hover:grayscale-0 transition-all duration-500 cursor-default">
+<span class="font-headline font-bold text-2xl italic tracking-tighter">BELARUSBANK</span>
+<span class="font-headline font-bold text-2xl italic tracking-tighter">A1 BUSINESS</span>
+<span class="font-headline font-bold text-2xl italic tracking-tighter">EPAM SYSTEMS</span>
+<span class="font-headline font-bold text-2xl italic tracking-tighter">TECH_HUB</span>
+<span class="font-headline font-bold text-2xl italic tracking-tighter">CAPITAL_GROUP</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-8 border-t border-white/10 bg-[#10131a]">
+<div class="max-w-7xl mx-auto space-y-8">
+<div class="flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="text-lg font-bold text-[#D4AF37] font-headline uppercase">
+                    Немига-Тауэр
+                </div>
+<div class="flex flex-wrap justify-center gap-8 font-['Inter'] text-sm tracking-wide">
+<a class="text-slate-500 hover:text-[#D4AF37] transition-colors" href="#">Политика конфиденциальности</a>
+<a class="text-slate-500 hover:text-[#D4AF37] transition-colors" href="#">Условия использования</a>
+<a class="text-slate-500 hover:text-[#D4AF37] transition-colors" href="#">Документация</a>
+</div>
+<div class="text-slate-500 font-['Inter'] text-sm tracking-wide opacity-80 hover:opacity-100 transition-opacity">
+                    © 2024 Nemiga Tower. Developed by AI_Nikitka93
+                </div>
+</div>
+<div class="pt-8 border-t border-white/5 text-center">
+<p class="text-[11px] text-slate-600 uppercase tracking-[0.3em] font-label">
+                    Тестовый проект AI_Nikitka93. Реального объекта не существует.
+                </p>
+</div>
+</div>
+</footer>
+</body></html>
