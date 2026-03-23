@@ -45,15 +45,20 @@
         .glass-card, .glass-panel { background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.05); }
         .text-gold-gradient { background: linear-gradient(135deg, #f2ca50 0%, #d4af37 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .bg-gold-gradient { background: linear-gradient(135deg, #f2ca50 0%, #d4af37 100%); background-size: 200% 200%; animation: gradient-shift 3s ease infinite; }
-        .btn-primary { background: linear-gradient(135deg, #f2ca50 0%, #d4af37 100%); color: #3c2f00; }
+        .btn-primary { background: linear-gradient(135deg, #f2ca50 0%, #d4af37 100%); color: #3c2f00 !important; font-weight: 700 !important; }
+        .btn-primary:hover { opacity: 0.85; }
+        .btn-primary:active { transform: scale(0.98); }
         .hero-gradient { background: radial-gradient(circle at center, rgba(212,175,55,0.08) 0%, transparent 70%); }
         input[type='range'] { -webkit-appearance: none; background: linear-gradient(to right, #f2ca50 0%, #f2ca50 var(--range-progress,50%), #32353d var(--range-progress,50%), #32353d 100%); height: 4px; border-radius: 2px; }
         input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; height: 20px; width: 20px; border-radius: 50%; background: #f2ca50; cursor: pointer; box-shadow: 0 0 15px rgba(242,202,80,0.6); transition: transform 0.2s; }
         input[type='range']::-webkit-slider-thumb:hover { transform: scale(1.2); box-shadow: 0 0 25px rgba(242,202,80,0.9); }
         .option-card { transition: all 0.3s cubic-bezier(0.4,0,0.2,1); cursor: pointer; }
         .option-card.selected { border-color: rgba(242,202,80,0.4); background: rgba(242,202,80,0.05); transform: translateY(-2px); }
+        .option-card.selected .material-symbols-outlined { color: #f2ca50; }
         .option-card:not(.selected) { border-color: rgba(255,255,255,0.05); background: rgba(29,31,39,0.5); }
-        .option-card:hover:not(.selected) { background: rgba(255,255,255,0.08); transform: translateY(-2px); }
+        .option-card:not(.selected):hover { background: rgba(255,255,255,0.08); transform: translateY(-2px); }
+        .option-card .font-semibold { color: #e1e2ec; }
+        .option-card.selected .font-semibold { color: #f2ca50; }
         .nav-link { position: relative; transition: color 0.3s; }
         .nav-link::after { content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 2px; background: #D4AF37; transition: width 0.3s ease; }
         .nav-link.active::after, .nav-link:hover::after { width: 100%; }
@@ -323,17 +328,17 @@
                                 <div class="flex flex-col gap-3">
                                     <button class="option-card selected p-4 rounded-xl border" data-type="finish" data-multiplier="1.0">
                                         <div>
-                                            <div class="font-semibold">Shell &amp; Core</div>
+                                            <div class="font-semibold" style="color: #e1e2ec;">Shell &amp; Core</div>
                                             <div class="text-xs text-on-surface-variant">Черновая отделка</div>
                                         </div>
-                                        <span class="material-symbols-outlined text-sm filled">check_circle</span>
+                                        <span class="material-symbols-outlined text-sm filled" style="color: #f2ca50;">check_circle</span>
                                     </button>
                                     <button class="option-card p-4 rounded-xl border" data-type="finish" data-multiplier="1.25">
                                         <div>
-                                            <div class="font-semibold">Turnkey</div>
+                                            <div class="font-semibold" style="color: #e1e2ec;">Turnkey</div>
                                             <div class="text-xs text-on-surface-variant">Под ключ</div>
                                         </div>
-                                        <span class="material-symbols-outlined text-sm">radio_button_unchecked</span>
+                                        <span class="material-symbols-outlined text-sm" style="color: #99907c;">radio_button_unchecked</span>
                                     </button>
                                 </div>
                             </div>
@@ -342,17 +347,17 @@
                                 <div class="flex flex-col gap-3">
                                     <button class="option-card p-4 rounded-xl border" data-type="floor" data-multiplier="1.0">
                                         <div>
-                                            <div class="font-semibold">Стандарт (5-20 этажи)</div>
+                                            <div class="font-semibold" style="color: #e1e2ec;">Стандарт (5-20 этажи)</div>
                                             <div class="text-xs text-on-surface-variant">Базовая ставка 65 BYN/м²</div>
                                         </div>
-                                        <span class="material-symbols-outlined text-sm">radio_button_unchecked</span>
+                                        <span class="material-symbols-outlined text-sm" style="color: #99907c;">radio_button_unchecked</span>
                                     </button>
                                     <button class="option-card selected p-4 rounded-xl border" data-type="floor" data-multiplier="1.15">
                                         <div>
-                                            <div class="font-semibold">Sky Office (30+ этажи)</div>
+                                            <div class="font-semibold" style="color: #e1e2ec;">Sky Office (30+ этажи)</div>
                                             <div class="text-xs text-on-surface-variant">Премиум ставка 95 BYN/м²</div>
                                         </div>
-                                        <span class="material-symbols-outlined text-sm filled">check_circle</span>
+                                        <span class="material-symbols-outlined text-sm filled" style="color: #f2ca50;">check_circle</span>
                                     </button>
                                 </div>
                             </div>
