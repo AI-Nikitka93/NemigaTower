@@ -126,7 +126,7 @@
             <a class="nav-link text-slate-400 cursor-pointer" onclick="showSection('contacts')">Контакты</a>
         </div>
         <div class="flex items-center gap-4">
-            <button class="hidden md:block bg-gold-gradient text-on-primary-fixed px-6 py-2 rounded-xl font-headline font-bold text-sm hover:opacity-80 transition-all duration-300 scale-95 active:scale-90 btn-glow" onclick="openModal('callbackModal')">Заказать звонок</button>
+            <button class="hidden md:block btn-primary px-6 py-2 rounded-xl font-headline font-bold text-sm hover:opacity-80 transition-all duration-300 scale-95 active:scale-90 btn-glow" onclick="openModal('callbackModal')">Заказать звонок</button>
             <button class="md:hidden text-on-surface p-2" onclick="toggleMobileMenu()" aria-label="Меню"><span class="material-symbols-outlined">menu</span></button>
         </div>
         <div class="bg-gradient-to-r from-transparent via-[#D4AF37]/20 to-transparent h-[1px] bottom-0 left-0 right-0 absolute"></div>
@@ -171,7 +171,7 @@
                 Экосистема для лидеров рынка, сочетающая интеллектуальную архитектуру и премиальный сервис 24/7.
             </p>
             <div class="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <button class="px-8 py-4 btn-primary font-headline font-bold rounded-xl text-lg hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all duration-500 active:scale-95 btn-glow" onclick="showSection('contacts')">Забронировать просмотр</button>
+                <button class="px-8 py-4 btn-primary font-headline font-bold rounded-xl text-lg hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all duration-500 active:scale-95 btn-glow" onclick="showSection('contacts')" style="color: #3c2f00 !important;">Забронировать просмотр</button>
                 <button class="px-8 py-4 glass-card border border-outline-variant text-on-surface font-headline font-bold rounded-xl text-lg hover:bg-white/5 transition-all duration-300" onclick="openModal('videoModal')"><span class="flex items-center gap-2"><span class="material-symbols-outlined">play_circle</span>Видео-тур</span></button>
             </div>
         </div>
@@ -380,7 +380,7 @@
                             <div class="flex justify-between"><span class="text-on-surface-variant">Коэф. этажа</span><span class="font-semibold" id="floorDisplay">1.15</span></div>
                             <div class="flex justify-between"><span class="text-on-surface-variant">Коэф. отделки</span><span class="font-semibold" id="finishDisplay">1.0</span></div>
                         </div>
-                        <button class="w-full btn-primary py-4 rounded-xl mt-6 font-bold" onclick="openModal('bookingModal')">Забронировать</button>
+                        <button class="w-full btn-primary py-4 rounded-xl mt-6 font-bold" onclick="openModal('bookingModal')" style="color: #3c2f00 !important;">Забронировать</button>
                         <p class="text-[10px] text-center text-on-surface-variant mt-4 opacity-60">Не является публичной офертой</p>
                     </div>
                 </div>
@@ -523,7 +523,7 @@
         <form onsubmit="handleModalSubmit(event,'callbackModal')" class="space-y-4">
             <input class="w-full bg-surface-container-lowest border rounded-lg px-4 py-3" placeholder="Ваше имя" required/>
             <input class="w-full bg-surface-container-lowest border rounded-lg px-4 py-3" placeholder="Телефон" required/>
-            <button class="w-full btn-primary py-4 rounded-xl font-bold" type="submit">Жду звонка</button>
+            <button class="w-full btn-primary py-4 rounded-xl font-bold" type="submit" style="color: #3c2f00 !important;">Жду звонка</button>
         </form>
     </div>
 </div>
@@ -543,7 +543,7 @@
             <input class="w-full bg-surface-container-lowest border rounded-lg px-4 py-3" placeholder="Ваше имя" required/>
             <input class="w-full bg-surface-container-lowest border rounded-lg px-4 py-3" placeholder="Телефон" required/>
             <input class="w-full bg-surface-container-lowest border rounded-lg px-4 py-3" placeholder="Email" type="email"/>
-            <button class="w-full btn-primary py-4 rounded-xl font-bold" type="submit">Отправить заявку</button>
+            <button class="w-full btn-primary py-4 rounded-xl font-bold" type="submit" style="color: #3c2f00 !important;">Отправить заявку</button>
         </form>
     </div>
 </div>
