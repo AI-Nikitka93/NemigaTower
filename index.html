@@ -152,7 +152,7 @@
     <div class="relative min-h-[800px] flex items-center justify-center overflow-hidden px-8 parallax-container">
         <div class="absolute inset-0 hero-gradient"></div>
         <div class="absolute inset-0 -z-10 opacity-30 parallax-image">
-            <img class="w-full h-full object-cover grayscale" src="/NemigaTower/assets/hero.jpg" alt="Skyscraper"/>
+            <img class="w-full h-full object-cover grayscale" src="assets/hero.jpg" alt="Nemiga Tower"/>
         </div>
         <div class="relative z-10 max-w-5xl text-center space-y-8 scroll-reveal">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-white/5 text-xs font-label uppercase tracking-widest text-primary-fixed-dim">
@@ -190,7 +190,7 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
             <div class="md:col-span-8 glass-card rounded-xl p-8 border border-white/5 group relative overflow-hidden flex flex-col justify-end min-h-[400px] bento-card scroll-reveal">
-                <img class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-105 transition-transform duration-700" src="/NemigaTower/assets/office.jpg" alt="Office"/>
+                <img class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-105 transition-transform duration-700" src="assets/hero.jpg" alt="Office"/>
                 <div class="relative z-10 space-y-4">
                     <span class="material-symbols-outlined text-primary text-4xl">domain</span>
                     <h4 class="text-3xl font-headline font-bold">Офисы Класса A+</h4>
@@ -236,7 +236,7 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
             <div class="md:col-span-8 md:row-span-2 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/10 bento-card scroll-reveal">
-                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image:url('/NemigaTower/assets/restaurant.jpg')"><div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div></div>
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image:url('assets/restaurant.jpg')"><div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div></div>
                 <div class="relative h-full flex flex-col justify-end p-8">
                     <div class="flex items-center gap-2 mb-4">
                         <span class="px-3 py-1 rounded-full bg-primary/20 text-primary text-[10px] font-bold uppercase tracking-widest border border-primary/30">40 Этаж</span>
@@ -248,7 +248,7 @@
                 </div>
             </div>
             <div class="md:col-span-4 md:row-span-3 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/10 bento-card scroll-reveal">
-                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image:url('/NemigaTower/assets/fitness.jpg')"><div class="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background"></div></div>
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image:url('assets/fitness.jpg')"><div class="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background"></div></div>
                 <div class="relative h-full flex flex-col justify-end p-8">
                     <div class="mb-6 h-12 w-12 rounded-full bg-gold-gradient flex items-center justify-center shadow-lg shadow-primary/20"><span class="material-symbols-outlined text-on-primary">fitness_center</span></div>
                     <h2 class="font-headline text-2xl font-bold mb-3">Фитнес-клуб</h2>
@@ -358,10 +358,10 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="gallery-item md:col-span-2 group relative rounded-xl overflow-hidden bento-card scroll-reveal" data-category="architecture">
-                <img class="w-full h-80 object-cover" src="/NemigaTower/assets/hero.jpg" alt="Architecture"/>
+                <img class="w-full h-80 object-cover" src="assets/hero.jpg" alt="Architecture"/>
             </div>
             <div class="gallery-item group relative rounded-xl overflow-hidden bento-card scroll-reveal" data-category="interior">
-                <img class="w-full h-80 object-cover" src="/NemigaTower/assets/office.jpg" alt="Interior"/>
+                <img class="w-full h-80 object-cover" src="assets/gallery-lounge.jpg" alt="Interior"/>
             </div>
         </div>
     </div>
@@ -391,18 +391,33 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="glass-card p-8 rounded-xl bento-card scroll-reveal">
                 <p class="italic mb-4">"Лучший офис в Минске!"</p>
-                <div class="font-bold">Александр К.</div>
-                <div class="text-xs text-on-surface-variant">CEO, TechHub</div>
+                <div class="flex items-center gap-4 mt-4">
+                    <img src="assets/avatar-ceo.jpg" alt="Александр К." class="w-12 h-12 rounded-full object-cover"/>
+                    <div>
+                        <div class="font-bold">Александр К.</div>
+                        <div class="text-xs text-on-surface-variant">CEO, TechHub</div>
+                    </div>
+                </div>
             </div>
             <div class="glass-card p-8 rounded-xl bento-card scroll-reveal">
                 <p class="italic mb-4">"Инфраструктура топ!"</p>
-                <div class="font-bold">Елена М.</div>
-                <div class="text-xs text-on-surface-variant">CTO, Innova</div>
+                <div class="flex items-center gap-4 mt-4">
+                    <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">Е</div>
+                    <div>
+                        <div class="font-bold">Елена М.</div>
+                        <div class="text-xs text-on-surface-variant">CTO, Innova</div>
+                    </div>
+                </div>
             </div>
             <div class="glass-card p-8 rounded-xl bento-card scroll-reveal">
                 <p class="italic mb-4">"Сервис премиум уровня"</p>
-                <div class="font-bold">Дмитрий В.</div>
-                <div class="text-xs text-on-surface-variant">CFO, Capital</div>
+                <div class="flex items-center gap-4 mt-4">
+                    <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">Д</div>
+                    <div>
+                        <div class="font-bold">Дмитрий В.</div>
+                        <div class="text-xs text-on-surface-variant">CFO, Capital</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -446,6 +461,7 @@
 <!-- Footer -->
 <footer class="border-t border-white/5 py-12 px-8 mt-20">
     <div class="max-w-7xl mx-auto text-center">
+        <img src="assets/logo.png" alt="Nemiga Tower by AI_Nikitka93" class="h-12 mx-auto mb-6"/>
         <div class="text-[#D4AF37] font-bold text-lg mb-4 cursor-pointer" onclick="showSection('home')">Немига-Тауэр</div>
         <p class="text-xs text-on-surface-variant">© 2024 Портфолио проект AI_Nikitka93</p>
         <p class="text-[10px] text-on-surface-variant mt-2">Тестовый проект. Реального объекта не существует. 😊</p>
@@ -479,8 +495,14 @@
 <div class="modal fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/50" id="videoModal" onclick="if(event.target===this)closeModal('videoModal')">
     <div class="modal-content glass-card p-8 rounded-xl max-w-2xl w-full">
         <div class="flex justify-between items-center mb-6"><h3 class="font-headline font-bold text-2xl">Видео-тур</h3><button class="material-symbols-outlined cursor-pointer" onclick="closeModal('videoModal')">close</button></div>
-        <div class="aspect-video bg-surface-container rounded-lg flex items-center justify-center">
-            <p class="text-on-surface-variant">Видео загружается...</p>
+        <div class="aspect-video bg-surface-container rounded-lg flex items-center justify-center relative overflow-hidden">
+            <img src="assets/hero.jpg" alt="Nemiga Tower" class="absolute inset-0 w-full h-full object-cover opacity-30"/>
+            <div class="relative z-10 text-center">
+                <div class="w-20 h-20 rounded-full bg-gold-gradient flex items-center justify-center mx-auto mb-4 cursor-pointer hover:scale-110 transition-transform">
+                    <span class="material-symbols-outlined text-on-primary text-4xl">play_arrow</span>
+                </div>
+                <p class="text-on-surface-variant text-sm">Portfolio by AI_Nikitka93</p>
+            </div>
         </div>
     </div>
 </div>
