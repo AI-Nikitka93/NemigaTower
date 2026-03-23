@@ -525,12 +525,20 @@
 
 <div class="modal fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/50" id="bookingModal" onclick="if(event.target===this)closeModal('bookingModal')">
     <div class="modal-content glass-card p-8 rounded-xl max-w-md w-full">
-        <div class="flex justify-between items-center mb-6"><h3 class="font-headline font-bold text-2xl">Бронирование</h3><button class="material-symbols-outlined cursor-pointer" onclick="closeModal('bookingModal')">close</button></div>
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="font-headline font-bold text-2xl">Бронирование</h3>
+            <button class="material-symbols-outlined cursor-pointer" onclick="closeModal('bookingModal')">close</button>
+        </div>
         <form onsubmit="handleModalSubmit(event,'bookingModal')" class="space-y-4">
-            <input class="w-full bg-surface-container-lowest border rounded-lg px-4 py-3" placeholder="Имя" required/>
+            <div class="glass-panel p-4 rounded-lg bg-surface-container-low">
+                <div class="text-xs text-on-surface-variant uppercase tracking-widest mb-2">Параметры офиса</div>
+                <div class="flex justify-between text-sm"><span>Площадь:</span><span class="font-bold" id="modalArea">250 м²</span></div>
+                <div class="flex justify-between text-sm"><span>Стоимость:</span><span class="font-bold text-primary" id="modalPrice">0 BYN</span></div>
+            </div>
+            <input class="w-full bg-surface-container-lowest border rounded-lg px-4 py-3" placeholder="Ваше имя" required/>
             <input class="w-full bg-surface-container-lowest border rounded-lg px-4 py-3" placeholder="Телефон" required/>
-            <input class="w-full bg-surface-container-lowest border rounded-lg px-4 py-3" placeholder="Email"/>
-            <button class="w-full btn-primary py-4 rounded-xl font-bold" type="submit">Забронировать</button>
+            <input class="w-full bg-surface-container-lowest border rounded-lg px-4 py-3" placeholder="Email" type="email"/>
+            <button class="w-full btn-primary py-4 rounded-xl font-bold" type="submit">Отправить заявку</button>
         </form>
     </div>
 </div>
@@ -541,7 +549,7 @@
         <div class="aspect-video bg-surface-container rounded-lg flex items-center justify-center relative overflow-hidden">
             <img src="assets/video-thumbnail.jpg" alt="Video Tour" class="absolute inset-0 w-full h-full object-cover opacity-50"/>
             <div class="relative z-10 text-center">
-                <div class="w-20 h-20 rounded-full bg-gold-gradient flex items-center justify-center mx-auto mb-4 cursor-pointer hover:scale-110 transition-transform">
+                <div class="w-20 h-20 rounded-full bg-gold-gradient flex items-center justify-center mx-auto mb-4 cursor-pointer hover:scale-110 active:scale-95 transition-transform shadow-lg" onclick="showToast('Видео-тур в разработке! Оставьте заявку и мы покажем объект лично.', 'info')">
                     <span class="material-symbols-outlined text-on-primary text-4xl">play_arrow</span>
                 </div>
                 <p class="text-white font-bold text-lg">AI_Nikitka93 Portfolio</p>
@@ -623,16 +631,26 @@ document.querySelectorAll('.option-card').forEach(card => {
     card.addEventListener('click', function() {
         const type = this.dataset.type;
         const mult = parseFloat(this.dataset.multiplier);
-        this.parentElement.querySelectorAll('.option-card').forEach(s => s.classList.remove('selected'));
-        this.classList.add('selected');
         
-        // Update icons
+        // Update siblings in same group
+        const siblings = this.parentElement.querySelectorAll('.option-card');
+        siblings.forEach(s => {
+            s.classList.remove('selected');
+            const siblingIcon = s.querySelector('.material-symbols-outlined');
+            if(siblingIcon) {
+                siblingIcon.textContent = 'radio_button_unchecked';
+                siblingIcon.classList.remove('filled');
+            }
+        });
+        
+        // Update clicked card
+        this.classList.add('selected');
         const icon = this.querySelector('.material-symbols-outlined');
         if(icon) {
             icon.textContent = 'check_circle';
             icon.classList.add('filled');
         }
-        
+
         if (type === 'finish') {
             finishMult = mult;
             finishDisplay.textContent = mult.toFixed(2);
@@ -658,8 +676,35 @@ function calculate() {
     const total = Math.round(area * baseRate * floorMult * finishMult);
     const usd = Math.round(total / usdRate);
     
-    totalPrice.textContent = total.toLocaleString('ru-RU');
-    usdPrice.textContent = usd.toLocaleString('ru-RU');
+    // Animate numbers
+    animateValue(totalPrice, total);
+    animateValue(usdPrice, usd);
+}
+
+// Animate value function
+function animateValue(element, target) {
+    const start = parseInt(element.textContent.replace(/\s/g, '')) || 0;
+    if (start === target) return;
+    
+    const duration = 300;
+    const startTime = performance.now();
+    
+    function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        // Easing function
+        const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+        
+        const current = Math.round(start + (target - start) * easeOutQuart);
+        element.textContent = current.toLocaleString('ru-RU');
+        
+        if (progress < 1) {
+            requestAnimationFrame(update);
+        }
+    }
+    
+    requestAnimationFrame(update);
 }
 
 // Stats Counter Animation
@@ -690,7 +735,17 @@ const observer = new IntersectionObserver(entries => {
 document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
 
 // Modals
-function openModal(id) { document.getElementById(id).classList.add('active'); }
+function openModal(id) {
+    document.getElementById(id).classList.add('active');
+    
+    // Update booking modal with calculator data
+    if (id === 'bookingModal') {
+        const modalArea = document.getElementById('modalArea');
+        const modalPrice = document.getElementById('modalPrice');
+        if (modalArea) modalArea.textContent = areaValue.textContent + ' м²';
+        if (modalPrice) modalPrice.textContent = totalPrice.textContent + ' BYN';
+    }
+}
 function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
 // Toast
