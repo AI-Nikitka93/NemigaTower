@@ -45,6 +45,7 @@
         .glass-card, .glass-panel { background: rgba(255,255,255,0.03); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.05); }
         .text-gold-gradient { background: linear-gradient(135deg, #f2ca50 0%, #d4af37 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
         .bg-gold-gradient { background: linear-gradient(135deg, #f2ca50 0%, #d4af37 100%); background-size: 200% 200%; animation: gradient-shift 3s ease infinite; }
+        .btn-primary { background: linear-gradient(135deg, #f2ca50 0%, #d4af37 100%); color: #3c2f00; }
         .hero-gradient { background: radial-gradient(circle at center, rgba(212,175,55,0.08) 0%, transparent 70%); }
         input[type='range'] { -webkit-appearance: none; background: linear-gradient(to right, #f2ca50 0%, #f2ca50 var(--range-progress,50%), #32353d var(--range-progress,50%), #32353d 100%); height: 4px; border-radius: 2px; }
         input[type='range']::-webkit-slider-thumb { -webkit-appearance: none; height: 20px; width: 20px; border-radius: 50%; background: #f2ca50; cursor: pointer; box-shadow: 0 0 15px rgba(242,202,80,0.6); transition: transform 0.2s; }
@@ -165,7 +166,7 @@
                 Экосистема для лидеров рынка, сочетающая интеллектуальную архитектуру и премиальный сервис 24/7.
             </p>
             <div class="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <button class="px-8 py-4 bg-primary-container text-on-primary-container font-headline font-bold rounded-xl text-lg hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all duration-500 active:scale-95 btn-glow" onclick="showSection('contacts')">Забронировать просмотр</button>
+                <button class="px-8 py-4 btn-primary font-headline font-bold rounded-xl text-lg hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all duration-500 active:scale-95 btn-glow" onclick="showSection('contacts')">Забронировать просмотр</button>
                 <button class="px-8 py-4 glass-card border border-outline-variant text-on-surface font-headline font-bold rounded-xl text-lg hover:bg-white/5 transition-all duration-300" onclick="openModal('videoModal')"><span class="flex items-center gap-2"><span class="material-symbols-outlined">play_circle</span>Видео-тур</span></button>
             </div>
         </div>
@@ -190,7 +191,7 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
             <div class="md:col-span-8 glass-card rounded-xl p-8 border border-white/5 group relative overflow-hidden flex flex-col justify-end min-h-[400px] bento-card scroll-reveal">
-                <img class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-105 transition-transform duration-700" src="assets/hero.jpg" alt="Office"/>
+                <img class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-105 transition-transform duration-700" src="assets/office-interior.jpg" alt="Office"/>
                 <div class="relative z-10 space-y-4">
                     <span class="material-symbols-outlined text-primary text-4xl">domain</span>
                     <h4 class="text-3xl font-headline font-bold">Офисы Класса A+</h4>
@@ -336,7 +337,7 @@
                         <div class="text-5xl font-headline font-extrabold text-gold-gradient"><span id="totalPrice">8 250</span></div>
                         <div class="text-on-surface-variant">BYN / мес ≈ <span id="usdPrice">2 540</span> USD</div>
                         <div class="mt-6 space-y-2 text-sm"><div class="flex justify-between"><span>Ставка</span><span id="baseRate">33</span></div><div class="flex justify-between"><span>Этаж</span><span id="floorMultiplier">1.15</span></div></div>
-                        <button class="w-full bg-gold-gradient py-4 rounded-xl mt-6 font-bold" onclick="openModal('bookingModal')">Забронировать</button>
+                        <button class="w-full btn-primary py-4 rounded-xl mt-6 font-bold" onclick="openModal('bookingModal')">Забронировать</button>
                     </div>
                 </div>
             </div>
@@ -358,10 +359,13 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="gallery-item md:col-span-2 group relative rounded-xl overflow-hidden bento-card scroll-reveal" data-category="architecture">
-                <img class="w-full h-80 object-cover" src="assets/hero.jpg" alt="Architecture"/>
+                <img class="w-full h-80 object-cover" src="assets/hero.jpg" alt="Nemiga Tower"/>
             </div>
             <div class="gallery-item group relative rounded-xl overflow-hidden bento-card scroll-reveal" data-category="interior">
-                <img class="w-full h-80 object-cover" src="assets/gallery-lounge.jpg" alt="Interior"/>
+                <img class="w-full h-80 object-cover" src="assets/office-interior.jpg" alt="Office Interior"/>
+            </div>
+            <div class="gallery-item group relative rounded-xl overflow-hidden bento-card scroll-reveal" data-category="interior">
+                <img class="w-full h-80 object-cover" src="assets/gallery-lounge.jpg" alt="Lounge"/>
             </div>
         </div>
     </div>
@@ -402,7 +406,7 @@
             <div class="glass-card p-8 rounded-xl bento-card scroll-reveal">
                 <p class="italic mb-4">"Инфраструктура топ!"</p>
                 <div class="flex items-center gap-4 mt-4">
-                    <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary font-bold">Е</div>
+                    <img src="assets/avatar-cto.jpg" alt="Елена М." class="w-12 h-12 rounded-full object-cover"/>
                     <div>
                         <div class="font-bold">Елена М.</div>
                         <div class="text-xs text-on-surface-variant">CTO, Innova</div>
@@ -475,7 +479,7 @@
         <form onsubmit="handleModalSubmit(event,'callbackModal')" class="space-y-4">
             <input class="w-full bg-surface-container-lowest border rounded-lg px-4 py-3" placeholder="Ваше имя" required/>
             <input class="w-full bg-surface-container-lowest border rounded-lg px-4 py-3" placeholder="Телефон" required/>
-            <button class="w-full bg-gold-gradient py-4 rounded-xl font-bold" type="submit">Жду звонка</button>
+            <button class="w-full btn-primary py-4 rounded-xl font-bold" type="submit">Жду звонка</button>
         </form>
     </div>
 </div>
@@ -487,7 +491,7 @@
             <input class="w-full bg-surface-container-lowest border rounded-lg px-4 py-3" placeholder="Имя" required/>
             <input class="w-full bg-surface-container-lowest border rounded-lg px-4 py-3" placeholder="Телефон" required/>
             <input class="w-full bg-surface-container-lowest border rounded-lg px-4 py-3" placeholder="Email"/>
-            <button class="w-full bg-gold-gradient py-4 rounded-xl font-bold" type="submit">Забронировать</button>
+            <button class="w-full btn-primary py-4 rounded-xl font-bold" type="submit">Забронировать</button>
         </form>
     </div>
 </div>
@@ -496,12 +500,12 @@
     <div class="modal-content glass-card p-8 rounded-xl max-w-2xl w-full">
         <div class="flex justify-between items-center mb-6"><h3 class="font-headline font-bold text-2xl">Видео-тур</h3><button class="material-symbols-outlined cursor-pointer" onclick="closeModal('videoModal')">close</button></div>
         <div class="aspect-video bg-surface-container rounded-lg flex items-center justify-center relative overflow-hidden">
-            <img src="assets/hero.jpg" alt="Nemiga Tower" class="absolute inset-0 w-full h-full object-cover opacity-30"/>
+            <img src="assets/video-thumbnail.jpg" alt="Video Tour" class="absolute inset-0 w-full h-full object-cover opacity-50"/>
             <div class="relative z-10 text-center">
                 <div class="w-20 h-20 rounded-full bg-gold-gradient flex items-center justify-center mx-auto mb-4 cursor-pointer hover:scale-110 transition-transform">
                     <span class="material-symbols-outlined text-on-primary text-4xl">play_arrow</span>
                 </div>
-                <p class="text-on-surface-variant text-sm">Portfolio by AI_Nikitka93</p>
+                <p class="text-white font-bold text-lg">AI_Nikitka93 Portfolio</p>
             </div>
         </div>
     </div>
