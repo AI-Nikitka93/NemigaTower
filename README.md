@@ -1,29 +1,45 @@
 # Nemiga Tower
 
-Премиальный showcase-лендинг бизнес-центра для портфолио. Проект собран как одностраничный сайт с акцентом на визуальный polish, адаптивность, доступность и стабильный GitHub Pages деплой.
+**Русский** | [English](./README.en.md)
+
+Премиальный showcase-лендинг бизнес-центра для портфолио. Проект сделан как одностраничный сайт с упором на визуальный polish, адаптивность, доступность, скорость первой загрузки и стабильный деплой на GitHub Pages.
 
 [Live URL](https://ai-nikitka93.github.io/NemigaTower/)  
 [Repository](https://github.com/AI-Nikitka93/NemigaTower/)
 
-## Что внутри
+## Обзор
 
-- Премиальный dark/gold visual language с glassmorphism и bento-layout
-- Навигация по секциям без перезагрузки страницы
-- Калькулятор аренды с live-пересчётом и курсом НБ РБ
-- Доступные модалки, `skip-link`, `focus-visible`, `prefers-reduced-motion`
-- Адаптивные mobile layouts для ключевых секций
-- Visual regression suite на Playwright для desktop и mobile экранов
-- Автоматический GitHub Pages deploy через Actions
+Nemiga Tower показывает, как может выглядеть дорогой digital-showcase для недвижимости и коммерческих пространств: тёмная премиальная палитра, сильный hero-блок, калькулятор аренды, мультимодальные секции, аккуратная мобильная версия и базовая визуальная автоматизация через Playwright.
 
-## Стек
+## Что реализовано
+
+- премиальный dark/gold visual language с glassmorphism и layered lighting
+- навигация по секциям без перезагрузки страницы
+- калькулятор аренды с live-пересчётом и курсом НБ РБ
+- доступные модалки, `skip-link`, `focus-visible`, `prefers-reduced-motion`
+- адаптивные mobile layouts для ключевых экранов
+- visual regression suite для desktop и mobile
+- автоматический GitHub Pages deploy через GitHub Actions
+
+## Стек и сервисы
+
+### Основной стек
 
 - `HTML5`
 - `Tailwind CSS CDN`
 - `Vanilla JavaScript`
+- `Node.js / npm`
 - `Playwright`
-- `GitHub Pages`
 
-## Локальный запуск
+### Внешние сервисы и интеграции
+
+- `GitHub Pages` — публичный хостинг
+- `GitHub Actions` — build и deploy
+- `NBRB API` — курс валют для калькулятора
+- `Google Fonts` — `Manrope`, `Inter`
+- `Material Symbols` — иконки
+
+## Команды
 
 ```bash
 git clone https://github.com/AI-Nikitka93/NemigaTower.git
@@ -34,7 +50,7 @@ npm run serve
 
 Локальный адрес по умолчанию: `http://127.0.0.1:41873/`
 
-## Команды
+Дополнительные команды:
 
 ```bash
 npm run build
@@ -43,7 +59,7 @@ npm run test:visual
 npm run test:visual:update
 ```
 
-Что делает `build`:
+## Что делает build
 
 - создаёт чистую папку `dist/`
 - копирует `index.html`
@@ -56,28 +72,20 @@ npm run test:visual:update
 ```text
 NemigaTower/
 ├── .github/workflows/pages.yml   # Автодеплой на GitHub Pages
-├── assets/                       # Исходные изображения и бренд-ассеты
+├── assets/                       # Локальные изображения и бренд-ассеты
 ├── scripts/build.mjs             # Production build для dist
 ├── tests/visual.spec.js          # Visual regression tests
-├── tests/__screenshots__/        # Базовые desktop/mobile снимки
+├── tests/__screenshots__/        # Baseline desktop/mobile снимки
 ├── index.html                    # Главный UI-файл проекта
 ├── package.json                  # Скрипты build/serve/test
 ├── playwright.config.js          # Конфигурация Playwright
-└── README.md
+├── README.md                     # Русская версия
+└── README.en.md                  # Английская версия
 ```
 
-## Ключевые секции
+## Visual Regression
 
-- `Главная` — hero, метрики, преимущества
-- `Инфраструктура` — ресторан, фитнес, коворкинг, паркинг
-- `Офисы` — калькулятор аренды
-- `Галерея` — брендовые визуалы
-- `Новости` и `Отзывы`
-- `Контакты` — формы и контактный блок
-
-## Тестовое покрытие
-
-Visual regression проверяет:
+Покрытие включает:
 
 - desktop `home`
 - desktop `infrastructure`
@@ -99,26 +107,17 @@ Visual regression проверяет:
 - [contacts-mobile.png](./tests/__screenshots__/contacts-mobile.png)
 - [media-tour-mobile.png](./tests/__screenshots__/media-tour-mobile.png)
 
-## Deploy
+## Публичные контакты и служебные данные проекта
 
-Проект публикуется на GitHub Pages по пушу в `main`.
+- Публичный email на сайте: `rent@nemigatower.by`
+- Git email автора в истории репозитория: `nikitka93@example.com`
+- Автор: `Nikita (AI_Nikitka93)`
 
-Workflow:
+## Ограничения
 
-1. `npm ci`
-2. `npm run build`
-3. upload `dist/`
-4. deploy в Pages environment
-
-Итоговый URL:
-
-`https://ai-nikitka93.github.io/NemigaTower/`
-
-## Ограничения проекта
-
-- Это демо-проект, а не сайт реального бизнес-центра
-- Формы сейчас демонстрационные и не отправляют данные на backend
-- Tailwind и шрифты загружаются из внешних CDN
+- это demo-проект, а не сайт реального бизнес-центра
+- формы демонстрационные и не отправляют данные на backend
+- часть ресурсов загружается из внешних CDN
 
 ## Автор
 
