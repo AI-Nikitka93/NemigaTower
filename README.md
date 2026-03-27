@@ -1,207 +1,125 @@
-# 🏢 Nemiga Tower — Бизнес-центр премиум класса
+# Nemiga Tower
 
-<div align="center">
+Премиальный showcase-лендинг бизнес-центра для портфолио. Проект собран как одностраничный сайт с акцентом на визуальный polish, адаптивность, доступность и стабильный GitHub Pages деплой.
 
-**Тестовый проект для портфолио**
+[Live URL](https://ai-nikitka93.github.io/NemigaTower/)  
+[Repository](https://github.com/AI-Nikitka93/NemigaTower/)
 
-[Посмотреть сайт](https://ai-nikitka93.github.io/NemigaTower/) · [Сообщить об ошибке](https://github.com/AI-Nikitka93/NemigaTower/issues)
+## Что внутри
 
-</div>
+- Премиальный dark/gold visual language с glassmorphism и bento-layout
+- Навигация по секциям без перезагрузки страницы
+- Калькулятор аренды с live-пересчётом и курсом НБ РБ
+- Доступные модалки, `skip-link`, `focus-visible`, `prefers-reduced-motion`
+- Адаптивные mobile layouts для ключевых секций
+- Visual regression suite на Playwright для desktop и mobile экранов
+- Автоматический GitHub Pages deploy через Actions
 
----
+## Стек
 
-## 📖 О проекте
+- `HTML5`
+- `Tailwind CSS CDN`
+- `Vanilla JavaScript`
+- `Playwright`
+- `GitHub Pages`
 
-**Nemiga Tower** — это концептуальный сайт премиального бизнес-класса, разработанный в рамках портфолио проекта. Проект демонстрирует навыки современной веб-разработки с использованием HTML, CSS (Tailwind CSS) и JavaScript.
+## Локальный запуск
 
-> ⚠️ **Важно:** Данный проект является тестовым и не представляет реальный бизнес-центр. Все изображения, тексты и данные используются исключительно в демонстрационных целях.
-
-### ✨ Особенности
-
-- 🎨 **Neo-Corporate Glassmorphism** — современная дизайн-система
-- 🧮 **Рабочий калькулятор аренды** — интерактивный расчет стоимости офиса
-- 📱 **Полная адаптивность** — корректное отображение на всех устройствах
-- 🚀 **Одностраничное приложение** — плавная навигация между секциями
-- 🌙 **Тёмная тема** — премиальная цветовая палитра
-
----
-
-## 🛠 Технологии
-
-| Технология | Назначение |
-|------------|------------|
-| HTML5 | Структура страницы |
-| Tailwind CSS | Стилизация и адаптивность |
-| JavaScript (Vanilla) | Логика калькулятора и навигация |
-| Google Fonts | Типографика (Manrope, Inter) |
-| Material Symbols | Иконки |
-
----
-
-## 📐 Дизайн-система
-
-### Цветовая палитра
-
-```
-Основной фон:     #10131a (глубокий чёрный)
-Акцент:           #D4AF37 (благородное золото)
-Поверхности:      Система токенов Material Design 3
-```
-
-### Типографика
-
-- **Заголовки:** Manrope (700, 800)
-- **Текст:** Inter (300, 400, 500, 600)
-
-### Принципы
-
-- Bento Grid для организации контента
-- Эффект матового стекла (backdrop-filter: blur)
-- Правило «No-Line» (минимум видимых границ)
-- Глубина через тональные переходы
-
----
-
-## 🚀 Быстрый старт
-
-### Локальный запуск
-
-1. Клонируйте репозиторий:
 ```bash
 git clone https://github.com/AI-Nikitka93/NemigaTower.git
 cd NemigaTower
+npm install
+npm run serve
 ```
 
-2. Откройте `index.html` в браузере
+Локальный адрес по умолчанию: `http://127.0.0.1:41873/`
 
-Или используйте Live Server в VS Code.
+## Команды
 
----
-
-## 📱 Структура сайта
-
-| Секция | Описание |
-|--------|----------|
-| **Главная** | Hero-блок с преимуществами (Bento Grid) |
-| **Инфраструктура** | Ресторан, фитнес, коворкинг, паркинг |
-| **Офисы** | Калькулятор аренды с интерактивным расчетом |
-| **Галерея** | Визуальная презентация интерьеров |
-| **Новости** | Лента событий бизнес-центра |
-| **Контакты** | Форма связи и информация |
-
----
-
-## 🧮 Калькулятор аренды
-
-### Функционал
-
-- **Выбор площади:** 50–1000 м² (слайдер)
-- **Тип отделки:**
-  - Shell & Core (базовый коэффициент 1.0)
-  - Turnkey «Под ключ» (коэффициент 1.25)
-- **Выбор этажа:**
-  - Офис 5–20 этажи (коэффициент 1.0)
-  - Sky Office 30+ этажи (коэффициент 1.15)
-
-### Формула расчета
-
-```
-Стоимость (BYN/мес) = Площадь × Базовая ставка × Коэф. этажа × Коэф. отделки
-
-Базовая ставка: 33 BYN/м²
-Курс USD: 3.25 BYN
+```bash
+npm run build
+npm run serve
+npm run test:visual
+npm run test:visual:update
 ```
 
----
+Что делает `build`:
 
-## 📁 Структура проекта
+- создаёт чистую папку `dist/`
+- копирует `index.html`
+- находит и копирует только реально используемые ассеты
+- создаёт `.nojekyll`
+- генерирует `build_metadata.json` с версией, датой сборки и `git_sha`
 
-```
+## Структура проекта
+
+```text
 NemigaTower/
-├── index.html          # Основная страница (SPA)
-├── README.md           # Документация
-├── prd_v2.0.html       # Архитектурный план (PRD)
-└── stitch/             # Исходные версии дизайна
-    ├── code.html
-    ├── nemiga_tower/
-    │   └── DESIGN.md
-    └── v3_*/
-        ├── code.html
-        └── screen.png
+├── .github/workflows/pages.yml   # Автодеплой на GitHub Pages
+├── assets/                       # Исходные изображения и бренд-ассеты
+├── scripts/build.mjs             # Production build для dist
+├── tests/visual.spec.js          # Visual regression tests
+├── tests/__screenshots__/        # Базовые desktop/mobile снимки
+├── index.html                    # Главный UI-файл проекта
+├── package.json                  # Скрипты build/serve/test
+├── playwright.config.js          # Конфигурация Playwright
+└── README.md
 ```
 
----
+## Ключевые секции
 
-## 🎯 Функциональные возможности
+- `Главная` — hero, метрики, преимущества
+- `Инфраструктура` — ресторан, фитнес, коворкинг, паркинг
+- `Офисы` — калькулятор аренды
+- `Галерея` — брендовые визуалы
+- `Новости` и `Отзывы`
+- `Контакты` — формы и контактный блок
 
-### Навигация
-- Плавные переходы между секциями
-- Активное состояние в меню
-- Scroll-to-top при смене секции
+## Тестовое покрытие
 
-### Калькулятор
-- Мгновенный пересчет при изменении параметров
-- Анимация чисел (easing function)
-- Визуальная индикация выбранных опций
+Visual regression проверяет:
 
-### Форма связи
-- Валидация полей
-- Имитация отправки данных
-- Адаптивный интерфейс
+- desktop `home`
+- desktop `infrastructure`
+- desktop `offices`
+- desktop `contacts`
+- desktop `media tour`
+- mobile `home`
+- mobile `infrastructure`
+- mobile `offices`
+- mobile `contacts`
+- mobile `media tour`
 
----
+Ключевые baselines:
 
-## 📸 Скриншоты
+- [home-desktop.png](./tests/__screenshots__/home-desktop.png)
+- [home-mobile.png](./tests/__screenshots__/home-mobile.png)
+- [infrastructure-mobile.png](./tests/__screenshots__/infrastructure-mobile.png)
+- [offices-mobile.png](./tests/__screenshots__/offices-mobile.png)
+- [contacts-mobile.png](./tests/__screenshots__/contacts-mobile.png)
+- [media-tour-mobile.png](./tests/__screenshots__/media-tour-mobile.png)
 
-> *Добавьте скриншоты основных экранов в папку `/screenshots`*
+## Deploy
 
----
+Проект публикуется на GitHub Pages по пушу в `main`.
 
-## 🔮 Планы развития
+Workflow:
 
-- [ ] Добавить многоязычность (RU/EN)
-- [ ] Интеграция с реальной картой (Google Maps API)
-- [ ] Анимации при скролле (Intersection Observer)
-- [ ] PWA функциональность
-- [ ] Оптимизация производительности (Lazy Loading изображений)
+1. `npm ci`
+2. `npm run build`
+3. upload `dist/`
+4. deploy в Pages environment
 
----
+Итоговый URL:
 
-## 👨‍💻 Автор
+`https://ai-nikitka93.github.io/NemigaTower/`
 
-**AI_Nikitka93**
+## Ограничения проекта
 
-Этот проект создан для демонстрации навыков:
-- Frontend разработка (HTML/CSS/JS)
-- Работа с дизайн-системами
-- Адаптивная вёрстка
-- Интерактивные компоненты
+- Это демо-проект, а не сайт реального бизнес-центра
+- Формы сейчас демонстрационные и не отправляют данные на backend
+- Tailwind и шрифты загружаются из внешних CDN
 
----
+## Автор
 
-## 📄 Лицензия
-
-MIT License — свободное использование с указанием автора.
-
----
-
-## ⚠️ Дисклеймер
-
-```
-ТЕСТОВЫЙ ПРОЕКТ AI_Nikitka93
-
-Данный проект создан исключительно для портфолио.
-Бизнес-центр «Немига-Тауэр» не существует в реальности.
-Все изображения, тексты, цены и данные являются демонстрационными.
-Любые совпадения случайны.
-```
-
----
-
-<div align="center">
-
-**Made with ❤️ by AI_Nikitka93**
-
-[Посмотреть сайт](https://ai-nikitka93.github.io/NemigaTower/)
-
-</div>
+Создано Nikita (AI_Nikitka93)

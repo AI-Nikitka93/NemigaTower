@@ -17,3 +17,5 @@ node_modules/
 playwright-report/
 test-results/
 dist/
+.audit_mobile/
+.wrangler/

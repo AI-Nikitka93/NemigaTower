@@ -62,6 +62,7 @@
         html { scroll-behavior: smooth; }
         body { background-color: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; overflow-x: hidden; line-height: 1.5; }
         body.modal-open { overflow: hidden; }
+        body.modal-open .skip-link { display: none; }
         button { cursor: pointer; }
         button:disabled { cursor: not-allowed; opacity: 0.6; }
         .skip-link {
@@ -106,9 +107,9 @@
         .cursor-dot { width: 8px; height: 8px; background: #D4AF37; border-radius: 50%; mix-blend-mode: difference; }
         .cursor-outline { width: 40px; height: 40px; border: 1px solid rgba(212,175,55,0.3); border-radius: 50%; transition: transform 0.15s ease-out; z-index: 9998; }
         @media (hover: hover) and (pointer: fine) { .cursor-dot, .cursor-outline { display: block; } }
-        .modal { opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; }
+        .modal { opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s; overflow-y: auto; overscroll-behavior: contain; }
         .modal.active { opacity: 1; visibility: visible; }
-        .modal-content { transform: scale(0.9) translateY(20px); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); }
+        .modal-content { transform: scale(0.9) translateY(20px); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1); max-height: calc(100dvh - 2rem); overflow-y: auto; }
         .modal.active .modal-content { transform: scale(1) translateY(0); }
         .toast { transform: translateX(100%); opacity: 0; transition: transform 0.3s, opacity 0.3s; }
         .toast.active { transform: translateX(0); opacity: 1; }
@@ -186,6 +187,12 @@
             height: 100%;
             object-fit: cover;
         }
+        .lazy-media {
+            background: rgba(255,255,255,0.03);
+        }
+        .lazy-bg {
+            background-color: rgba(255,255,255,0.03);
+        }
         .media-tour-card[data-active="true"] {
             border-color: rgba(242,202,80,0.4);
             box-shadow: 0 0 0 3px rgba(242,202,80,0.12);
@@ -200,6 +207,69 @@
             .media-tour-grid { grid-template-columns: 1fr; }
             .brand-logo { height: 2.15rem; }
             .cursor-dot, .cursor-outline { display: none !important; }
+            .page-shell { padding-left: 1rem; padding-right: 1rem; }
+            .section-shell { padding-top: 6rem; padding-bottom: 4rem; }
+            .section-shell-tight { padding-top: 5rem; padding-bottom: 3rem; }
+            .hero-shell {
+                min-height: 0;
+                padding-top: 5.5rem;
+                padding-bottom: 3.5rem;
+                align-items: flex-start;
+            }
+            .hero-copy { gap: 1.5rem; }
+            .hero-title { font-size: clamp(2.5rem, 13vw, 3.6rem); line-height: 0.92; }
+            .hero-body { font-size: 1rem; }
+            .hero-actions .btn-primary,
+            .hero-actions .glass-card { width: 100%; }
+            .hero-actions .glass-card > span { justify-content: center; width: 100%; }
+            .stats-grid { gap: 1rem; }
+            .stats-grid .stat-number { font-size: 2rem; }
+            .section-title {
+                font-size: clamp(2rem, 10vw, 2.85rem);
+                line-height: 0.96;
+            }
+            .section-lead { font-size: 1rem; }
+            .card-pad { padding: 1.25rem; }
+            .panel-pad { padding: 1.25rem; }
+            .calc-total { font-size: 2.5rem; }
+            .gallery-filter-bar {
+                gap: 0.75rem;
+                flex-wrap: wrap;
+            }
+            .gallery-filter-bar .filter-btn {
+                flex: 1 1 calc(50% - 0.375rem);
+                min-width: 8.5rem;
+            }
+            .footer-shell {
+                padding-left: 1rem;
+                padding-right: 1rem;
+                padding-top: 2.5rem;
+                padding-bottom: 2.5rem;
+            }
+            .footer-brand { max-width: 14rem; }
+            .modal {
+                align-items: flex-start;
+                padding: 0.75rem;
+                padding-top: 4.75rem;
+            }
+            .modal-content {
+                width: 100%;
+                border-radius: 1rem;
+            }
+            .modal-header {
+                position: sticky;
+                top: 0;
+                z-index: 2;
+                background: linear-gradient(180deg, rgba(29,31,39,0.98), rgba(29,31,39,0.9));
+                backdrop-filter: blur(12px);
+                padding-bottom: 0.75rem;
+            }
+            .media-tour-visual { aspect-ratio: 4 / 3; }
+            .media-tour-summary {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .media-tour-summary .btn-primary { width: 100%; }
         }
         @media (prefers-reduced-motion: reduce) {
             html { scroll-behavior: auto; }
@@ -250,7 +320,7 @@
 
 <!-- Navigation -->
 <nav class="fixed top-0 w-full z-50 bg-[#10131a]/80 backdrop-blur-xl shadow-2xl shadow-black/50" aria-label="Основная навигация">
-    <div class="flex justify-between items-center max-w-7xl mx-auto px-8 py-4 relative">
+    <div class="flex justify-between items-center max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-4 relative">
         <a href="#home" class="brand-link hover:opacity-90 transition-opacity" data-section="home" aria-label="Немига-Тауэр — на главную">
             <img src="assets/logo-wordmark.svg" alt="Nemiga Tower" class="brand-logo"/>
         </a>
@@ -290,27 +360,27 @@
     </div>
 </div>
 
-<main class="pt-24" id="mainContent" tabindex="-1">
+<main class="pt-20 md:pt-24" id="mainContent" tabindex="-1">
 <!-- HOME SECTION -->
 <section id="home" class="section fade-in" aria-labelledby="home-title">
-    <div class="relative min-h-[800px] flex items-center justify-center overflow-hidden px-8 parallax-container">
+    <div class="hero-shell relative min-h-[800px] flex items-center justify-center overflow-hidden px-4 sm:px-6 md:px-8 parallax-container">
         <div class="absolute inset-0 hero-gradient"></div>
         <div class="absolute inset-0 -z-10 opacity-30 parallax-image">
             <img class="w-full h-full object-cover grayscale" src="assets/hero.jpg" alt="Ночной фасад бизнес-центра Nemiga Tower с золотой архитектурной подсветкой"/>
         </div>
-        <div class="relative z-10 max-w-5xl text-center space-y-8 scroll-reveal">
+        <div class="hero-copy relative z-10 max-w-5xl text-center space-y-8 scroll-reveal">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-white/5 text-xs font-label uppercase tracking-widest text-primary-fixed-dim">
                 <span class="material-symbols-outlined text-[14px]">location_on</span>Минск, Центр
             </div>
-            <h1 class="text-5xl md:text-8xl font-headline font-extrabold tracking-tighter text-on-surface leading-[0.9]" id="home-title">
+            <h1 class="hero-title text-5xl md:text-8xl font-headline font-extrabold tracking-tighter text-on-surface leading-[0.9]" id="home-title">
                 Будущее бизнеса <br/><span class="text-gold-gradient">в центре Минска</span>
             </h1>
-            <p class="text-lg md:text-xl text-on-surface-variant max-w-2xl mx-auto leading-relaxed opacity-80">
+            <p class="hero-body text-lg md:text-xl text-on-surface-variant max-w-2xl mx-auto leading-relaxed opacity-80">
                 Экосистема для лидеров рынка, сочетающая интеллектуальную архитектуру и премиальный сервис 24/7.
             </p>
-            <div class="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
-                <button class="px-8 py-4 btn-primary font-headline font-bold rounded-xl text-lg hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all duration-500 active:scale-95 btn-glow" type="button" onclick="navigateToSection('contacts')">Забронировать просмотр</button>
-                <button class="px-8 py-4 glass-card border border-outline-variant text-on-surface font-headline font-bold rounded-xl text-lg hover:bg-white/5 transition-all duration-300" type="button" onclick="openModal('mediaTourModal')"><span class="flex items-center gap-2"><span class="material-symbols-outlined">photo_library</span>Обзор пространства</span></button>
+            <div class="hero-actions pt-4 sm:pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button class="w-full sm:w-auto px-8 py-4 btn-primary font-headline font-bold rounded-xl text-base sm:text-lg hover:shadow-[0_0_30px_rgba(212,175,55,0.3)] transition-all duration-500 active:scale-95 btn-glow" type="button" onclick="navigateToSection('contacts')">Забронировать просмотр</button>
+                <button class="w-full sm:w-auto px-8 py-4 glass-card border border-outline-variant text-on-surface font-headline font-bold rounded-xl text-base sm:text-lg hover:bg-white/5 transition-all duration-300" type="button" onclick="openModal('mediaTourModal')"><span class="flex items-center gap-2"><span class="material-symbols-outlined">photo_library</span>Обзор пространства</span></button>
             </div>
         </div>
         <div class="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-30 animate-bounce">
@@ -318,8 +388,8 @@
         </div>
     </div>
     <!-- Stats -->
-    <div class="max-w-7xl mx-auto px-8 py-16">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+    <div class="page-shell max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-14 md:py-16">
+        <div class="stats-grid grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
             <div class="text-center scroll-reveal"><div class="text-4xl md:text-5xl font-headline font-extrabold text-primary stat-number" data-count="42">0</div><div class="text-sm text-on-surface-variant uppercase tracking-widest mt-2">Этажа</div></div>
             <div class="text-center scroll-reveal" style="transition-delay:100ms"><div class="text-4xl md:text-5xl font-headline font-extrabold text-primary stat-number" data-count="15000">0</div><div class="text-sm text-on-surface-variant uppercase tracking-widest mt-2">м² площади</div></div>
             <div class="text-center scroll-reveal" style="transition-delay:200ms"><div class="text-4xl md:text-5xl font-headline font-extrabold text-primary stat-number" data-count="450">0</div><div class="text-sm text-on-surface-variant uppercase tracking-widest mt-2">Паркомест</div></div>
@@ -327,21 +397,21 @@
         </div>
     </div>
     <!-- Advantages -->
-    <div class="max-w-7xl mx-auto px-8 py-24">
+    <div class="page-shell max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-16 md:py-24">
         <div class="mb-16 space-y-4 scroll-reveal">
             <h2 class="text-sm font-label uppercase tracking-[0.2em] text-primary-fixed-dim">Преимущества</h2>
-            <h3 class="text-4xl font-headline font-bold">Архитектура возможностей</h3>
+            <h3 class="section-title text-4xl font-headline font-bold">Архитектура возможностей</h3>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-            <div class="md:col-span-8 glass-card rounded-xl p-8 border border-white/5 group relative overflow-hidden flex flex-col justify-end min-h-[400px] bento-card scroll-reveal">
-                <img class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-105 transition-transform duration-700" src="assets/office-interior.jpg" alt="Office"/>
+            <div class="md:col-span-8 glass-card rounded-xl p-5 sm:p-8 card-pad border border-white/5 group relative overflow-hidden flex flex-col justify-end min-h-[320px] md:min-h-[400px] bento-card scroll-reveal">
+                <img class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-105 transition-transform duration-700" src="assets/office-interior.jpg" alt="Office" loading="lazy" decoding="async" fetchpriority="low"/>
                 <div class="relative z-10 space-y-4">
                     <span class="material-symbols-outlined text-primary text-4xl">domain</span>
                     <h4 class="text-3xl font-headline font-bold">Офисы Класса A+</h4>
                     <p class="text-on-surface-variant max-w-md">Панорамное остекление, потолки 3.8м, свободная планировка.</p>
                 </div>
             </div>
-            <div class="md:col-span-4 bg-surface-container-low rounded-xl p-8 border border-white/5 flex flex-col gap-6 bento-card scroll-reveal">
+            <div class="md:col-span-4 bg-surface-container-low rounded-xl p-5 sm:p-8 card-pad border border-white/5 flex flex-col gap-6 bento-card scroll-reveal">
                 <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center"><span class="material-symbols-outlined text-primary">security</span></div>
                 <div class="space-y-2">
                     <h4 class="text-xl font-headline font-bold">Безопасность</h4>
@@ -352,17 +422,17 @@
                     <div class="w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_#f2ca50] animate-pulse"></div>
                 </div>
             </div>
-            <div class="md:col-span-4 glass-card rounded-xl p-8 border border-white/5 space-y-4 bento-card scroll-reveal">
+            <div class="md:col-span-4 glass-card rounded-xl p-5 sm:p-8 card-pad border border-white/5 space-y-4 bento-card scroll-reveal">
                 <span class="material-symbols-outlined text-primary">ev_station</span>
                 <h4 class="text-xl font-headline font-bold">Эко-инфраструктура</h4>
                 <p class="text-sm text-on-surface-variant">50 зарядных станций для электромобилей.</p>
             </div>
-            <div class="md:col-span-4 glass-card rounded-xl p-8 border border-white/5 space-y-4 bento-card scroll-reveal">
+            <div class="md:col-span-4 glass-card rounded-xl p-5 sm:p-8 card-pad border border-white/5 space-y-4 bento-card scroll-reveal">
                 <span class="material-symbols-outlined text-primary">restaurant</span>
                 <h4 class="text-xl font-headline font-bold">Гастрономия</h4>
                 <p class="text-sm text-on-surface-variant">Ресторанный комплекс и фуд-холл.</p>
             </div>
-            <div class="md:col-span-4 bg-surface-container-highest rounded-xl p-8 border border-white/5 flex flex-col justify-between bento-card scroll-reveal">
+            <div class="md:col-span-4 bg-surface-container-highest rounded-xl p-5 sm:p-8 card-pad border border-white/5 flex flex-col justify-between bento-card scroll-reveal">
                 <div><h4 class="text-4xl font-headline font-extrabold text-primary stat-number" data-count="2500">0</h4><p class="text-sm font-label uppercase tracking-widest text-on-surface-variant">М² Терраса</p></div>
                 <p class="text-sm text-on-surface opacity-60">Зона отдыха на крыше с видом на город.</p>
             </div>
@@ -372,16 +442,16 @@
 
 <!-- INFRASTRUCTURE SECTION -->
 <section id="infrastructure" class="section hidden fade-in" aria-labelledby="infrastructure-title" hidden>
-    <div class="pt-32 pb-20 px-8 max-w-7xl mx-auto">
+    <div class="section-shell page-shell pt-24 md:pt-32 pb-16 md:pb-20 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto">
         <div class="mb-16 scroll-reveal">
             <div class="flex items-center gap-3 mb-4"><div class="h-[1px] w-12 bg-primary-container"></div><span class="font-label text-xs uppercase tracking-[0.2em] text-on-surface-variant font-bold">Экосистема</span></div>
-            <h1 class="font-headline text-5xl md:text-7xl font-extrabold tracking-tighter mb-6" id="infrastructure-title">Инфраструктура <span class="text-primary">Превосходства</span></h1>
-            <p class="max-w-2xl text-on-surface-variant text-lg leading-relaxed">Ваше время — самая ценная валюта. Мы создали среду для синергии бизнеса и отдыха.</p>
+            <h1 class="section-title font-headline text-5xl md:text-7xl font-extrabold tracking-tighter mb-6" id="infrastructure-title">Инфраструктура <span class="text-primary">Превосходства</span></h1>
+            <p class="section-lead max-w-2xl text-on-surface-variant text-lg leading-relaxed">Ваше время — самая ценная валюта. Мы создали среду для синергии бизнеса и отдыха.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
             <div class="md:col-span-8 md:row-span-2 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/10 bento-card scroll-reveal">
-                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image:url('assets/restaurant.jpg')"><div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div></div>
-                <div class="relative h-full flex flex-col justify-end p-8">
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 lazy-bg" data-bg="assets/restaurant.jpg"><div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div></div>
+                <div class="relative h-full flex flex-col justify-end p-5 sm:p-8 card-pad">
                     <div class="flex items-center gap-2 mb-4">
                         <span class="px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold uppercase tracking-widest border border-primary/30">40 Этаж</span>
                         <span class="status-chip px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-bold uppercase tracking-widest border border-green-500/30"><span class="material-symbols-outlined text-base filled" aria-hidden="true">check_circle</span>Открыто</span>
@@ -392,8 +462,8 @@
                 </div>
             </div>
             <div class="md:col-span-4 md:row-span-3 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/10 bento-card scroll-reveal">
-                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105" style="background-image:url('assets/fitness.jpg')"><div class="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background"></div></div>
-                <div class="relative h-full flex flex-col justify-end p-8">
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105 lazy-bg" data-bg="assets/fitness.jpg"><div class="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background"></div></div>
+                <div class="relative h-full flex flex-col justify-end p-5 sm:p-8 card-pad">
                     <div class="mb-6 h-12 w-12 rounded-full bg-gold-gradient flex items-center justify-center shadow-lg shadow-primary/20"><span class="material-symbols-outlined text-on-primary">fitness_center</span></div>
                     <h2 class="font-headline text-2xl font-bold mb-3">Фитнес-клуб</h2>
                     <p class="text-on-surface-variant text-sm leading-relaxed mb-6">Бассейн, Technogym тренажеры, SPA зона.</p>
@@ -406,7 +476,7 @@
                 </div>
             </div>
             <div class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-low border border-outline-variant/5 bento-card scroll-reveal">
-                <div class="p-8 flex flex-col h-full">
+                <div class="p-5 sm:p-8 card-pad flex flex-col h-full">
                     <div class="flex justify-between items-start mb-6">
                         <span class="material-symbols-outlined text-primary text-3xl">hub</span>
                         <span class="status-chip text-xs font-bold text-green-500 uppercase tracking-wider"><span class="material-symbols-outlined text-base filled" aria-hidden="true">schedule</span>Open 24/7</span>
@@ -414,15 +484,15 @@
                     <h3 class="font-headline text-xl font-bold mb-2">Коворкинг</h3>
                     <p class="text-on-surface-variant text-sm mb-6">Сейчас работают: 23 человека</p>
                     <div class="flex -space-x-2">
-                        <img class="w-8 h-8 rounded-full border-2 border-background" src="https://i.pravatar.cc/100?img=1" alt="User"/>
-                        <img class="w-8 h-8 rounded-full border-2 border-background" src="https://i.pravatar.cc/100?img=2" alt="User"/>
-                        <img class="w-8 h-8 rounded-full border-2 border-background" src="https://i.pravatar.cc/100?img=3" alt="User"/>
+                        <div class="w-8 h-8 rounded-full border-2 border-background bg-surface-variant flex items-center justify-center text-[10px] font-bold text-primary">AL</div>
+                        <div class="w-8 h-8 rounded-full border-2 border-background bg-surface-variant flex items-center justify-center text-[10px] font-bold text-primary">EK</div>
+                        <div class="w-8 h-8 rounded-full border-2 border-background bg-surface-variant flex items-center justify-center text-[10px] font-bold text-primary">MN</div>
                         <div class="w-8 h-8 rounded-full border-2 border-background bg-surface-variant flex items-center justify-center text-xs font-bold">+20</div>
                     </div>
                 </div>
             </div>
             <div class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-low border border-outline-variant/5 bento-card scroll-reveal">
-                <div class="p-8 flex flex-col h-full">
+                <div class="p-5 sm:p-8 card-pad flex flex-col h-full">
                     <div class="mb-4"><span class="material-symbols-outlined text-primary text-3xl">electric_car</span></div>
                     <h3 class="font-headline text-xl font-bold mb-2">Паркинг</h3>
                     <p class="text-on-surface-variant text-sm mb-4">Face ID доступ, 50 EV-станций.</p>
@@ -438,10 +508,10 @@
 
 <!-- OFFICES SECTION -->
 <section id="offices" class="section hidden fade-in" aria-labelledby="offices-title" hidden>
-    <div class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
-        <header class="mb-16 text-center scroll-reveal">
-            <h1 class="font-headline text-4xl md:text-6xl font-extrabold tracking-tight mb-6" id="offices-title">Рассчитайте <span class="text-gold-gradient">инвестицию</span></h1>
-            <p class="text-on-surface-variant max-w-2xl mx-auto text-lg">Калькулятор аренды для вашего офиса.</p>
+    <div class="section-shell page-shell pt-24 md:pt-32 pb-16 md:pb-20 px-4 sm:px-6 max-w-7xl mx-auto">
+        <header class="mb-10 md:mb-16 text-center scroll-reveal">
+            <h1 class="section-title font-headline text-4xl md:text-6xl font-extrabold tracking-tight mb-6" id="offices-title">Рассчитайте <span class="text-gold-gradient">инвестицию</span></h1>
+            <p class="section-lead text-on-surface-variant max-w-2xl mx-auto text-lg">Калькулятор аренды для вашего офиса.</p>
             <div class="mt-6 flex items-center justify-center gap-2 text-sm text-on-surface-variant">
                 <span class="material-symbols-outlined text-primary text-sm">sync</span>
                 <span>Курс НБ РБ: <strong class="text-primary" id="nbRateDisplay">3.25</strong> BYN/USD</span>
@@ -450,7 +520,7 @@
         </header>
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
             <div class="lg:col-span-8">
-                <div class="glass-panel p-8 rounded-xl scroll-reveal">
+                <div class="glass-panel p-5 sm:p-8 panel-pad rounded-xl scroll-reveal">
                     <div class="space-y-12">
                         <div class="space-y-6">
                             <div class="flex justify-between items-end">
@@ -505,8 +575,8 @@
             </div>
             <div class="lg:col-span-4">
                 <div class="glass-panel rounded-xl sticky top-32 scroll-reveal">
-                    <div class="p-8">
-                        <div class="text-5xl font-headline font-extrabold text-gold-gradient"><span id="totalPrice">0</span></div>
+                    <div class="p-5 sm:p-8 panel-pad">
+                        <div class="calc-total text-4xl sm:text-5xl font-headline font-extrabold text-gold-gradient"><span id="totalPrice">0</span></div>
                         <div class="text-on-surface-variant font-medium">BYN / месяц</div>
                         <div class="mt-4 pt-4 border-t border-white/10">
                             <div class="text-2xl font-headline font-bold text-primary"><span id="usdPrice">0</span> <span class="text-sm">USD</span></div>
@@ -529,25 +599,25 @@
 
 <!-- GALLERY SECTION -->
 <section id="gallery" class="section hidden fade-in" aria-labelledby="gallery-title" hidden>
-    <div class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
+    <div class="section-shell page-shell pt-24 md:pt-32 pb-16 md:pb-20 px-4 sm:px-6 max-w-7xl mx-auto">
         <header class="mb-16 text-center scroll-reveal">
             <span class="text-primary text-xs uppercase">Галерея</span>
-            <h1 class="text-5xl font-headline font-extrabold mt-4" id="gallery-title">Эстетика</h1>
+            <h1 class="section-title text-5xl font-headline font-extrabold mt-4" id="gallery-title">Эстетика</h1>
         </header>
-        <div class="flex gap-4 mb-12 scroll-reveal">
+        <div class="gallery-filter-bar flex gap-4 mb-12 scroll-reveal">
             <button class="px-6 py-2 glass-card border filter-btn active" data-filter="all">Все</button>
             <button class="px-6 py-2 glass-card border filter-btn" data-filter="architecture">Архитектура</button>
             <button class="px-6 py-2 glass-card border filter-btn" data-filter="interior">Интерьеры</button>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="gallery-item md:col-span-2 group relative rounded-xl overflow-hidden bento-card scroll-reveal" data-category="architecture">
-                <img class="w-full h-80 object-cover" src="assets/hero.jpg" alt="Архитектурный вид Nemiga Tower ночью"/>
+                <img class="w-full h-80 object-cover lazy-media" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/hero.jpg" alt="Архитектурный вид Nemiga Tower ночью" loading="lazy" decoding="async"/>
             </div>
             <div class="gallery-item group relative rounded-xl overflow-hidden bento-card scroll-reveal" data-category="interior">
-                <img class="w-full h-80 object-cover" src="assets/office-interior.jpg" alt="Светлый офисный интерьер с панорамным остеклением"/>
+                <img class="w-full h-80 object-cover lazy-media" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/office-interior.jpg" alt="Светлый офисный интерьер с панорамным остеклением" loading="lazy" decoding="async"/>
             </div>
             <div class="gallery-item group relative rounded-xl overflow-hidden bento-card scroll-reveal" data-category="interior">
-                <img class="w-full h-80 object-cover" src="assets/gallery-lounge.jpg" alt="Приватная lounge-библиотека для резидентов"/>
+                <img class="w-full h-80 object-cover lazy-media" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/gallery-lounge.jpg" alt="Приватная lounge-библиотека для резидентов" loading="lazy" decoding="async"/>
             </div>
         </div>
     </div>
@@ -555,8 +625,8 @@
 
 <!-- NEWS SECTION -->
 <section id="news" class="section hidden fade-in" aria-labelledby="news-title" hidden>
-    <div class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
-        <h1 class="text-5xl font-headline font-extrabold mb-16 scroll-reveal" id="news-title">Новости</h1>
+    <div class="section-shell-tight page-shell pt-24 md:pt-32 pb-16 md:pb-20 px-4 sm:px-6 max-w-7xl mx-auto">
+        <h1 class="section-title text-5xl font-headline font-extrabold mb-12 md:mb-16 scroll-reveal" id="news-title">Новости</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="glass-card p-8 rounded-xl bento-card scroll-reveal">
                 <h3 class="font-headline font-bold text-2xl mb-4">Открытие коворкинга</h3>
@@ -572,13 +642,13 @@
 
 <!-- REVIEWS SECTION -->
 <section id="reviews" class="section hidden fade-in" aria-labelledby="reviews-title" hidden>
-    <div class="pt-32 pb-20 px-6 max-w-7xl mx-auto">
-        <h1 class="text-5xl font-headline font-extrabold text-center mb-16 scroll-reveal" id="reviews-title">Отзывы</h1>
+    <div class="section-shell-tight page-shell pt-24 md:pt-32 pb-16 md:pb-20 px-4 sm:px-6 max-w-7xl mx-auto">
+        <h1 class="section-title text-5xl font-headline font-extrabold text-center mb-12 md:mb-16 scroll-reveal" id="reviews-title">Отзывы</h1>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="glass-card p-8 rounded-xl bento-card scroll-reveal">
                 <p class="italic mb-4">"Лучший офис в Минске!"</p>
                 <div class="flex items-center gap-4 mt-4">
-                    <img src="assets/avatar-ceo.jpg" alt="Александр К." class="w-12 h-12 rounded-full object-cover"/>
+                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/avatar-ceo.jpg" alt="Александр К." class="w-12 h-12 rounded-full object-cover lazy-media" loading="lazy" decoding="async"/>
                     <div>
                         <div class="font-bold">Александр К.</div>
                         <div class="text-xs text-on-surface-variant">CEO, TechHub</div>
@@ -588,7 +658,7 @@
             <div class="glass-card p-8 rounded-xl bento-card scroll-reveal">
                 <p class="italic mb-4">"Инфраструктура топ!"</p>
                 <div class="flex items-center gap-4 mt-4">
-                    <img src="assets/avatar-cto.jpg" alt="Елена М." class="w-12 h-12 rounded-full object-cover"/>
+                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/avatar-cto.jpg" alt="Елена М." class="w-12 h-12 rounded-full object-cover lazy-media" loading="lazy" decoding="async"/>
                     <div>
                         <div class="font-bold">Елена М.</div>
                         <div class="text-xs text-on-surface-variant">CTO, Innova</div>
@@ -611,10 +681,10 @@
 
 <!-- CONTACTS SECTION -->
 <section id="contacts" class="section hidden fade-in" aria-labelledby="contacts-title" hidden>
-    <div class="pt-32 pb-16 px-6 max-w-7xl mx-auto">
-        <h1 class="font-headline text-5xl md:text-7xl mb-8 scroll-reveal" id="contacts-title">Контакты</h1>
+    <div class="section-shell-tight page-shell pt-24 md:pt-32 pb-16 px-4 sm:px-6 max-w-7xl mx-auto">
+        <h1 class="section-title font-headline text-5xl md:text-7xl mb-8 scroll-reveal" id="contacts-title">Контакты</h1>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="glass-card p-8 rounded-xl scroll-reveal">
+            <div class="glass-card p-5 sm:p-8 card-pad rounded-xl scroll-reveal">
                 <h3 class="font-headline font-bold text-xl mb-4">Отдел аренды</h3>
                 <div class="space-y-3">
                     <div class="flex items-center gap-3"><span class="material-symbols-outlined">call</span><span>+375 (29) 123-45-67</span></div>
@@ -622,7 +692,7 @@
                     <div class="flex items-center gap-3"><span class="material-symbols-outlined">location_on</span><span>Минск, Немига 5</span></div>
                 </div>
             </div>
-            <div class="glass-card p-8 rounded-xl scroll-reveal">
+            <div class="glass-card p-5 sm:p-8 card-pad rounded-xl scroll-reveal">
                 <h3 class="font-headline font-bold text-xl mb-4">Режим работы</h3>
                 <div class="space-y-2">
                     <div class="flex justify-between"><span>Пн-Пт</span><span>9:00 - 20:00</span></div>
@@ -630,7 +700,7 @@
                 </div>
             </div>
         </div>
-        <div class="glass-card p-10 rounded-xl mt-6 scroll-reveal">
+        <div class="glass-card p-5 sm:p-10 panel-pad rounded-xl mt-6 scroll-reveal">
             <h2 class="font-headline font-bold text-2xl mb-6">Заявка</h2>
             <form onsubmit="handleSubmit(event)" class="space-y-4">
                 <div class="space-y-2">
@@ -654,7 +724,7 @@
 </main>
 
 <!-- Footer -->
-<footer class="border-t border-white/5 py-12 px-8 mt-20">
+<footer class="footer-shell border-t border-white/5 py-12 px-4 sm:px-6 md:px-8 mt-16 md:mt-20">
     <div class="max-w-7xl mx-auto text-center">
         <a class="inline-block footer-brand" href="#home" data-section="home" aria-label="Немига-Тауэр — на главную">
             <img src="assets/logo-wordmark.svg" alt="Nemiga Tower wordmark" class="w-full h-auto"/>
@@ -665,9 +735,9 @@
 </footer>
 
 <!-- Modals -->
-<div class="modal fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/50" id="callbackModal" onclick="if(event.target===this)closeModal('callbackModal')" aria-hidden="true">
-    <div class="modal-content glass-card p-8 rounded-xl max-w-md w-full" role="dialog" aria-modal="true" aria-labelledby="callbackTitle">
-        <div class="flex justify-between items-center mb-6"><h3 class="font-headline font-bold text-2xl" id="callbackTitle">Заказать звонок</h3><button class="material-symbols-outlined modal-close" type="button" onclick="closeModal('callbackModal')" aria-label="Закрыть окно обратного звонка">close</button></div>
+<div class="modal fixed inset-0 z-[10020] flex items-center justify-center p-4 bg-black/60" id="callbackModal" onclick="if(event.target===this)closeModal('callbackModal')" aria-hidden="true">
+    <div class="modal-content glass-card p-5 md:p-8 rounded-xl max-w-md w-full" role="dialog" aria-modal="true" aria-labelledby="callbackTitle">
+        <div class="modal-header flex justify-between items-center mb-6"><h3 class="font-headline font-bold text-2xl" id="callbackTitle">Заказать звонок</h3><button class="material-symbols-outlined modal-close" type="button" onclick="closeModal('callbackModal')" aria-label="Закрыть окно обратного звонка">close</button></div>
         <form onsubmit="handleModalSubmit(event,'callbackModal')" class="space-y-4">
             <div class="space-y-2">
                 <label class="text-sm font-medium text-on-surface" for="callbackName">Ваше имя</label>
@@ -682,9 +752,9 @@
     </div>
 </div>
 
-<div class="modal fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/50" id="bookingModal" onclick="if(event.target===this)closeModal('bookingModal')" aria-hidden="true">
-    <div class="modal-content glass-card p-8 rounded-xl max-w-md w-full" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
-        <div class="flex justify-between items-center mb-6">
+<div class="modal fixed inset-0 z-[10020] flex items-center justify-center p-4 bg-black/60" id="bookingModal" onclick="if(event.target===this)closeModal('bookingModal')" aria-hidden="true">
+    <div class="modal-content glass-card p-5 md:p-8 rounded-xl max-w-md w-full" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
+        <div class="modal-header flex justify-between items-center mb-6">
             <h3 class="font-headline font-bold text-2xl" id="bookingTitle">Бронирование</h3>
             <button class="material-symbols-outlined modal-close" type="button" onclick="closeModal('bookingModal')" aria-label="Закрыть окно бронирования">close</button>
         </div>
@@ -711,14 +781,14 @@
     </div>
 </div>
 
-<div class="modal fixed inset-0 z-[9999] flex items-center justify-center p-4 bg-black/50" id="mediaTourModal" onclick="if(event.target===this)closeModal('mediaTourModal')" aria-hidden="true">
-    <div class="modal-content glass-card p-8 rounded-xl max-w-5xl w-full" role="dialog" aria-modal="true" aria-labelledby="mediaTourTitle">
-        <div class="flex justify-between items-center mb-6"><h3 class="font-headline font-bold text-2xl" id="mediaTourTitle">Обзор пространства</h3><button class="material-symbols-outlined modal-close" type="button" onclick="closeModal('mediaTourModal')" aria-label="Закрыть обзор пространства">close</button></div>
+<div class="modal fixed inset-0 z-[10020] flex items-center justify-center p-4 bg-black/60" id="mediaTourModal" onclick="if(event.target===this)closeModal('mediaTourModal')" aria-hidden="true">
+    <div class="modal-content glass-card p-5 md:p-8 rounded-xl max-w-5xl w-full" role="dialog" aria-modal="true" aria-labelledby="mediaTourTitle">
+        <div class="modal-header flex justify-between items-center mb-6"><h3 class="font-headline font-bold text-2xl" id="mediaTourTitle">Обзор пространства</h3><button class="material-symbols-outlined modal-close" type="button" onclick="closeModal('mediaTourModal')" aria-label="Закрыть обзор пространства">close</button></div>
         <div class="space-y-6">
-            <div class="aspect-[16/7] bg-surface-container rounded-[1.25rem] overflow-hidden border border-white/10">
-                <img src="assets/hero.jpg" alt="Главный вид Nemiga Tower" class="w-full h-full object-cover" id="mediaTourPreview"/>
+            <div class="media-tour-visual aspect-[16/7] bg-surface-container rounded-[1.25rem] overflow-hidden border border-white/10">
+                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/hero.jpg" alt="Главный вид Nemiga Tower" class="w-full h-full object-cover lazy-media" id="mediaTourPreview" decoding="async"/>
             </div>
-            <div class="flex items-start justify-between gap-4 flex-col md:flex-row">
+            <div class="media-tour-summary flex items-start justify-between gap-4 flex-col md:flex-row">
                 <div>
                     <p class="text-lg font-headline font-bold text-on-surface" id="mediaTourHeading">Архитектурный фасад</p>
                     <p class="microcopy text-on-surface-variant max-w-2xl" id="mediaTourDescription">Ночной силуэт башни с золотой подсветкой формирует первую эмоциональную точку контакта и задаёт премиальный тон всему объекту.</p>
@@ -727,23 +797,23 @@
             </div>
             <div class="media-tour-grid" role="list" aria-label="Ключевые пространства бизнес-центра">
                 <button class="media-tour-card text-left" type="button" data-active="true" data-tour-image="assets/hero.jpg" data-tour-title="Архитектурный фасад" data-tour-description="Ночной силуэт башни с золотой подсветкой формирует первую эмоциональную точку контакта и задаёт премиальный тон всему объекту.">
-                    <img src="assets/hero.jpg" alt="Миниатюра фасада бизнес-центра"/>
+                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/hero.jpg" alt="Миниатюра фасада бизнес-центра" class="lazy-media" loading="lazy" decoding="async"/>
                     <span class="media-tour-caption"><span class="font-headline font-bold text-white">Фасад</span></span>
                 </button>
                 <button class="media-tour-card text-left" type="button" data-tour-image="assets/office-interior.jpg" data-tour-title="Панорамные офисы" data-tour-description="Светлые офисы с мягким освещением, большим количеством воздуха и спокойной премиальной палитрой для ежедневной работы.">
-                    <img src="assets/office-interior.jpg" alt="Миниатюра офисного интерьера"/>
+                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/office-interior.jpg" alt="Миниатюра офисного интерьера" class="lazy-media" loading="lazy" decoding="async"/>
                     <span class="media-tour-caption"><span class="font-headline font-bold text-white">Офисы</span></span>
                 </button>
                 <button class="media-tour-card text-left" type="button" data-tour-image="assets/restaurant.jpg" data-tour-title="Sky Terrace" data-tour-description="Ресторан на верхнем этаже продолжает визуальный язык башни и добавляет бизнес-центру нужную hospitality-слойность.">
-                    <img src="assets/restaurant.jpg" alt="Миниатюра ресторана Sky Terrace"/>
+                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/restaurant.jpg" alt="Миниатюра ресторана Sky Terrace" class="lazy-media" loading="lazy" decoding="async"/>
                     <span class="media-tour-caption"><span class="font-headline font-bold text-white">Ресторан</span></span>
                 </button>
                 <button class="media-tour-card text-left" type="button" data-tour-image="assets/fitness.jpg" data-tour-title="Фитнес-клуб" data-tour-description="Фитнес и бассейн работают как сервисный якорь для резидентов и усиливают ощущение полноценной экосистемы внутри объекта.">
-                    <img src="assets/fitness.jpg" alt="Миниатюра фитнес-клуба"/>
+                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/fitness.jpg" alt="Миниатюра фитнес-клуба" class="lazy-media" loading="lazy" decoding="async"/>
                     <span class="media-tour-caption"><span class="font-headline font-bold text-white">Фитнес</span></span>
                 </button>
                 <button class="media-tour-card text-left" type="button" data-tour-image="assets/gallery-lounge.jpg" data-tour-title="Resident lounge" data-tour-description="Камерное lounge-пространство создаёт более мягкую, приватную атмосферу для встреч, чтения и пауз в течение дня.">
-                    <img src="assets/gallery-lounge.jpg" alt="Миниатюра lounge-пространства"/>
+                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/gallery-lounge.jpg" alt="Миниатюра lounge-пространства" class="lazy-media" loading="lazy" decoding="async"/>
                     <span class="media-tour-caption"><span class="font-headline font-bold text-white">Lounge</span></span>
                 </button>
             </div>
@@ -777,6 +847,8 @@ const finishDisplay = document.getElementById('finishDisplay');
 const mediaTourPreview = document.getElementById('mediaTourPreview');
 const mediaTourHeading = document.getElementById('mediaTourHeading');
 const mediaTourDescription = document.getElementById('mediaTourDescription');
+const lazyImages = Array.from(document.querySelectorAll('img[data-src]'));
+const lazyBackgrounds = Array.from(document.querySelectorAll('[data-bg]'));
 
 const RATES = {
     standard: 65,
@@ -799,6 +871,65 @@ function getFocusableElements(root) {
         .filter((element) => !element.hidden && element.offsetParent !== null);
 }
 
+function hydrateImage(image) {
+    if (!image || !image.dataset.src || image.dataset.hydrated === 'true') {
+        return;
+    }
+
+    image.src = image.dataset.src;
+    image.dataset.hydrated = 'true';
+}
+
+function hydrateBackground(element) {
+    if (!element || !element.dataset.bg || element.dataset.hydrated === 'true') {
+        return;
+    }
+
+    element.style.backgroundImage = `url('${element.dataset.bg}')`;
+    element.dataset.hydrated = 'true';
+}
+
+function hydrateMediaWithin(root) {
+    if (!root) {
+        return;
+    }
+
+    root.querySelectorAll('img[data-src]').forEach(hydrateImage);
+    root.querySelectorAll('[data-bg]').forEach(hydrateBackground);
+}
+
+function initDeferredMedia() {
+    if (!('IntersectionObserver' in window)) {
+        hydrateMediaWithin(document);
+        return;
+    }
+
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+                return;
+            }
+            hydrateImage(entry.target);
+            observer.unobserve(entry.target);
+        });
+    }, { rootMargin: '240px 0px' });
+
+    const backgroundObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+                return;
+            }
+            hydrateBackground(entry.target);
+            observer.unobserve(entry.target);
+        });
+    }, { rootMargin: '240px 0px' });
+
+    lazyImages.forEach((image) => imageObserver.observe(image));
+    lazyBackgrounds.forEach((element) => backgroundObserver.observe(element));
+
+    hydrateMediaWithin(document.getElementById('home'));
+}
+
 function setActiveSection(id, options = {}) {
     const { updateHash = true, moveFocus = true } = options;
     const targetId = sections.some((section) => section.id === id) ? id : 'home';
@@ -808,6 +939,9 @@ function setActiveSection(id, options = {}) {
         section.hidden = !isActive;
         section.classList.toggle('hidden', !isActive);
         section.setAttribute('aria-hidden', String(!isActive));
+        if (isActive) {
+            hydrateMediaWithin(section);
+        }
     });
 
     navLinks.forEach((link) => {
@@ -995,6 +1129,7 @@ function openModal(id) {
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('modal-open');
+    hydrateMediaWithin(modal);
 
     if (id === 'bookingModal') {
         const modalArea = document.getElementById('modalArea');
@@ -1080,6 +1215,7 @@ function initMediaTour() {
         card.addEventListener('click', () => {
             cards.forEach((currentCard) => currentCard.dataset.active = 'false');
             card.dataset.active = 'true';
+            hydrateImage(card.querySelector('img'));
             mediaTourPreview.src = card.dataset.tourImage;
             mediaTourPreview.alt = card.querySelector('img').alt.replace('Миниатюра ', '');
             mediaTourHeading.textContent = card.dataset.tourTitle;
@@ -1214,6 +1350,7 @@ function init() {
     initNavigation();
     initGalleryFilters();
     initMediaTour();
+    initDeferredMedia();
     initCustomCursor();
     initParallax();
     initKeyboardGuards();

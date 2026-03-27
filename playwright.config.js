@@ -12,7 +12,7 @@ module.exports = defineConfig({
     trace: 'off'
   },
   webServer: {
-    command: 'python -m http.server 41873',
+    command: 'npm run serve',
     url: 'http://127.0.0.1:41873',
     reuseExistingServer: false,
     timeout: 120000
