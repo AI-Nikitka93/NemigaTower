@@ -11,3 +11,9 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+node_modules/
+.codex_restore/
+.audit_visual/
+playwright-report/
+test-results/
+dist/

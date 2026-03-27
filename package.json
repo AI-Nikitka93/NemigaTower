@@ -1,0 +1,14 @@
+{
+  "name": "biznescentr",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Premium business center landing page with accessibility and visual regression checks.",
+  "scripts": {
+    "start": "python -m http.server 41873",
+    "test:visual": "npx playwright test",
+    "test:visual:update": "npx playwright test --update-snapshots"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2"
+  }
+}
