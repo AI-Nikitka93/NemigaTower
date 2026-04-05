@@ -1,0 +1,10 @@
+# Default ownership for repository changes
+* @AI-Nikitka93
+
+# Protect the repository governance surface
+/.github/ @AI-Nikitka93
+/README.md @AI-Nikitka93
+/README.ru.md @AI-Nikitka93
+/CONTRIBUTING.md @AI-Nikitka93
+/CODE_OF_CONDUCT.md @AI-Nikitka93
+/SECURITY.md @AI-Nikitka93

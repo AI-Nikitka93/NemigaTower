@@ -1,0 +1,70 @@
+name: Bug report
+description: Report a reproducible bug in the site, build, or deployment flow
+title: "[Bug]: "
+labels:
+  - bug
+  - triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping improve Nemiga Tower.
+
+        Please use this form for reproducible bugs in the landing page, build pipeline, or GitHub Pages output.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      description: Which part of the repository is affected?
+      options:
+        - Landing page UI
+        - Rental calculator
+        - Accessibility behavior
+        - Visual regression tests
+        - Build or deploy pipeline
+        - Documentation
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: Describe the bug and the expected behavior.
+      placeholder: The contacts section layout breaks on mobile after...
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Add a short step-by-step flow.
+      placeholder: |
+        1. Open the homepage
+        2. Scroll to...
+        3. Click...
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser, OS, viewport, or local command context
+      placeholder: Chrome 135 on Windows 11, 390x844 viewport
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Logs, screenshots, or notes
+      description: Paste errors, screenshots, or other useful context.
+    validations:
+      required: false
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Confirmation
+      options:
+        - label: I searched the existing issues first.
+          required: true
+        - label: This is not a private security report.
+          required: true

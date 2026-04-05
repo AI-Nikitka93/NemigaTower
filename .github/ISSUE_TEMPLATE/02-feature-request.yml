@@ -1,0 +1,51 @@
+name: Feature request
+description: Suggest an improvement to the site, docs, or repository packaging
+title: "[Feature]: "
+labels:
+  - enhancement
+  - triage
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form for thoughtful improvements that make the repository clearer, easier to run, or more useful as a showcase.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem are you trying to solve?
+      placeholder: The repository lacks...
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change
+      placeholder: I would like to add...
+    validations:
+      required: true
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - UI or content
+        - Build or deployment
+        - Testing
+        - Documentation
+        - GitHub packaging
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Why this matters
+      description: Explain how this would improve onboarding, trust, or maintainability.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Confirmation
+      options:
+        - label: I checked that this request is not already covered by the README or open issues.
+          required: true
