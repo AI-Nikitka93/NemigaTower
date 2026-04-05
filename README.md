@@ -4,7 +4,7 @@
 
 Premium business-center showcase landing page built as a public portfolio surface. Nemiga Tower combines a polished one-page UI, responsive behavior, accessibility details, visual regression checks, and a GitHub Pages deployment flow in a compact static-site repository.
 
-[Live demo](https://ai-nikitka93.github.io/NemigaTower/) · [Contributing](./CONTRIBUTING.md) · [Security](./SECURITY.md)
+[Live demo](https://ai-nikitka93.github.io/NemigaTower/) · [Contributing](./CONTRIBUTING.md) · [Support](./SUPPORT.md) · [Security](./SECURITY.md)
 
 | Surface | Status |
 | --- | --- |

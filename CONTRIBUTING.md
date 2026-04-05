@@ -53,4 +53,5 @@ npm run test:visual:update
 
 - Use the issue forms in [`.github/ISSUE_TEMPLATE`](./.github/ISSUE_TEMPLATE) for bugs and feature requests.
 - Include reproduction steps, environment details, and screenshots when relevant.
+- Route general help requests through [`SUPPORT.md`](./SUPPORT.md) so bugs stay actionable.
 - Do not report security issues in public tickets. Follow [`SECURITY.md`](./SECURITY.md) instead.

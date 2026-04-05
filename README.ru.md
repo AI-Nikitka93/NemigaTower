@@ -4,7 +4,7 @@
 
 Премиальный showcase-лендинг бизнес-центра для публичного портфолио. Репозиторий собран как компактный static-site surface: один основной UI-файл, аккуратный build-проход, визуальные проверки через Playwright и стабильный деплой на GitHub Pages.
 
-[Live demo](https://ai-nikitka93.github.io/NemigaTower/) · [Contributing](./CONTRIBUTING.md) · [Security](./SECURITY.md)
+[Live demo](https://ai-nikitka93.github.io/NemigaTower/) · [Contributing](./CONTRIBUTING.md) · [Support](./SUPPORT.md) · [Security](./SECURITY.md)
 
 | Поверхность | Статус |
 | --- | --- |

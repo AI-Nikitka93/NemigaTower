@@ -1,1 +1,8 @@
 blank_issues_enabled: false
+contact_links:
+  - name: Support and usage help
+    url: https://github.com/AI-Nikitka93/NemigaTower/blob/main/SUPPORT.md
+    about: Use this when you need help, context, or setup guidance instead of filing a bug.
+  - name: Security policy
+    url: https://github.com/AI-Nikitka93/NemigaTower/blob/main/SECURITY.md
+    about: Report suspected vulnerabilities privately instead of opening a public issue.
