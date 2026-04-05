@@ -12,7 +12,7 @@ Premium business-center showcase landing page built as a public portfolio surfac
 | Runtime | Static `HTML` + `Tailwind CSS CDN` + `Vanilla JavaScript` |
 | Verification | Playwright visual regression for desktop and mobile |
 | Deployment | GitHub Pages via [`.github/workflows/pages.yml`](./.github/workflows/pages.yml) |
-| Reuse rights | `UNLICENSED` until a root `LICENSE` file is added |
+| Reuse rights | Code: `MIT` · Visual and brand assets: see [`ASSET_LICENSE.md`](./ASSET_LICENSE.md) |
 
 ![Nemiga Tower homepage preview](./docs/screenshots/site-live-home.png)
 
@@ -102,4 +102,4 @@ This is an actively maintained demo repository, not a production website for a r
 
 ## License
 
-No reusable open-source license has been added yet. Until a root `LICENSE` file exists, treat the repository as not licensed for reuse. The package metadata is marked `UNLICENSED` to make that posture explicit.
+Source code is available under the [MIT License](./LICENSE). Images, screenshots, and brand-style showcase assets are not automatically covered by MIT; see [ASSET_LICENSE.md](./ASSET_LICENSE.md) for the non-code asset notice.

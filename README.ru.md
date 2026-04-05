@@ -12,7 +12,7 @@
 | Runtime | `HTML` + `Tailwind CSS CDN` + `Vanilla JavaScript` |
 | Проверка | Playwright visual regression для desktop и mobile |
 | Деплой | GitHub Pages через [`.github/workflows/pages.yml`](./.github/workflows/pages.yml) |
-| Права на reuse | `UNLICENSED`, пока в корне нет `LICENSE` |
+| Права на reuse | Код: `MIT` · Визуальные и брендовые assets: см. [`ASSET_LICENSE.md`](./ASSET_LICENSE.md) |
 
 ![Превью главной страницы Nemiga Tower](./docs/screenshots/site-live-home.png)
 
@@ -103,4 +103,4 @@ NemigaTower/
 
 ## Лицензия
 
-Переиспользуемая open-source лицензия пока не добавлена. Пока в корне нет файла `LICENSE`, не стоит считать код и контент разрешёнными для reuse. В `package.json` это дополнительно отражено через `UNLICENSED`.
+Исходный код доступен по [MIT License](./LICENSE). Изображения, скриншоты и showcase-assets не переходят под MIT автоматически; для них действует отдельная оговорка в [ASSET_LICENSE.md](./ASSET_LICENSE.md).
