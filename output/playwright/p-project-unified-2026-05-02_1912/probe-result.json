@@ -1,0 +1,51 @@
+{
+  "url": "http://127.0.0.1:41912/",
+  "screenshots": [
+    "home-desktop.png",
+    "offices-calculator-desktop.png",
+    "booking-modal-desktop.png",
+    "contacts-submit-desktop.png",
+    "media-tour-desktop.png",
+    "mobile-menu.png"
+  ],
+  "checks": {
+    "calculator": {
+      "sectionHidden": false,
+      "rate": "2.8230",
+      "rateUpdate": "от 02.05",
+      "area": "360",
+      "total": "49 163",
+      "usd": "17 415",
+      "finish": "1.25"
+    },
+    "bookingModal": {
+      "active": true,
+      "ariaHidden": "false",
+      "modalArea": "360 м²",
+      "modalPrice": "49 163 BYN",
+      "emailBackground": "rgb(20, 23, 31)",
+      "activeElement": ""
+    },
+    "bookingSubmit": {
+      "modalActive": false,
+      "toast": "check_circleСпасибо. Мы уже готовим для вас персональный маршрут по объекту."
+    },
+    "contactSubmit": {
+      "toastCount": 2,
+      "latestToast": "check_circleЗаявка отправлена. Менеджер свяжется с вами в течение 15 минут.",
+      "contactNameAfterReset": ""
+    },
+    "mediaTour": {
+      "active": true,
+      "heading": "Фитнес-клуб",
+      "preview": "assets/fitness.jpg"
+    },
+    "mobileMenu": {
+      "active": true,
+      "ariaHidden": "false",
+      "toggleExpanded": "true"
+    }
+  },
+  "consoleErrors": [],
+  "serverLog": "Serving dist at http://127.0.0.1:41912/"
+}

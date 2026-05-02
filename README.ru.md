@@ -32,8 +32,6 @@ Nemiga Tower показывает, как может выглядеть доро
 
 - `Node.js 20+`
 - `npm`
-- `Python 3`, потому что `npm run serve` поднимает локальный static server через `python -m http.server`
-
 ```bash
 git clone https://github.com/AI-Nikitka93/NemigaTower.git
 cd NemigaTower

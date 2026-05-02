@@ -43,7 +43,8 @@ mkdirSync(assetOutputDir, { recursive: true });
 writeFileSync(path.join(distDir, 'index.html'), indexHtml, 'utf8');
 writeFileSync(path.join(distDir, '.nojekyll'), '', 'utf8');
 
-for (const assetPath of referencedAssets) {
+for (const rawAssetPath of referencedAssets) {
+  const assetPath = rawAssetPath.split('?')[0]; // Strip query strings
   const sourcePath = ensureAssetExists(assetPath);
   const destinationPath = path.join(rootDir, 'dist', assetPath);
   mkdirSync(path.dirname(destinationPath), { recursive: true });

@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --bg: #10131a;
+    --bg-soft: #14171f;
+    --surface: #1d1f27;
+    --surface-low: #191b23;
+    --surface-high: #272a32;
+    --surface-highest: #232730;
+    --surface-variant: #32353d;
+    --text: #e1e2ec;
+    --text-muted: #d0c5af;
+    --gold: #f2ca50;
+    --gold-deep: #d4af37;
+    --gold-muted: #d8bc79;
+    --outline: #4d4635;
+    --focus: #f4d56d;
+    --success: #7ed9a8;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gold-gradient text-on-primary font-bold transition-all duration-300;
+  }
+}

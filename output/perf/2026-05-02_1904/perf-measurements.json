@@ -1,0 +1,346 @@
+{
+  "measuredAt": "2026-05-02T16:07:03.926Z",
+  "serverStartupMs": 66.98,
+  "serverRestartStartupMs": 62.9,
+  "memoryAfterStart": {
+    "pid": 31728,
+    "workingSetMB": 71.82,
+    "privateMemoryMB": 29.82,
+    "cpuSeconds": 0.078125
+  },
+  "memoryAfterLoad": {
+    "pid": 31728,
+    "workingSetMB": 73.43,
+    "privateMemoryMB": 60.84,
+    "cpuSeconds": 0.515625
+  },
+  "memoryAfterRestart": {
+    "pid": 82940,
+    "workingSetMB": 72.48,
+    "privateMemoryMB": 62.07,
+    "cpuSeconds": 0.0625
+  },
+  "warmup": {
+    "ms": 15.85,
+    "status": 200,
+    "bytes": 84050
+  },
+  "sequentialIndex": {
+    "count": 60,
+    "min": 0.86,
+    "p50": 1.05,
+    "p95": 1.8,
+    "p99": 3.29,
+    "max": 3.29,
+    "avg": 1.2,
+    "failed": 0,
+    "errorRate": 0,
+    "bytes": 5043000
+  },
+  "sequentialHero": {
+    "count": 30,
+    "min": 2.31,
+    "p50": 2.95,
+    "p95": 10.75,
+    "p99": 14.88,
+    "max": 14.88,
+    "avg": 3.66,
+    "failed": 0,
+    "errorRate": 0,
+    "bytes": 30324990
+  },
+  "burstIndex": {
+    "count": 120,
+    "min": 3.41,
+    "p50": 5.69,
+    "p95": 13.79,
+    "p99": 17.01,
+    "max": 17.11,
+    "avg": 6.54,
+    "failed": 0,
+    "errorRate": 0,
+    "bytes": 10086000
+  },
+  "browserDesktop": {
+    "pageReadyMs": 2299.01,
+    "lcpMs": 352,
+    "cls": 0.0128,
+    "maxEventDurationMs": null,
+    "routeTransitionMs": 17.4,
+    "sliderInteractionMs": 31.3,
+    "domContentLoadedMs": 342.4,
+    "loadEventMs": 709.8,
+    "transferSize": 84350,
+    "encodedBodySize": 84050,
+    "rateText": "от 02.05",
+    "rateValue": "2.8230",
+    "totalPrice": "83 030",
+    "slowestResources": [
+      {
+        "name": "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap",
+        "initiatorType": "link",
+        "duration": 187.6,
+        "transferSize": 711,
+        "encodedBodySize": 411,
+        "decodedBodySize": 688
+      },
+      {
+        "name": "https://cdn.tailwindcss.com/?plugins=forms,container-queries",
+        "initiatorType": "script",
+        "duration": 151.2,
+        "transferSize": 0,
+        "encodedBodySize": 0,
+        "decodedBodySize": 0
+      },
+      {
+        "name": "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap",
+        "initiatorType": "link",
+        "duration": 148.7,
+        "transferSize": 1299,
+        "encodedBodySize": 999,
+        "decodedBodySize": 23075
+      },
+      {
+        "name": "https://api.nbrb.by/exrates/rates/USD?parammode=2",
+        "initiatorType": "fetch",
+        "duration": 57.7,
+        "transferSize": 0,
+        "encodedBodySize": 0,
+        "decodedBodySize": 0
+      },
+      {
+        "name": "http://127.0.0.1:41873/assets/fitness.jpg",
+        "initiatorType": "img",
+        "duration": 9,
+        "transferSize": 899090,
+        "encodedBodySize": 898790,
+        "decodedBodySize": 898790
+      },
+      {
+        "name": "http://127.0.0.1:41873/assets/gallery-lounge.jpg",
+        "initiatorType": "img",
+        "duration": 8.8,
+        "transferSize": 841562,
+        "encodedBodySize": 841262,
+        "decodedBodySize": 841262
+      },
+      {
+        "name": "http://127.0.0.1:41873/assets/restaurant.jpg",
+        "initiatorType": "img",
+        "duration": 5,
+        "transferSize": 817618,
+        "encodedBodySize": 817318,
+        "decodedBodySize": 817318
+      },
+      {
+        "name": "http://127.0.0.1:41873/assets/hero.jpg",
+        "initiatorType": "link",
+        "duration": 4.2,
+        "transferSize": 1011133,
+        "encodedBodySize": 1010833,
+        "decodedBodySize": 1010833
+      },
+      {
+        "name": "http://127.0.0.1:41873/assets/office-interior.jpg",
+        "initiatorType": "img",
+        "duration": 3.8,
+        "transferSize": 731344,
+        "encodedBodySize": 731044,
+        "decodedBodySize": 731044
+      },
+      {
+        "name": "http://127.0.0.1:41873/assets/logo-wordmark.svg",
+        "initiatorType": "img",
+        "duration": 3.4,
+        "transferSize": 1493,
+        "encodedBodySize": 1193,
+        "decodedBodySize": 1193
+      }
+    ]
+  },
+  "browserMobile": {
+    "pageReadyMs": 2286.42,
+    "lcpMs": 316,
+    "cls": 0.0579,
+    "maxEventDurationMs": null,
+    "routeTransitionMs": 21.9,
+    "sliderInteractionMs": 31.9,
+    "domContentLoadedMs": 339.5,
+    "loadEventMs": 704.7,
+    "transferSize": 84350,
+    "encodedBodySize": 84050,
+    "rateText": "от 02.05",
+    "rateValue": "2.8230",
+    "totalPrice": "83 030",
+    "slowestResources": [
+      {
+        "name": "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap",
+        "initiatorType": "link",
+        "duration": 186.4,
+        "transferSize": 711,
+        "encodedBodySize": 411,
+        "decodedBodySize": 688
+      },
+      {
+        "name": "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap",
+        "initiatorType": "link",
+        "duration": 146.4,
+        "transferSize": 1299,
+        "encodedBodySize": 999,
+        "decodedBodySize": 23075
+      },
+      {
+        "name": "https://cdn.tailwindcss.com/?plugins=forms,container-queries",
+        "initiatorType": "script",
+        "duration": 144.1,
+        "transferSize": 0,
+        "encodedBodySize": 0,
+        "decodedBodySize": 0
+      },
+      {
+        "name": "https://api.nbrb.by/exrates/rates/USD?parammode=2",
+        "initiatorType": "fetch",
+        "duration": 53.7,
+        "transferSize": 0,
+        "encodedBodySize": 0,
+        "decodedBodySize": 0
+      },
+      {
+        "name": "http://127.0.0.1:41873/assets/restaurant.jpg",
+        "initiatorType": "img",
+        "duration": 5.1,
+        "transferSize": 817618,
+        "encodedBodySize": 817318,
+        "decodedBodySize": 817318
+      },
+      {
+        "name": "http://127.0.0.1:41873/assets/hero.jpg",
+        "initiatorType": "link",
+        "duration": 4.9,
+        "transferSize": 1011133,
+        "encodedBodySize": 1010833,
+        "decodedBodySize": 1010833
+      },
+      {
+        "name": "http://127.0.0.1:41873/assets/office-interior.jpg",
+        "initiatorType": "img",
+        "duration": 3.2,
+        "transferSize": 731344,
+        "encodedBodySize": 731044,
+        "decodedBodySize": 731044
+      },
+      {
+        "name": "http://127.0.0.1:41873/assets/logo-wordmark.svg",
+        "initiatorType": "img",
+        "duration": 2.6,
+        "transferSize": 1493,
+        "encodedBodySize": 1193,
+        "decodedBodySize": 1193
+      }
+    ]
+  },
+  "dependencyDegraded": {
+    "pageReadyMs": 2214.4,
+    "lcpMs": 344,
+    "cls": 0.0129,
+    "maxEventDurationMs": null,
+    "routeTransitionMs": 18.1,
+    "sliderInteractionMs": 32.6,
+    "domContentLoadedMs": 335,
+    "loadEventMs": 697.6,
+    "transferSize": 84350,
+    "encodedBodySize": 84050,
+    "rateText": "(дефолтный)",
+    "rateValue": "3.25",
+    "totalPrice": "83 030",
+    "slowestResources": [
+      {
+        "name": "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap",
+        "initiatorType": "link",
+        "duration": 185.5,
+        "transferSize": 711,
+        "encodedBodySize": 411,
+        "decodedBodySize": 688
+      },
+      {
+        "name": "https://cdn.tailwindcss.com/?plugins=forms,container-queries",
+        "initiatorType": "script",
+        "duration": 137,
+        "transferSize": 0,
+        "encodedBodySize": 0,
+        "decodedBodySize": 0
+      },
+      {
+        "name": "https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap",
+        "initiatorType": "link",
+        "duration": 129,
+        "transferSize": 1299,
+        "encodedBodySize": 999,
+        "decodedBodySize": 23075
+      },
+      {
+        "name": "http://127.0.0.1:41873/assets/gallery-lounge.jpg",
+        "initiatorType": "img",
+        "duration": 19.7,
+        "transferSize": 841562,
+        "encodedBodySize": 841262,
+        "decodedBodySize": 841262
+      },
+      {
+        "name": "http://127.0.0.1:41873/assets/fitness.jpg",
+        "initiatorType": "img",
+        "duration": 19.2,
+        "transferSize": 899090,
+        "encodedBodySize": 898790,
+        "decodedBodySize": 898790
+      },
+      {
+        "name": "http://127.0.0.1:41873/assets/restaurant.jpg",
+        "initiatorType": "img",
+        "duration": 17.8,
+        "transferSize": 817618,
+        "encodedBodySize": 817318,
+        "decodedBodySize": 817318
+      },
+      {
+        "name": "http://127.0.0.1:41873/assets/logo-wordmark.svg",
+        "initiatorType": "img",
+        "duration": 10.5,
+        "transferSize": 1493,
+        "encodedBodySize": 1193,
+        "decodedBodySize": 1193
+      },
+      {
+        "name": "http://127.0.0.1:41873/assets/hero.jpg",
+        "initiatorType": "link",
+        "duration": 9.7,
+        "transferSize": 1011133,
+        "encodedBodySize": 1010833,
+        "decodedBodySize": 1010833
+      },
+      {
+        "name": "http://127.0.0.1:41873/assets/office-interior.jpg",
+        "initiatorType": "img",
+        "duration": 5.4,
+        "transferSize": 731344,
+        "encodedBodySize": 731044,
+        "decodedBodySize": 731044
+      },
+      {
+        "name": "https://api.nbrb.by/exrates/rates/USD?parammode=2",
+        "initiatorType": "fetch",
+        "duration": 3,
+        "transferSize": 0,
+        "encodedBodySize": 0,
+        "decodedBodySize": 0
+      }
+    ]
+  },
+  "thresholds": {
+    "lcpMs": 2500,
+    "cls": 0.1,
+    "inpMs": 200,
+    "localStaticP95Ms": 200,
+    "errorRate": 0.01
+  }
+}

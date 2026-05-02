@@ -32,8 +32,6 @@ Prerequisites:
 
 - `Node.js 20+`
 - `npm`
-- `Python 3` for the local static server used by `npm run serve`
-
 ```bash
 git clone https://github.com/AI-Nikitka93/NemigaTower.git
 cd NemigaTower

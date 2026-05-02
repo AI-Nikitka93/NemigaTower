@@ -2,6 +2,13 @@ const { test, expect } = require('@playwright/test');
 
 async function stabilizePage(page) {
   await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.route('https://api.nbrb.by/exrates/rates/USD?parammode=2', async (route) => {
+    await route.fulfill({
+      status: 200,
+      contentType: 'application/json',
+      body: '[]'
+    });
+  });
   await page.goto('/');
   await page.waitForLoadState('networkidle');
   await page.waitForTimeout(1200);
