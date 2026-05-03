@@ -16,6 +16,7 @@ node_modules/
 .audit_visual/
 playwright-report/
 test-results/
+output/
 dist/
 .audit_mobile/
 .wrangler/

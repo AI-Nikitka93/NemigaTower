@@ -24,11 +24,34 @@ const baseRateDisplay = document.getElementById('baseRateDisplay');
 const areaDisplay = document.getElementById('areaDisplay');
 const floorDisplay = document.getElementById('floorDisplay');
 const finishDisplay = document.getElementById('finishDisplay');
+const calcResultSummary = document.getElementById('calcResultSummary');
+const copyCalcResult = document.getElementById('copyCalcResult');
+const shareCalcResult = document.getElementById('shareCalcResult');
+const openAnalyticsPanel = document.getElementById('openAnalyticsPanel');
+const analyticsPanelBody = document.getElementById('analyticsPanelBody');
+const copyAnalyticsEvents = document.getElementById('copyAnalyticsEvents');
+const clearAnalyticsEvents = document.getElementById('clearAnalyticsEvents');
 const mediaTourPreview = document.getElementById('mediaTourPreview');
 const mediaTourHeading = document.getElementById('mediaTourHeading');
 const mediaTourDescription = document.getElementById('mediaTourDescription');
 const lazyImages = Array.from(document.querySelectorAll('img[data-src]'));
 const lazyBackgrounds = Array.from(document.querySelectorAll('[data-bg]'));
+
+const amenityModal = document.getElementById('amenityModal');
+const amenityKicker = document.getElementById('amenityKicker');
+const amenityTitle = document.getElementById('amenityTitle');
+const amenityImage = document.getElementById('amenityImage');
+const amenityDescription = document.getElementById('amenityDescription');
+const amenityMeta = document.getElementById('amenityMeta');
+const amenityHighlights = document.getElementById('amenityHighlights');
+const amenityPrimary = document.getElementById('amenityPrimary');
+const amenitySecondary = document.getElementById('amenitySecondary');
+const newsModal = document.getElementById('newsModal');
+const newsModalMeta = document.getElementById('newsModalMeta');
+const newsModalTitle = document.getElementById('newsModalTitle');
+const newsModalLead = document.getElementById('newsModalLead');
+const newsModalPoints = document.getElementById('newsModalPoints');
+const newsModalAction = document.getElementById('newsModalAction');
 
 const RATES = {
     standard: 65,
@@ -41,6 +64,323 @@ let baseRate = RATES.sky;
 let usdRate = 3.25;
 let activeModalId = null;
 let lastFocusedElement = null;
+let currentCalculationSummary = '';
+const ANALYTICS_STORAGE_KEY = 'nemiga.analytics.v1';
+const ANALYTICS_MAX_EVENTS = 250;
+const analyticsSessionId = (() => {
+    try {
+        const existing = sessionStorage.getItem('nemiga.analytics.session');
+        if (existing) return existing;
+        const created = crypto.randomUUID ? crypto.randomUUID() : `session-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+        sessionStorage.setItem('nemiga.analytics.session', created);
+        return created;
+    } catch {
+        return `session-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+    }
+})();
+
+const AMENITY_DETAILS = {
+    restaurant: {
+        kicker: '40 этаж / открыто',
+        title: 'Ресторан "Sky Terrace"',
+        image: 'assets/optimized/restaurant-960.webp',
+        imageSet: 'assets/optimized/restaurant-640.webp 640w, assets/optimized/restaurant-960.webp 960w, assets/optimized/restaurant-1376.webp 1376w',
+        imageAlt: 'Панорамный ресторан Sky Terrace вечером',
+        description: 'Верхний ресторан для деловых ужинов, закрытых встреч и спокойных пауз над городом. Это не просто красивая зона: она работает как hospitality-слой для резидентов и гостей башни.',
+        meta: ['40 этаж', 'Chef table', 'Вид на центр Минска'],
+        highlights: ['Деловые завтраки и ужины для резидентов', 'Приватные столы для переговоров без офисного шума', 'Сезонное меню и отдельные сценарии под мероприятия'],
+        primary: 'Запланировать ужин',
+        secondary: 'Посмотреть ресторан в туре',
+        secondaryTour: 'Sky Terrace'
+    },
+    fitness: {
+        kicker: 'Wellness / резидентский доступ',
+        title: 'Фитнес-клуб',
+        image: 'assets/optimized/fitness-960.webp',
+        imageSet: 'assets/optimized/fitness-640.webp 640w, assets/optimized/fitness-960.webp 960w, assets/optimized/fitness-1376.webp 1376w',
+        imageAlt: 'Фитнес-клуб с бассейном и премиальной SPA-зоной',
+        description: 'Фитнес, бассейн и SPA встроены в рабочий день, чтобы резидент не тратил время на отдельные поездки. Это повышает ценность объекта для команд, которые живут в офисе не только с 9 до 18.',
+        meta: ['25 м бассейн', 'SPA и хаммам', 'Персональные тренировки'],
+        highlights: ['Утренние и вечерние слоты для резидентов', 'Зона восстановления после переговоров и перелетов', 'Корпоративные программы для команд'],
+        primary: 'Уточнить доступ',
+        secondary: 'Посмотреть фитнес в туре',
+        secondaryTour: 'Фитнес-клуб'
+    },
+    coworking: {
+        kicker: '24/7 / гибкая работа',
+        title: 'Коворкинг и lounge',
+        image: 'assets/optimized/gallery-lounge-960.webp',
+        imageSet: 'assets/optimized/gallery-lounge-640.webp 640w, assets/optimized/gallery-lounge-960.webp 960w, assets/optimized/gallery-lounge-1376.webp 1376w',
+        imageAlt: 'Камерное lounge-пространство для резидентов',
+        description: 'Гибкое пространство для быстрых встреч, фокус-работы и ожидания гостей. Оно дополняет офисы, когда команде нужны не только кабинеты, но и живой рабочий ритм внутри здания.',
+        meta: ['Open 24/7', '23 человека сейчас', 'Гостевые зоны'],
+        highlights: ['Места для коротких созвонов и встреч', 'Lounge-сценарии для ожидания партнеров', 'Доступ рядом с офисами и сервисами башни'],
+        primary: 'Забронировать тур',
+        secondary: 'Посмотреть lounge',
+        secondaryTour: 'Resident lounge'
+    },
+    parking: {
+        kicker: '450 мест / 50 EV-станций',
+        title: 'Паркинг и доступ',
+        image: 'assets/optimized/hero-960.webp',
+        imageSet: 'assets/optimized/hero-640.webp 640w, assets/optimized/hero-960.webp 960w, assets/optimized/hero-1376.webp 1376w',
+        imageAlt: 'Фасад Nemiga Tower с вечерней подсветкой',
+        description: 'Паркинг работает как часть премиального опыта: быстрый въезд, доступ по Face ID, зарядные станции и понятная вместимость для резидентов и гостей.',
+        meta: ['450 мест', '312 свободно', 'Face ID доступ'],
+        highlights: ['Отдельные сценарии для резидентов и гостей', 'EV-инфраструктура для электромобилей', 'Безопасный доступ и круглосуточный контроль'],
+        primary: 'Уточнить паркинг',
+        secondary: 'К офисам',
+        secondarySection: 'offices'
+    }
+};
+
+const NEWS_DETAILS = {
+    director: {
+        meta: 'Встреча / 03.05.2026',
+        title: 'Встреча с директором проекта AI_Nikitka93',
+        lead: 'В концепт-истории Nemiga Tower директор проекта AI_Nikitka93 проводит закрытую встречу с будущими резидентами и показывает, как сайт, визуальный стиль и интерактивные сценарии были собраны как портфолио-кейс.',
+        points: ['Обсуждение честной демо-рамки: что реально работает, а что является концептом.', 'Разбор AI-assisted workflow: от идеи бизнес-центра до кликабельных секций.', 'План следующего слоя: заявки, аналитика, быстрые туры и публичная проверяемость.'],
+        action: 'К контактам',
+        section: 'contacts'
+    },
+    aihall: {
+        meta: 'Открытие / 09.05.2026',
+        title: 'Открытие AI-зала переговоров',
+        lead: 'Вымышленный зал для стратегических встреч на 36 этаже усиливает образ Nemiga Tower как пространства для команд, которые работают с технологиями, презентациями и быстрыми управленческими решениями.',
+        points: ['Интерактивная стена для презентаций и проектных карт.', 'Private briefing режим для закрытых встреч.', 'Сценарии света и посадки под переговоры, лекции и demo day.'],
+        action: 'Запланировать тур',
+        section: 'contacts'
+    },
+    lounge: {
+        meta: 'Lounge / 14.05.2026',
+        title: 'Новый зал Resident Lounge',
+        lead: 'Resident Lounge добавлен как тихий слой между офисом, рестораном и коворкингом: здесь можно встретить партнера, дождаться переговоров или провести камерную беседу без формальности переговорной.',
+        points: ['Мягкая посадка и приватные ниши для коротких встреч.', 'Связь с рестораном Sky Terrace и общим маршрутом гостя.', 'Отдельная атмосфера для вечерних событий резидентов.'],
+        action: 'Открыть lounge в туре',
+        tour: 'Resident lounge'
+    },
+    parking: {
+        meta: 'Сервис / 21.05.2026',
+        title: 'Пилот умного паркинга',
+        lead: 'Концепт умного паркинга показывает, как резидент или гость может заранее получить маршрут до места, въездной сценарий и подсказку к нужному лифтовому ядру.',
+        points: ['Предварительное назначение гостевого места.', 'EV-станции и быстрый доступ для резидентов.', 'Связка с офисным туром: от паркинга до переговорной без лишних шагов.'],
+        action: 'Перейти к паркингу',
+        amenity: 'parking'
+    }
+};
+
+function getStoredAnalyticsEvents() {
+    try {
+        const raw = localStorage.getItem(ANALYTICS_STORAGE_KEY);
+        const parsed = raw ? JSON.parse(raw) : [];
+        return Array.isArray(parsed) ? parsed : [];
+    } catch {
+        return [];
+    }
+}
+
+function saveAnalyticsEvents(events) {
+    try {
+        localStorage.setItem(ANALYTICS_STORAGE_KEY, JSON.stringify(events.slice(-ANALYTICS_MAX_EVENTS)));
+    } catch {
+        // Storage can be unavailable in private or restricted browser contexts.
+    }
+}
+
+function getCurrentSectionId() {
+    return document.querySelector('.section:not([hidden])')?.id || window.location.hash.replace('#', '') || 'home';
+}
+
+function sanitizeAnalyticsText(value, fallback = 'unknown') {
+    return (value || fallback).toString().replace(/\s+/g, ' ').trim().slice(0, 160) || fallback;
+}
+
+function sendAnalyticsEvent(event) {
+    const body = JSON.stringify(event);
+    if (navigator.sendBeacon) {
+        const blob = new Blob([body], { type: 'application/json' });
+        if (navigator.sendBeacon('/analytics', blob)) return;
+    }
+
+    fetch('/analytics', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body,
+        keepalive: true
+    }).catch(() => {
+        // Static hosting fallback: localStorage still keeps the event for demo review.
+    });
+}
+
+function trackAnalytics(type, payload = {}) {
+    const event = {
+        id: crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(16).slice(2)}`,
+        type,
+        timestamp: new Date().toISOString(),
+        sessionId: analyticsSessionId,
+        path: `${window.location.pathname}${window.location.hash || ''}`,
+        section: getCurrentSectionId(),
+        viewport: {
+            width: Math.round(window.visualViewport?.width || window.innerWidth || 0),
+            height: Math.round(window.visualViewport?.height || window.innerHeight || 0)
+        },
+        ...payload
+    };
+
+    const events = [...getStoredAnalyticsEvents(), event].slice(-ANALYTICS_MAX_EVENTS);
+    saveAnalyticsEvents(events);
+    sendAnalyticsEvent(event);
+    renderAnalyticsPanel();
+    return event;
+}
+
+function describeAnalyticsTarget(target) {
+    const element = target.closest?.('button, a, [role="button"], input[type="range"], .option-card');
+    if (!element) return null;
+
+    const clone = element.cloneNode(true);
+    clone.querySelectorAll('.material-symbols-outlined').forEach((icon) => icon.remove());
+    const label = element.getAttribute('aria-label')
+        || element.dataset.analyticsLabel
+        || clone.textContent
+        || element.id
+        || element.tagName;
+
+    return {
+        tag: element.tagName.toLowerCase(),
+        id: element.id || undefined,
+        label: sanitizeAnalyticsText(label),
+        href: element.tagName.toLowerCase() === 'a' ? element.getAttribute('href') : undefined,
+        section: element.dataset.section || undefined,
+        action: element.dataset.amenityAction || element.dataset.newsAction || element.dataset.tourTitle || element.dataset.type || undefined
+    };
+}
+
+function summarizeAnalytics(events) {
+    const clicks = events.filter((event) => event.type === 'click').length;
+    const errors = events.filter((event) => event.type === 'error' || event.type === 'unhandledrejection').length;
+    const sectionViews = events.filter((event) => event.type === 'section_view').length;
+    const latestSection = [...events].reverse().find((event) => event.section)?.section || 'home';
+    return { clicks, errors, sectionViews, latestSection };
+}
+
+function renderAnalyticsPanel() {
+    if (!analyticsPanelBody) return;
+
+    const events = getStoredAnalyticsEvents();
+    if (!events.length) {
+        analyticsPanelBody.innerHTML = '<p class="text-on-surface-variant">Событий пока нет.</p>';
+        return;
+    }
+
+    const summary = summarizeAnalytics(events);
+    const recentEvents = [...events].slice(-12).reverse();
+    analyticsPanelBody.innerHTML = `
+        <div class="analytics-summary-grid">
+            <div class="analytics-stat"><strong>${events.length}</strong><span>Всего событий</span></div>
+            <div class="analytics-stat"><strong>${summary.clicks}</strong><span>Клики</span></div>
+            <div class="analytics-stat"><strong>${summary.errors}</strong><span>Ошибки</span></div>
+            <div class="analytics-stat"><strong>${summary.latestSection}</strong><span>Последний раздел</span></div>
+        </div>
+        <div class="analytics-event-list">
+            ${recentEvents.map((event) => {
+                const time = new Date(event.timestamp).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                const details = event.message || event.label || event.target?.label || event.modal || event.section || event.action || 'event';
+                return `
+                    <article class="analytics-event">
+                        <div class="analytics-event-title"><code>${event.type}</code><span>${time}</span></div>
+                        <p>${sanitizeAnalyticsText(details, 'event')}</p>
+                    </article>
+                `;
+            }).join('')}
+        </div>
+    `;
+}
+
+async function copyAnalyticsSnapshot() {
+    const events = getStoredAnalyticsEvents();
+    try {
+        await navigator.clipboard.writeText(JSON.stringify(events, null, 2));
+        showToast('JSON демо-аналитики скопирован.', 'success');
+    } catch {
+        showToast('Не удалось скопировать JSON автоматически.', 'info');
+    }
+}
+
+function clearAnalyticsSnapshot() {
+    saveAnalyticsEvents([]);
+    renderAnalyticsPanel();
+    showToast('Локальная демо-аналитика очищена.', 'info');
+}
+
+function initAnalytics() {
+    document.addEventListener('click', (event) => {
+        const target = describeAnalyticsTarget(event.target);
+        if (!target) return;
+        trackAnalytics('click', { target, label: target.label });
+    }, true);
+
+    window.addEventListener('error', (event) => {
+        trackAnalytics('error', {
+            message: sanitizeAnalyticsText(event.message, 'Unknown script error'),
+            source: event.filename || undefined,
+            line: event.lineno || undefined,
+            column: event.colno || undefined
+        });
+    });
+
+    window.addEventListener('unhandledrejection', (event) => {
+        trackAnalytics('unhandledrejection', {
+            message: sanitizeAnalyticsText(event.reason?.message || event.reason || 'Unhandled promise rejection')
+        });
+    });
+
+    openAnalyticsPanel?.addEventListener('click', () => {
+        renderAnalyticsPanel();
+        openModal('analyticsModal');
+    });
+    copyAnalyticsEvents?.addEventListener('click', copyAnalyticsSnapshot);
+    clearAnalyticsEvents?.addEventListener('click', clearAnalyticsSnapshot);
+    renderAnalyticsPanel();
+}
+
+function selectResponsiveCandidate(srcset, fallback) {
+    if (!srcset) return fallback;
+    const candidates = srcset.split(',')
+        .map((candidate) => {
+            const [url, descriptor] = candidate.trim().split(/\s+/);
+            return {
+                url,
+                width: descriptor && descriptor.endsWith('w') ? Number.parseInt(descriptor, 10) : Number.POSITIVE_INFINITY
+            };
+        })
+        .filter((candidate) => candidate.url);
+
+    if (!candidates.length) return fallback;
+
+    const viewportWidth = window.visualViewport?.width || window.innerWidth || document.documentElement.clientWidth || 960;
+    const targetWidth = viewportWidth * Math.min(window.devicePixelRatio || 1, 2);
+    const match = candidates
+        .sort((a, b) => a.width - b.width)
+        .find((candidate) => candidate.width >= targetWidth);
+
+    return (match || candidates[candidates.length - 1]).url;
+}
+
+function setResponsiveImage(image, fallback, srcset, sizes = '100vw') {
+    if (!image) return;
+    if (srcset) {
+        image.sizes = sizes;
+        image.srcset = srcset;
+        if (!image.src || image.src.startsWith('data:')) {
+            return;
+        }
+    } else {
+        image.removeAttribute('srcset');
+        image.removeAttribute('sizes');
+    }
+    image.src = fallback || selectResponsiveCandidate(srcset, image.src);
+}
 
 function motionBehavior() {
     return prefersReducedMotion.matches ? 'auto' : 'smooth';
@@ -70,13 +410,14 @@ function hydrateImage(image) {
         };
     }
 
-    image.src = image.dataset.src;
+    setResponsiveImage(image, image.dataset.src, image.dataset.srcset, image.dataset.sizes || '100vw');
     image.dataset.hydrated = 'true';
 }
 
 function hydrateBackground(element) {
     if (!element || !element.dataset.bg || element.dataset.hydrated === 'true') return;
-    element.style.backgroundImage = `url('${element.dataset.bg}')`;
+    const imageUrl = selectResponsiveCandidate(element.dataset.bgset, element.dataset.bg);
+    element.style.backgroundImage = `url('${imageUrl}')`;
     element.dataset.hydrated = 'true';
 }
 
@@ -84,6 +425,12 @@ function hydrateMediaWithin(root) {
     if (!root) return;
     root.querySelectorAll('img[data-src]').forEach(hydrateImage);
     root.querySelectorAll('[data-bg]').forEach(hydrateBackground);
+}
+
+function isInsideHiddenSurface(element) {
+    const section = element.closest('.section');
+    const modal = element.closest('.modal');
+    return Boolean(section?.hidden || modal?.getAttribute('aria-hidden') === 'true');
 }
 
 function initDeferredMedia() {
@@ -95,6 +442,7 @@ function initDeferredMedia() {
     const imageObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach((entry) => {
             if (!entry.isIntersecting) return;
+            if (isInsideHiddenSurface(entry.target)) return;
             hydrateImage(entry.target);
             observer.unobserve(entry.target);
         });
@@ -103,6 +451,7 @@ function initDeferredMedia() {
     const backgroundObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach((entry) => {
             if (!entry.isIntersecting) return;
+            if (isInsideHiddenSurface(entry.target)) return;
             hydrateBackground(entry.target);
             observer.unobserve(entry.target);
         });
@@ -111,7 +460,11 @@ function initDeferredMedia() {
     lazyImages.forEach((image) => imageObserver.observe(image));
     lazyBackgrounds.forEach((element) => backgroundObserver.observe(element));
 
-    hydrateMediaWithin(document.getElementById('home'));
+    const activeSection = document.querySelector('.section:not([hidden])');
+    activeSection?.querySelectorAll('[data-eager-media]').forEach((element) => {
+        if (element.matches('img[data-src]')) hydrateImage(element);
+        if (element.matches('[data-bg]')) hydrateBackground(element);
+    });
 }
 
 // Navigation & Sections
@@ -125,7 +478,6 @@ function setActiveSection(id, options = {}) {
         section.classList.toggle('hidden', !isActive);
         section.setAttribute('aria-hidden', String(!isActive));
         if (isActive) {
-            hydrateMediaWithin(section);
             // Re-trigger scroll reveal for newly visible section
             setTimeout(() => initScrollReveal(), 100);
         }
@@ -157,6 +509,7 @@ function setActiveSection(id, options = {}) {
         history.replaceState(null, '', `#${targetId}`);
     }
 
+    trackAnalytics('section_view', { section: targetId });
     toggleMobileMenu(false);
     window.scrollTo({ top: 0, behavior: motionBehavior() });
 
@@ -209,6 +562,52 @@ function calculate() {
     const usd = Math.round(total / usdRate);
     animateValue(totalPrice, total);
     animateValue(usdPrice, usd);
+    updateCalculationSummary({ area, total, usd });
+}
+
+function getSelectedOptionLabel(type) {
+    const selected = document.querySelector(`.option-card.selected[data-type="${type}"] .font-semibold`);
+    return selected ? selected.textContent.trim() : 'Не выбрано';
+}
+
+function updateCalculationSummary({ area, total, usd }) {
+    if (!calcResultSummary) return;
+
+    const floorLabel = getSelectedOptionLabel('floor');
+    const finishLabel = getSelectedOptionLabel('finish');
+    const rateText = `${baseRate.toLocaleString('ru-RU')} BYN/м²`;
+    const totalText = `${total.toLocaleString('ru-RU')} BYN / месяц`;
+    const usdText = `${usd.toLocaleString('ru-RU')} USD / месяц`;
+
+    currentCalculationSummary = [
+        'Nemiga Tower — ориентировочный расчёт аренды',
+        `Площадь: ${area.toLocaleString('ru-RU')} м²`,
+        `Этаж: ${floorLabel}`,
+        `Отделка: ${finishLabel}`,
+        `Базовая ставка: ${rateText}`,
+        `Итого: ${totalText}`,
+        `Примерно: ${usdText} по курсу НБ РБ ${usdRate.toFixed(4)}`,
+        'Важно: расчёт является ориентиром и уточняется после консультации.'
+    ].join('\n');
+
+    calcResultSummary.textContent = currentCalculationSummary;
+
+    if (shareCalcResult) {
+        const shareUrl = `${window.location.origin}${window.location.pathname}#offices`;
+        shareCalcResult.href = `https://t.me/share/url?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(currentCalculationSummary)}`;
+    }
+}
+
+async function copyCalculationSummary() {
+    if (!currentCalculationSummary) calculate();
+
+    try {
+        await navigator.clipboard.writeText(currentCalculationSummary);
+        trackAnalytics('calculator_copy', { label: 'Скопировать итог' });
+        showToast('Итог расчёта скопирован. Можно отправить клиенту или reviewer.', 'success');
+    } catch (error) {
+        showToast('Не удалось скопировать автоматически. Выделите итог расчёта вручную.', 'info');
+    }
 }
 
 function animateValue(element, target) {
@@ -336,6 +735,7 @@ function openModal(id) {
     const modal = document.getElementById(id);
     if (!modal) return;
 
+    trackAnalytics('modal_open', { modal: id });
     lastFocusedElement = document.activeElement;
     activeModalId = id;
     modal.classList.add('active');
@@ -350,6 +750,68 @@ function openModal(id) {
 
     const focusableElements = getFocusableElements(modal);
     if (focusableElements.length > 0) focusableElements[0].focus();
+}
+
+function openAmenityDetail(key) {
+    const detail = AMENITY_DETAILS[key];
+    if (!detail || !amenityModal) return;
+
+    amenityKicker.textContent = detail.kicker;
+    amenityTitle.textContent = detail.title;
+    setResponsiveImage(amenityImage, detail.image, detail.imageSet, detail.imageSizes || '(max-width: 768px) 92vw, 54vw');
+    amenityImage.alt = detail.imageAlt;
+    amenityDescription.textContent = detail.description;
+    amenityMeta.innerHTML = detail.meta.map((item) => `<span>${item}</span>`).join('');
+    amenityHighlights.innerHTML = detail.highlights.map((item) => `<li><span class="material-symbols-outlined filled">check_circle</span>${item}</li>`).join('');
+    amenityPrimary.textContent = detail.primary;
+    amenitySecondary.textContent = detail.secondary;
+
+    amenityPrimary.onclick = () => {
+        closeModal('amenityModal');
+        navigateToSection('contacts');
+    };
+
+    amenitySecondary.onclick = () => {
+        closeModal('amenityModal');
+        if (detail.secondaryTour) {
+            openModal('mediaTourModal');
+            const targetCard = Array.from(document.querySelectorAll('[data-tour-title]'))
+                .find((card) => card.dataset.tourTitle === detail.secondaryTour);
+            if (targetCard) targetCard.click();
+            return;
+        }
+        if (detail.secondarySection) navigateToSection(detail.secondarySection);
+    };
+
+    openModal('amenityModal');
+}
+
+function openNewsDetail(key) {
+    const detail = NEWS_DETAILS[key];
+    if (!detail || !newsModal) return;
+
+    newsModalMeta.textContent = detail.meta;
+    newsModalTitle.textContent = detail.title;
+    newsModalLead.textContent = detail.lead;
+    newsModalPoints.innerHTML = detail.points.map((point) => `<p>${point}</p>`).join('');
+    newsModalAction.textContent = detail.action;
+    newsModalAction.onclick = () => {
+        closeModal('newsModal');
+        if (detail.tour) {
+            openModal('mediaTourModal');
+            const targetCard = Array.from(document.querySelectorAll('[data-tour-title]'))
+                .find((card) => card.dataset.tourTitle === detail.tour);
+            if (targetCard) targetCard.click();
+            return;
+        }
+        if (detail.amenity) {
+            openAmenityDetail(detail.amenity);
+            return;
+        }
+        if (detail.section) navigateToSection(detail.section);
+    };
+
+    openModal('newsModal');
 }
 
 function closeModal(id) {
@@ -383,14 +845,16 @@ function showToast(message, type = 'info') {
 
 window.handleSubmit = (event) => {
     event.preventDefault();
-    showToast('Заявка отправлена. Менеджер свяжется с вами в течение 15 минут.', 'success');
+    trackAnalytics('form_demo_submit', { form: 'contacts' });
+    showToast('Демо-режим: заявка показана, но данные никуда не отправлены.', 'info');
     event.target.reset();
 };
 
 window.handleModalSubmit = (event, modalId) => {
     event.preventDefault();
+    trackAnalytics('form_demo_submit', { form: modalId });
     closeModal(modalId);
-    showToast('Спасибо. Мы уже готовим для вас персональный маршрут по объекту.', 'success');
+    showToast('Демо-режим: действие сработало на экране, реальная заявка не создана.', 'info');
     event.target.reset();
 };
 
@@ -398,6 +862,8 @@ window.handleModalSubmit = (event, modalId) => {
 function init() {
     initNavigation();
     initGalleryFilters();
+    initAmenityCards();
+    initNewsCards();
     initMediaTour();
     initDeferredMedia();
     initCustomCursor();
@@ -405,8 +871,11 @@ function init() {
     initKeyboardGuards();
     initOptionCards();
     initRangeSlider();
+    initCalculationActions();
+    initAnalytics();
     initScrollReveal();
     initCounters();
+    calculate();
     
     // Page Loader
     window.addEventListener('load', () => {
@@ -455,6 +924,40 @@ function initGalleryFilters() {
     });
 }
 
+function initAmenityCards() {
+    document.querySelectorAll('[data-amenity-card], [data-amenity-action]').forEach((element) => {
+        const key = element.dataset.amenityCard || element.dataset.amenityAction;
+        element.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            openAmenityDetail(key);
+        });
+        element.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                openAmenityDetail(key);
+            }
+        });
+    });
+}
+
+function initNewsCards() {
+    document.querySelectorAll('[data-news-card], [data-news-action]').forEach((element) => {
+        const key = element.dataset.newsCard || element.dataset.newsAction;
+        element.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            openNewsDetail(key);
+        });
+        element.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                openNewsDetail(key);
+            }
+        });
+    });
+}
+
 function initMediaTour() {
     const cards = Array.from(document.querySelectorAll('[data-tour-image]'));
     cards.forEach((card) => {
@@ -462,7 +965,7 @@ function initMediaTour() {
             cards.forEach((c) => c.dataset.active = 'false');
             card.dataset.active = 'true';
             hydrateImage(card.querySelector('img'));
-            mediaTourPreview.src = card.dataset.tourImage;
+            setResponsiveImage(mediaTourPreview, card.dataset.tourImage, card.dataset.tourSrcset, card.dataset.tourSizes || '(max-width: 768px) 92vw, 72vw');
             mediaTourHeading.textContent = card.dataset.tourTitle;
             mediaTourDescription.textContent = card.dataset.tourDescription;
         });
@@ -525,11 +1028,23 @@ function initRangeSlider() {
     areaSlider.style.setProperty('--range-progress', '20%');
 }
 
+function initCalculationActions() {
+    copyCalcResult?.addEventListener('click', copyCalculationSummary);
+}
+
 // Global scope expose for onclick handlers
 window.openModal = openModal;
 window.closeModal = closeModal;
 window.navigateToSection = navigateToSection;
+window.openAmenityDetail = openAmenityDetail;
+window.openNewsDetail = openNewsDetail;
 window.toggleMobileMenu = toggleMobileMenu;
 window.showToast = showToast;
+window.NemigaAnalytics = {
+    track: trackAnalytics,
+    getEvents: getStoredAnalyticsEvents,
+    clear: clearAnalyticsSnapshot,
+    render: renderAnalyticsPanel
+};
 
 init();

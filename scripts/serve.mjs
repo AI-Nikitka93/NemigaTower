@@ -1,9 +1,11 @@
 import { createServer } from 'node:http';
-import { createReadStream, existsSync, statSync } from 'node:fs';
+import { appendFileSync, createReadStream, existsSync, mkdirSync, readFileSync, statSync } from 'node:fs';
 import { extname, join, normalize, resolve } from 'node:path';
 
 const rootDir = process.cwd();
 const distDir = resolve(rootDir, 'dist');
+const analyticsDir = resolve(rootDir, 'output', 'analytics');
+const analyticsFile = join(analyticsDir, 'events.ndjson');
 const port = Number(process.env.PORT || 41873);
 const host = process.env.HOST || '127.0.0.1';
 
@@ -22,11 +24,11 @@ const contentTypes = {
 function cacheControlFor(filePath) {
   const extension = extname(filePath);
 
-  if (extension === '.html') {
+  if (['.html', '.css', '.js', '.json'].includes(extension)) {
     return 'no-cache';
   }
 
-  if (['.css', '.js', '.json', '.svg', '.png', '.jpg', '.jpeg', '.webp'].includes(extension)) {
+  if (['.svg', '.png', '.jpg', '.jpeg', '.webp'].includes(extension)) {
     return 'public, max-age=31536000, immutable';
   }
 
@@ -49,7 +51,69 @@ function resolveRequestPath(urlPath) {
   return join(distDir, 'index.html');
 }
 
-const server = createServer((request, response) => {
+function readRequestBody(request) {
+  return new Promise((resolveBody, rejectBody) => {
+    let body = '';
+    request.setEncoding('utf8');
+    request.on('data', (chunk) => {
+      body += chunk;
+      if (body.length > 64_000) {
+        rejectBody(new Error('Analytics payload too large'));
+        request.destroy();
+      }
+    });
+    request.on('end', () => resolveBody(body));
+    request.on('error', rejectBody);
+  });
+}
+
+async function handleAnalyticsRequest(request, response) {
+  if (request.method === 'GET') {
+    const events = existsSync(analyticsFile)
+      ? readFileSync(analyticsFile, 'utf8').trim().split('\n').filter(Boolean).slice(-100)
+      : [];
+    response.writeHead(200, {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Cache-Control': 'no-cache'
+    });
+    response.end(JSON.stringify({ events }));
+    return;
+  }
+
+  if (request.method !== 'POST') {
+    response.writeHead(405, { 'Allow': 'GET, POST' });
+    response.end();
+    return;
+  }
+
+  try {
+    const body = await readRequestBody(request);
+    const parsed = JSON.parse(body || '{}');
+    mkdirSync(analyticsDir, { recursive: true });
+    appendFileSync(analyticsFile, `${JSON.stringify({
+      receivedAt: new Date().toISOString(),
+      ...parsed
+    })}\n`, 'utf8');
+    response.writeHead(204, {
+      'Cache-Control': 'no-cache'
+    });
+    response.end();
+  } catch {
+    response.writeHead(400, {
+      'Content-Type': 'application/json; charset=utf-8',
+      'Cache-Control': 'no-cache'
+    });
+    response.end(JSON.stringify({ error: 'Invalid analytics payload' }));
+  }
+}
+
+const server = createServer(async (request, response) => {
+  const requestPath = (request.url || '/').split('?')[0];
+  if (requestPath === '/analytics') {
+    await handleAnalyticsRequest(request, response);
+    return;
+  }
+
   const filePath = resolveRequestPath(request.url || '/');
   if (!filePath || !existsSync(filePath)) {
     response.writeHead(404, { 'Content-Type': 'text/plain; charset=utf-8' });

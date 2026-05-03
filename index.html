@@ -44,7 +44,7 @@
             }
         }
     </script>
-    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="assets/styles.css?v=20260503-dark-shell">
 </head>
 <body class="font-body selection:bg-primary/30">
 <a class="skip-link" href="#mainContent">Перейти к основному содержимому</a>
@@ -69,14 +69,14 @@
 
 <!-- Navigation -->
 <nav class="fixed top-0 w-full z-50 bg-[#10131a]/80 backdrop-blur-xl shadow-2xl shadow-black/50" aria-label="Основная навигация">
-    <div class="grid grid-cols-2 md:grid-cols-3 items-center max-w-7xl mx-auto px-4 sm:px-6 md:px-8 py-2 md:py-3 relative">
-        <div class="flex justify-self-start">
+    <div class="flex items-center justify-between max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 lg:py-4 relative">
+        <div class="flex-shrink-0">
             <a href="#home" class="brand-link hover:opacity-90 transition-opacity" data-section="home" aria-label="Немига-Тауэр — на главную">
-                <img src="assets/logo-wordmark.svg" alt="Nemiga Tower" class="brand-logo" width="372" height="96"/>
+                <img src="assets/logo-wordmark.svg?v=2" alt="Nemiga Tower" class="brand-logo" width="420" height="96"/>
             </a>
         </div>
         
-        <div class="hidden md:flex justify-self-center items-center space-x-10 font-headline font-bold tracking-tight mt-[4px]">
+        <div class="hidden xl:flex items-center justify-center flex-grow space-x-5 xl:space-x-8 font-headline font-bold tracking-tight mt-[4px] mx-4">
             <a href="#home" class="nav-link js-nav-link active text-[#D4AF37]" data-section="home" aria-current="page">Главная</a>
             <a href="#infrastructure" class="nav-link js-nav-link text-slate-400" data-section="infrastructure">Инфраструктура</a>
             <a href="#offices" class="nav-link js-nav-link text-slate-400" data-section="offices">Офисы</a>
@@ -86,16 +86,16 @@
             <a href="#contacts" class="nav-link js-nav-link text-slate-400" data-section="contacts">Контакты</a>
         </div>
 
-        <div class="flex justify-self-end items-center gap-4 mt-[4px]">
-            <button class="hidden md:flex justify-center items-center whitespace-nowrap min-w-[180px] btn-primary px-8 py-3 rounded-xl font-headline font-bold text-sm hover:opacity-80 transition-all duration-300 active:scale-95 btn-glow" onclick="openModal('callbackModal')">Заказать звонок</button>
-            <button class="md:hidden text-on-surface p-2" type="button" onclick="toggleMobileMenu()" aria-label="Открыть меню" aria-controls="mobileMenu" aria-expanded="false" id="mobileMenuToggle"><span class="material-symbols-outlined">menu</span></button>
+        <div class="relative z-10 flex items-center flex-shrink-0 gap-4 mt-[4px]">
+            <button class="hidden lg:flex justify-center items-center whitespace-nowrap min-w-[160px] btn-primary px-6 xl:px-8 py-3 rounded-xl font-headline font-bold text-sm hover:opacity-80 transition-all duration-300 active:scale-95 btn-glow" onclick="openModal('callbackModal')">Заказать звонок</button>
+            <button class="relative z-10 xl:hidden flex h-11 w-11 shrink-0 items-center justify-center text-on-surface" type="button" onclick="toggleMobileMenu()" aria-label="Открыть меню" aria-controls="mobileMenu" aria-expanded="false" id="mobileMenuToggle"><span class="material-symbols-outlined">menu</span></button>
         </div>
         <div class="bg-gradient-to-r from-transparent via-[#D4AF37]/20 to-transparent h-[1px] bottom-0 left-0 right-0 absolute"></div>
     </div>
 </nav>
 
 <!-- Mobile Menu -->
-<div class="mobile-menu fixed top-0 right-0 w-full max-w-sm h-full bg-surface-container-low z-[9999] shadow-2xl md:hidden" id="mobileMenu" aria-hidden="true">
+<div class="mobile-menu fixed top-0 right-0 w-full max-w-sm h-full bg-surface-container-low z-[9999] shadow-2xl xl:hidden" id="mobileMenu" aria-hidden="true">
     <div class="p-6">
         <div class="flex justify-between items-center mb-8">
             <div class="text-xl font-bold tracking-tighter text-[#D4AF37] font-headline">МЕНЮ</div>
@@ -118,9 +118,10 @@
 <section id="home" class="section fade-in" aria-labelledby="home-title">
     <div class="hero-shell relative min-h-[800px] flex items-center justify-center overflow-hidden px-4 sm:px-6 md:px-8 parallax-container">
         <div class="absolute inset-0 hero-gradient"></div>
-        <div class="absolute inset-0 -z-10 opacity-30 parallax-image" data-speed="0.2">
-            <img class="w-full h-full object-cover grayscale hero-image-zoom" src="assets/hero.jpg" alt="Ночной фасад бизнес-центра Nemiga Tower с золотой архитектурной подсветкой" width="1376" height="768" fetchpriority="high" decoding="async"/>
-        </div>
+        <picture class="absolute inset-0 -z-10 opacity-30 parallax-image" data-speed="0.2">
+            <source type="image/webp" srcset="assets/optimized/hero-640.webp 640w, assets/optimized/hero-960.webp 960w, assets/optimized/hero-1376.webp 1376w" sizes="100vw"/>
+            <img class="w-full h-full object-cover grayscale hero-image-zoom" src="assets/optimized/hero-960.webp" alt="Ночной фасад бизнес-центра Nemiga Tower с золотой архитектурной подсветкой" width="1376" height="768" fetchpriority="high" decoding="async"/>
+        </picture>
         <div class="hero-copy relative z-10 max-w-5xl text-center space-y-8 scroll-reveal reveal-scale">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-white/5 text-xs font-label uppercase tracking-widest text-primary-fixed-dim">
                 <span class="material-symbols-outlined text-[14px]">location_on</span>Минск, Центр
@@ -157,7 +158,7 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
             <div class="md:col-span-8 glass-card rounded-xl p-5 sm:p-8 card-pad border border-white/5 group relative overflow-hidden flex flex-col justify-end min-h-[320px] md:min-h-[400px] bento-card scroll-reveal reveal-left">
-                <img class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-105 transition-transform duration-700" src="assets/office-interior.jpg" alt="Office" width="1376" height="768" loading="lazy" decoding="async" fetchpriority="low"/>
+                <img class="absolute inset-0 w-full h-full object-cover opacity-20 group-hover:scale-105 transition-transform duration-700 lazy-media" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/optimized/office-interior-960.webp" data-srcset="assets/optimized/office-interior-640.webp 640w, assets/optimized/office-interior-960.webp 960w, assets/optimized/office-interior-1376.webp 1376w" data-sizes="(max-width: 768px) 100vw, 66vw" alt="Office" width="1376" height="768" loading="lazy" decoding="async" fetchpriority="low"/>
                 <div class="relative z-10 space-y-4">
                     <span class="material-symbols-outlined text-primary text-4xl">domain</span>
                     <h4 class="text-3xl font-headline font-bold">Офисы Класса A+</h4>
@@ -202,20 +203,20 @@
             <p class="section-lead max-w-2xl text-on-surface-variant text-lg leading-relaxed">Ваше время — самая ценная валюта. Мы создали среду для синергии бизнеса и отдыха.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-            <div class="md:col-span-8 md:row-span-2 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/10 bento-card scroll-reveal reveal-left">
-                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 lazy-bg" data-bg="assets/restaurant.jpg"><div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div></div>
+            <div class="md:col-span-8 md:row-span-2 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/10 bento-card scroll-reveal reveal-left amenity-card" role="button" tabindex="0" data-amenity-card="restaurant" aria-label="Открыть детали ресторана Sky Terrace">
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110 lazy-bg" data-bg="assets/optimized/restaurant-960.webp" data-bgset="assets/optimized/restaurant-640.webp 640w, assets/optimized/restaurant-960.webp 960w, assets/optimized/restaurant-1376.webp 1376w"><div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div></div>
                 <div class="relative h-full flex flex-col justify-end p-5 sm:p-8 card-pad">
                     <div class="flex items-center gap-2 mb-4">
                         <span class="px-3 py-1 rounded-full bg-primary/20 text-primary text-xs font-bold uppercase tracking-widest border border-primary/30">40 Этаж</span>
-                        <span class="status-chip px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-bold uppercase tracking-widest border border-green-500/30"><span class="material-symbols-outlined text-base filled" aria-hidden="true">check_circle</span>Открыто</span>
+                        <span class="status-chip inline-flex items-center gap-1 px-3 py-1 rounded-full bg-green-500/20 text-green-400 text-xs font-bold uppercase tracking-widest border border-green-500/30"><span class="material-symbols-outlined text-base filled" aria-hidden="true">check_circle</span>Открыто</span>
                     </div>
                     <h2 class="font-headline text-3xl font-bold mb-3">Ресторан "Sky Terrace"</h2>
                     <p class="text-on-surface-variant max-w-md mb-6 leading-relaxed">Авторская кухня от шеф-повара с опытом в Michelin-ресторанах.</p>
-                    <button class="flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-wider hover:gap-4 transition-all" onclick="showToast('Демо-сценарий: меню ресторана не подключено к отдельному приложению.', 'info')">Узнать меню <span class="material-symbols-outlined text-sm">arrow_forward</span></button>
+                    <button class="amenity-inline-action flex items-center gap-2 text-primary font-bold text-sm uppercase tracking-wider hover:gap-4 transition-all" type="button" data-amenity-action="restaurant">Узнать меню <span class="material-symbols-outlined text-sm">arrow_forward</span></button>
                 </div>
             </div>
-            <div class="md:col-span-4 md:row-span-3 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/10 bento-card scroll-reveal reveal-right">
-                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105 lazy-bg" data-bg="assets/fitness.jpg"><div class="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background"></div></div>
+            <div class="md:col-span-4 md:row-span-3 group relative overflow-hidden rounded-xl bg-surface-container border border-outline-variant/10 bento-card scroll-reveal reveal-right amenity-card" role="button" tabindex="0" data-amenity-card="fitness" aria-label="Открыть детали фитнес-клуба">
+                <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105 lazy-bg" data-bg="assets/optimized/fitness-960.webp" data-bgset="assets/optimized/fitness-640.webp 640w, assets/optimized/fitness-960.webp 960w, assets/optimized/fitness-1376.webp 1376w"><div class="absolute inset-0 bg-gradient-to-b from-background/20 via-transparent to-background"></div></div>
                 <div class="relative h-full flex flex-col justify-end p-5 sm:p-8 card-pad">
                     <div class="mb-6 h-12 w-12 rounded-full bg-gold-gradient flex items-center justify-center shadow-lg shadow-primary/20"><span class="material-symbols-outlined text-on-primary">fitness_center</span></div>
                     <h2 class="font-headline text-2xl font-bold mb-3">Фитнес-клуб</h2>
@@ -225,14 +226,14 @@
                         <li class="flex items-center gap-3 text-xs text-on-surface/80"><span class="material-symbols-outlined text-primary text-sm filled">check_circle</span>Персональные тренировки</li>
                         <li class="flex items-center gap-3 text-xs text-on-surface/80"><span class="material-symbols-outlined text-primary text-sm filled">check_circle</span>Хаммам и сауна</li>
                     </ul>
-                    <button class="w-full py-3 rounded-lg border border-primary text-primary font-bold text-sm hover:bg-primary hover:text-on-primary transition-all uppercase tracking-widest" onclick="showToast('Демо-сценарий: покупка абонемента не подключена к backend.', 'info')">Абонементы</button>
+                    <button class="amenity-inline-action w-full py-3 rounded-lg border border-primary text-primary font-bold text-sm hover:bg-primary hover:text-on-primary transition-all uppercase tracking-widest" type="button" data-amenity-action="fitness">Абонементы</button>
                 </div>
             </div>
-            <div class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-low border border-outline-variant/5 bento-card scroll-reveal reveal-left">
+            <div class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-low border border-outline-variant/5 bento-card scroll-reveal reveal-left amenity-card" role="button" tabindex="0" data-amenity-card="coworking" aria-label="Открыть детали коворкинга">
                 <div class="p-5 sm:p-8 card-pad flex flex-col h-full">
                     <div class="flex justify-between items-start mb-6">
                         <span class="material-symbols-outlined text-primary text-3xl">hub</span>
-                        <span class="status-chip text-xs font-bold text-green-500 uppercase tracking-wider"><span class="material-symbols-outlined text-base filled" aria-hidden="true">schedule</span>Open 24/7</span>
+                        <span class="status-chip inline-flex items-center gap-1 text-xs font-bold text-green-500 uppercase tracking-wider"><span class="material-symbols-outlined text-base filled" aria-hidden="true">schedule</span>Open 24/7</span>
                     </div>
                     <h3 class="font-headline text-xl font-bold mb-2">Коворкинг</h3>
                     <p class="text-on-surface-variant text-sm mb-6">Сейчас работают: 23 человека</p>
@@ -244,7 +245,7 @@
                     </div>
                 </div>
             </div>
-            <div class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-low border border-outline-variant/5 bento-card scroll-reveal reveal-scale">
+            <div class="md:col-span-4 group relative overflow-hidden rounded-xl bg-surface-container-low border border-outline-variant/5 bento-card scroll-reveal reveal-scale amenity-card" role="button" tabindex="0" data-amenity-card="parking" aria-label="Открыть детали паркинга">
                 <div class="p-5 sm:p-8 card-pad flex flex-col h-full">
                     <div class="mb-4"><span class="material-symbols-outlined text-primary text-3xl">electric_car</span></div>
                     <h3 class="font-headline text-xl font-bold mb-2">Паркинг</h3>
@@ -341,6 +342,26 @@
                             <div class="flex justify-between"><span class="text-on-surface-variant">Коэф. этажа</span><span class="font-semibold" id="floorDisplay">1.15</span></div>
                             <div class="flex justify-between"><span class="text-on-surface-variant">Коэф. отделки</span><span class="font-semibold" id="finishDisplay">1.0</span></div>
                         </div>
+                        <div class="calc-result-card mt-6" aria-labelledby="calcResultTitle">
+                            <div class="calc-result-header">
+                                <div>
+                                    <p class="section-kicker">Итог</p>
+                                    <h3 class="font-headline font-bold text-lg" id="calcResultTitle">Готово для отправки</h3>
+                                </div>
+                                <span class="material-symbols-outlined text-primary" aria-hidden="true">summarize</span>
+                            </div>
+                            <p class="calc-result-text" id="calcResultSummary">Расчёт формируется...</p>
+                            <div class="calc-result-actions">
+                                <button class="calc-result-action" id="copyCalcResult" type="button">
+                                    <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+                                    Скопировать итог
+                                </button>
+                                <a class="calc-result-action calc-result-share" id="shareCalcResult" href="https://t.me/share/url" target="_blank" rel="noopener noreferrer">
+                                    <span class="material-symbols-outlined" aria-hidden="true">send</span>
+                                    Отправить в Telegram
+                                </a>
+                            </div>
+                        </div>
                         <button class="w-full btn-primary py-4 rounded-xl mt-6 font-bold" type="button" onclick="openModal('bookingModal')">Забронировать</button>
                         <p class="microcopy text-center text-on-surface-variant mt-4 opacity-60">Расчёт является ориентиром и уточняется после консультации.</p>
                     </div>
@@ -364,13 +385,13 @@
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="gallery-item md:col-span-2 group relative rounded-xl overflow-hidden bento-card scroll-reveal reveal-left" data-category="architecture">
-                <img class="w-full h-80 object-cover lazy-media" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/hero.jpg" alt="Архитектурный вид Nemiga Tower ночью" width="1376" height="768" loading="lazy" decoding="async"/>
+                <img class="w-full h-80 object-cover lazy-media" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/optimized/hero-640.webp" data-srcset="assets/optimized/hero-640.webp 640w, assets/optimized/hero-960.webp 960w, assets/optimized/hero-1376.webp 1376w" data-sizes="(max-width: 768px) 100vw, 66vw" alt="Архитектурный вид Nemiga Tower ночью" width="1376" height="768" loading="lazy" decoding="async"/>
             </div>
             <div class="gallery-item group relative rounded-xl overflow-hidden bento-card scroll-reveal reveal-right" data-category="interior">
-                <img class="w-full h-80 object-cover lazy-media" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/office-interior.jpg" alt="Светлый офисный интерьер с панорамным остеклением" width="1376" height="768" loading="lazy" decoding="async"/>
+                <img class="w-full h-80 object-cover lazy-media" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/optimized/office-interior-640.webp" data-srcset="assets/optimized/office-interior-320.webp 320w, assets/optimized/office-interior-640.webp 640w, assets/optimized/office-interior-960.webp 960w" data-sizes="(max-width: 768px) 100vw, 33vw" alt="Светлый офисный интерьер с панорамным остеклением" width="1376" height="768" loading="lazy" decoding="async"/>
             </div>
             <div class="gallery-item group relative rounded-xl overflow-hidden bento-card scroll-reveal reveal-left" data-category="interior">
-                <img class="w-full h-80 object-cover lazy-media" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/gallery-lounge.jpg" alt="Приватная lounge-библиотека для резидентов" width="1376" height="768" loading="lazy" decoding="async"/>
+                <img class="w-full h-80 object-cover lazy-media" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/optimized/gallery-lounge-640.webp" data-srcset="assets/optimized/gallery-lounge-320.webp 320w, assets/optimized/gallery-lounge-640.webp 640w, assets/optimized/gallery-lounge-960.webp 960w" data-sizes="(max-width: 768px) 100vw, 33vw" alt="Приватная lounge-библиотека для резидентов" width="1376" height="768" loading="lazy" decoding="async"/>
             </div>
         </div>
     </div>
@@ -379,16 +400,38 @@
 <!-- NEWS SECTION -->
 <section id="news" class="section hidden fade-in" aria-labelledby="news-title" hidden>
     <div class="section-shell-tight page-shell pt-24 md:pt-32 pb-16 md:pb-20 px-4 sm:px-6 max-w-7xl mx-auto">
-        <h1 class="section-title text-5xl font-headline font-extrabold mb-12 md:mb-16 scroll-reveal reveal-left" id="news-title">Новости</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="glass-card p-8 rounded-xl bento-card scroll-reveal reveal-left">
-                <h3 class="font-headline font-bold text-2xl mb-4">Открытие коворкинга</h3>
-                <p class="text-on-surface-variant">Новое пространство на 35 этаже.</p>
+        <div class="news-header scroll-reveal reveal-left">
+            <div>
+                <div class="section-kicker">Концепт-журнал</div>
+                <h1 class="section-title text-5xl font-headline font-extrabold" id="news-title">Новости</h1>
             </div>
-            <div class="glass-card p-8 rounded-xl bento-card scroll-reveal reveal-right">
-                <h3 class="font-headline font-bold text-2xl mb-4">EPAM — резидент</h3>
-                <p class="text-on-surface-variant">Крупнейшая IT-компания заняла 5 этажей.</p>
-            </div>
+            <p class="fiction-note">Все новости в этом разделе вымышлены и добавлены только для демонстрации живого сайта-портфолио.</p>
+        </div>
+        <div class="news-grid">
+            <article class="news-card glass-card bento-card scroll-reveal reveal-left" role="button" tabindex="0" data-news-card="director">
+                <div class="news-card-meta"><span>Встреча</span><time datetime="2026-05-03">03.05.2026</time></div>
+                <h3>Встреча с директором проекта AI_Nikitka93</h3>
+                <p>Команда Nemiga Tower обсудила, как ИИ помогает собрать премиальный сайт за один вечер без потери честности.</p>
+                <button class="news-card-link" type="button" data-news-action="director">Читать концепт <span class="material-symbols-outlined">arrow_forward</span></button>
+            </article>
+            <article class="news-card glass-card bento-card scroll-reveal reveal-scale" role="button" tabindex="0" data-news-card="aihall">
+                <div class="news-card-meta"><span>Открытие</span><time datetime="2026-05-09">09.05.2026</time></div>
+                <h3>Открытие AI-зала переговоров</h3>
+                <p>На 36 этаже появился зал для стратегических встреч с интерактивной стеной, быстрыми сценариями презентаций и private briefing режимом.</p>
+                <button class="news-card-link" type="button" data-news-action="aihall">Что внутри <span class="material-symbols-outlined">arrow_forward</span></button>
+            </article>
+            <article class="news-card glass-card bento-card scroll-reveal reveal-right" role="button" tabindex="0" data-news-card="lounge">
+                <div class="news-card-meta"><span>Lounge</span><time datetime="2026-05-14">14.05.2026</time></div>
+                <h3>Новый зал Resident Lounge</h3>
+                <p>Камерное пространство для ожидания гостей, коротких встреч и вечерних разговоров стало частью маршрута резидента.</p>
+                <button class="news-card-link" type="button" data-news-action="lounge">Посмотреть детали <span class="material-symbols-outlined">arrow_forward</span></button>
+            </article>
+            <article class="news-card glass-card bento-card scroll-reveal reveal-left" role="button" tabindex="0" data-news-card="parking">
+                <div class="news-card-meta"><span>Сервис</span><time datetime="2026-05-21">21.05.2026</time></div>
+                <h3>Пилот умного паркинга</h3>
+                <p>Для концепта добавлен сценарий: гость заранее получает маршрут, въезд и место рядом с нужным лифтовым ядром.</p>
+                <button class="news-card-link" type="button" data-news-action="parking">Как работает <span class="material-symbols-outlined">arrow_forward</span></button>
+            </article>
         </div>
     </div>
 </section>
@@ -401,7 +444,7 @@
             <div class="glass-card p-8 rounded-xl bento-card scroll-reveal reveal-left">
                 <p class="italic mb-4">"Лучший офис в Минске!"</p>
                 <div class="flex items-center gap-4 mt-4">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/avatar-ceo.jpg" alt="Александр К." class="w-12 h-12 rounded-full object-cover lazy-media" width="1376" height="768" loading="lazy" decoding="async"/>
+                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/optimized/avatar-ceo-96.webp" data-srcset="assets/optimized/avatar-ceo-96.webp 96w, assets/optimized/avatar-ceo-192.webp 192w" data-sizes="48px" alt="Александр К." class="w-12 h-12 rounded-full object-cover lazy-media" width="96" height="96" loading="lazy" decoding="async"/>
                     <div>
                         <div class="font-bold">Александр К.</div>
                         <div class="text-xs text-on-surface-variant">CEO, TechHub</div>
@@ -411,7 +454,7 @@
             <div class="glass-card p-8 rounded-xl bento-card scroll-reveal reveal-scale">
                 <p class="italic mb-4">"Инфраструктура топ!"</p>
                 <div class="flex items-center gap-4 mt-4">
-                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/avatar-cto.jpg" alt="Елена М." class="w-12 h-12 rounded-full object-cover lazy-media" width="1376" height="768" loading="lazy" decoding="async"/>
+                    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/optimized/avatar-cto-96.webp" data-srcset="assets/optimized/avatar-cto-96.webp 96w, assets/optimized/avatar-cto-192.webp 192w" data-sizes="48px" alt="Елена М." class="w-12 h-12 rounded-full object-cover lazy-media" width="96" height="96" loading="lazy" decoding="async"/>
                     <div>
                         <div class="font-bold">Елена М.</div>
                         <div class="text-xs text-on-surface-variant">CTO, Innova</div>
@@ -436,7 +479,7 @@
 <section id="contacts" class="section hidden fade-in" aria-labelledby="contacts-title" hidden>
     <div class="section-shell-tight page-shell pt-24 md:pt-32 pb-16 px-4 sm:px-6 max-w-7xl mx-auto">
         <h1 class="section-title font-headline text-5xl md:text-7xl mb-8 scroll-reveal reveal-left" id="contacts-title">Контакты</h1>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="glass-card p-5 sm:p-8 card-pad rounded-xl scroll-reveal reveal-left">
                 <h3 class="font-headline font-bold text-xl mb-4">Отдел аренды</h3>
                 <div class="space-y-3">
@@ -452,9 +495,32 @@
                     <div class="flex justify-between"><span>Сб-Вс</span><span>10:00 - 18:00</span></div>
                 </div>
             </div>
+            <div class="glass-card p-5 sm:p-8 card-pad rounded-xl scroll-reveal reveal-scale">
+                <h3 class="font-headline font-bold text-xl mb-4">Автор сайта</h3>
+                <div class="space-y-3">
+                    <a class="contact-link" href="https://t.me/Ai_nikitka93" target="_blank" rel="noopener noreferrer" aria-label="Открыть Telegram автора AI_Nikitka93">
+                        <span class="material-symbols-outlined" aria-hidden="true">alternate_email</span>
+                        <span>@Ai_nikitka93</span>
+                    </a>
+                    <a class="contact-link" href="https://t.me/digital_ai_art" target="_blank" rel="noopener noreferrer" aria-label="Открыть Telegram-канал AI Хроники: Лаборатория AI_Nikitka93">
+                        <span class="material-symbols-outlined" aria-hidden="true">rss_feed</span>
+                        <span>AI Хроники: Лаборатория AI_Nikitka93</span>
+                    </a>
+                    <p class="microcopy text-on-surface-variant pt-2">Ссылки ведут на реальные Telegram-страницы автора проекта.</p>
+                </div>
+            </div>
         </div>
         <div class="glass-card p-5 sm:p-10 panel-pad rounded-xl mt-6 scroll-reveal reveal-scale">
-            <h2 class="font-headline font-bold text-2xl mb-6">Заявка</h2>
+            <div class="form-heading">
+                <div>
+                    <p class="section-kicker">Демо-режим</p>
+                    <h2 class="font-headline font-bold text-2xl">Заявка</h2>
+                </div>
+                <span class="demo-badge">Не отправляется</span>
+            </div>
+            <p class="demo-notice" role="note">
+                Это демонстрационная форма портфолио. Данные не уходят менеджеру, в CRM или на почту.
+            </p>
             <form onsubmit="handleSubmit(event)" class="space-y-4">
                 <div class="space-y-2">
                     <label class="text-sm font-medium text-on-surface" for="contactName">Имя</label>
@@ -468,7 +534,7 @@
                     <label class="text-sm font-medium text-on-surface" for="contactMessage">Сообщение</label>
                     <textarea class="surface-field" id="contactMessage" name="message" placeholder="Опишите требования к офису, график просмотра или пожелания по сервису." rows="4"></textarea>
                 </div>
-                <button class="w-full btn-primary py-4 rounded-xl font-bold" type="submit">Отправить заявку</button>
+                <button class="w-full btn-primary py-4 rounded-xl font-bold" type="submit">Показать демо-отправку</button>
             </form>
         </div>
     </div>
@@ -480,17 +546,27 @@
 <footer class="footer-shell border-t border-white/5 py-12 px-4 sm:px-6 md:px-8 mt-16 md:mt-20">
     <div class="max-w-7xl mx-auto text-center">
         <a class="inline-block footer-brand" href="#home" data-section="home" aria-label="Немига-Тауэр — на главную">
-            <img src="assets/logo-wordmark.svg" alt="Nemiga Tower wordmark" class="w-full h-auto" width="372" height="96"/>
+            <img src="assets/logo-wordmark.svg?v=2" alt="Nemiga Tower wordmark" class="w-full h-auto" width="420" height="96"/>
         </a>
         <p class="text-sm text-on-surface-variant">© 2026 Немига-Тауэр. Создано Nikita (AI_Nikitka93).</p>
-        <p class="microcopy text-on-surface-variant mt-2">Концепт демонстрационного объекта. Все материалы на странице выстроены как премиальный showcase, а не как шаблон-заглушка.</p>
+        <p class="microcopy text-on-surface-variant mt-2">Проект создан исключительно для портфолио в качестве демонстрации сайта, разработанного за один вечер с использованием ИИ.</p>
+        <div class="footer-actions">
+            <button class="footer-utility" id="openAnalyticsPanel" type="button">
+                <span class="material-symbols-outlined" aria-hidden="true">monitoring</span>
+                Открыть демо-аналитику
+            </button>
+        </div>
+        <p class="microcopy text-on-surface-variant mt-2">Демо-аналитика хранит только клики, переходы и ошибки без значений из форм.</p>
     </div>
 </footer>
 
 <!-- Modals -->
 <div class="modal fixed inset-0 z-[10020] flex items-center justify-center p-4 bg-black/60" id="callbackModal" onclick="if(event.target===this)closeModal('callbackModal')" aria-hidden="true">
     <div class="modal-content glass-card p-5 md:p-8 rounded-xl max-w-md w-full" role="dialog" aria-modal="true" aria-labelledby="callbackTitle">
-        <div class="modal-header flex justify-between items-center mb-6"><h3 class="font-headline font-bold text-2xl" id="callbackTitle">Заказать звонок</h3><button class="material-symbols-outlined modal-close" type="button" onclick="closeModal('callbackModal')" aria-label="Закрыть окно обратного звонка">close</button></div>
+        <div class="modal-header flex justify-between items-center mb-6"><h3 class="font-headline font-bold text-2xl" id="callbackTitle">Демо-звонок</h3><button class="material-symbols-outlined modal-close" type="button" onclick="closeModal('callbackModal')" aria-label="Закрыть окно обратного звонка">close</button></div>
+        <p class="demo-notice modal-demo-notice" role="note">
+            Демо-форма: номер не отправляется и реальный звонок не создаётся.
+        </p>
         <form onsubmit="handleModalSubmit(event,'callbackModal')" class="space-y-4">
             <div class="space-y-2">
                 <label class="text-sm font-medium text-on-surface" for="callbackName">Ваше имя</label>
@@ -500,7 +576,7 @@
                 <label class="text-sm font-medium text-on-surface" for="callbackPhone">Телефон</label>
                 <input class="surface-field" id="callbackPhone" name="phone" autocomplete="tel" placeholder="+375 (29) 123-45-67" required/>
             </div>
-            <button class="w-full btn-primary py-4 rounded-xl font-bold" type="submit">Жду звонка</button>
+            <button class="w-full btn-primary py-4 rounded-xl font-bold" type="submit">Показать демо-заявку</button>
         </form>
     </div>
 </div>
@@ -508,9 +584,12 @@
 <div class="modal fixed inset-0 z-[10020] flex items-center justify-center p-4 bg-black/60" id="bookingModal" onclick="if(event.target===this)closeModal('bookingModal')" aria-hidden="true">
     <div class="modal-content glass-card p-5 md:p-8 rounded-xl max-w-md w-full" role="dialog" aria-modal="true" aria-labelledby="bookingTitle">
         <div class="modal-header flex justify-between items-center mb-6">
-            <h3 class="font-headline font-bold text-2xl" id="bookingTitle">Бронирование</h3>
+            <h3 class="font-headline font-bold text-2xl" id="bookingTitle">Демо-бронирование</h3>
             <button class="material-symbols-outlined modal-close" type="button" onclick="closeModal('bookingModal')" aria-label="Закрыть окно бронирования">close</button>
         </div>
+        <p class="demo-notice modal-demo-notice" role="note">
+            Демо-форма: офис не бронируется, данные никуда не отправляются.
+        </p>
         <form onsubmit="handleModalSubmit(event,'bookingModal')" class="space-y-4">
             <div class="glass-panel p-4 rounded-lg bg-surface-container-low">
                 <div class="text-xs text-on-surface-variant uppercase tracking-widest mb-2">Параметры офиса</div>
@@ -529,8 +608,52 @@
                 <label class="text-sm font-medium text-on-surface" for="bookingEmail">Email</label>
                 <input class="surface-field" id="bookingEmail" name="email" autocomplete="email" placeholder="name@company.com" type="email"/>
             </div>
-            <button class="w-full btn-primary py-4 rounded-xl font-bold" type="submit">Отправить заявку</button>
+            <button class="w-full btn-primary py-4 rounded-xl font-bold" type="submit">Показать демо-бронирование</button>
         </form>
+    </div>
+</div>
+
+<div class="modal fixed inset-0 z-[10020] flex items-center justify-center p-4 bg-black/60" id="amenityModal" onclick="if(event.target===this)closeModal('amenityModal')" aria-hidden="true">
+    <div class="modal-content amenity-detail glass-card rounded-xl max-w-5xl w-full" role="dialog" aria-modal="true" aria-labelledby="amenityTitle">
+        <div class="modal-header amenity-detail-header">
+            <div>
+                <div class="amenity-detail-kicker" id="amenityKicker">Инфраструктура</div>
+                <h3 class="font-headline font-bold text-3xl md:text-4xl" id="amenityTitle">Sky Terrace</h3>
+            </div>
+            <button class="material-symbols-outlined modal-close" type="button" onclick="closeModal('amenityModal')" aria-label="Закрыть детали инфраструктуры">close</button>
+        </div>
+        <div class="amenity-detail-layout">
+            <div class="amenity-detail-visual">
+                <img id="amenityImage" src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/optimized/restaurant-960.webp" data-srcset="assets/optimized/restaurant-640.webp 640w, assets/optimized/restaurant-960.webp 960w, assets/optimized/restaurant-1376.webp 1376w" data-sizes="(max-width: 768px) 92vw, 54vw" alt="" width="1376" height="768" loading="lazy" decoding="async"/>
+            </div>
+            <div class="amenity-detail-body">
+                <p class="amenity-detail-description" id="amenityDescription"></p>
+                <div class="amenity-detail-meta" id="amenityMeta"></div>
+                <ul class="amenity-detail-list" id="amenityHighlights"></ul>
+                <div class="amenity-detail-actions">
+                    <button class="btn-primary amenity-detail-primary" type="button" id="amenityPrimary">Запланировать визит</button>
+                    <button class="amenity-detail-secondary" type="button" id="amenitySecondary">Смотреть обзор</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fixed inset-0 z-[10020] flex items-center justify-center p-4 bg-black/60" id="newsModal" onclick="if(event.target===this)closeModal('newsModal')" aria-hidden="true">
+    <div class="modal-content news-detail glass-card rounded-xl max-w-3xl w-full" role="dialog" aria-modal="true" aria-labelledby="newsModalTitle">
+        <div class="modal-header news-detail-header">
+            <div>
+                <div class="news-detail-meta" id="newsModalMeta">Концепт / 2026</div>
+                <h3 class="font-headline font-bold text-3xl md:text-4xl" id="newsModalTitle">Новость</h3>
+            </div>
+            <button class="material-symbols-outlined modal-close" type="button" onclick="closeModal('newsModal')" aria-label="Закрыть новость">close</button>
+        </div>
+        <div class="news-detail-body">
+            <p id="newsModalLead"></p>
+            <div class="news-detail-points" id="newsModalPoints"></div>
+            <p class="fiction-note news-detail-note">Вымышленная новость: демонстрационный контент для портфолио, не реальное заявление бизнес-центра.</p>
+            <button class="btn-primary news-detail-action" type="button" id="newsModalAction">Перейти дальше</button>
+        </div>
     </div>
 </div>
 
@@ -539,7 +662,7 @@
         <div class="modal-header flex justify-between items-center mb-6"><h3 class="font-headline font-bold text-2xl" id="mediaTourTitle">Обзор пространства</h3><button class="material-symbols-outlined modal-close" type="button" onclick="closeModal('mediaTourModal')" aria-label="Закрыть обзор пространства">close</button></div>
         <div class="space-y-6">
             <div class="media-tour-visual aspect-[16/7] bg-surface-container rounded-[1.25rem] overflow-hidden border border-white/10">
-                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/hero.jpg" alt="Главный вид Nemiga Tower" class="w-full h-full object-cover lazy-media" id="mediaTourPreview" width="1376" height="768" decoding="async"/>
+                <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/optimized/hero-960.webp" data-srcset="assets/optimized/hero-640.webp 640w, assets/optimized/hero-960.webp 960w, assets/optimized/hero-1376.webp 1376w" data-sizes="(max-width: 768px) 92vw, 72vw" alt="Главный вид Nemiga Tower" class="w-full h-full object-cover lazy-media" id="mediaTourPreview" width="1376" height="768" decoding="async"/>
             </div>
             <div class="media-tour-summary flex items-start justify-between gap-4 flex-col md:flex-row">
                 <div>
@@ -549,24 +672,24 @@
                 <button class="btn-primary px-6 py-3 rounded-xl font-bold" type="button" onclick="navigateToSection('contacts'); closeModal('mediaTourModal')">Запланировать личный тур</button>
             </div>
             <div class="media-tour-grid" role="list" aria-label="Ключевые пространства бизнес-центра">
-                <button class="media-tour-card text-left" type="button" data-active="true" data-tour-image="assets/hero.jpg" data-tour-title="Архитектурный фасад" data-tour-description="Ночной силуэт башни с золотой подсветкой формирует первую эмоциональную точку контакта и задаёт премиальный тон всему объекту.">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/hero.jpg" alt="Миниатюра фасада бизнес-центра" class="lazy-media" width="1376" height="768" loading="lazy" decoding="async"/>
+                <button class="media-tour-card text-left" type="button" data-active="true" data-tour-image="assets/optimized/hero-960.webp" data-tour-srcset="assets/optimized/hero-640.webp 640w, assets/optimized/hero-960.webp 960w, assets/optimized/hero-1376.webp 1376w" data-tour-title="Архитектурный фасад" data-tour-description="Ночной силуэт башни с золотой подсветкой формирует первую эмоциональную точку контакта и задаёт премиальный тон всему объекту.">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/optimized/hero-320.webp" data-srcset="assets/optimized/hero-320.webp 320w, assets/optimized/hero-640.webp 640w" data-sizes="(max-width: 768px) 48vw, 14vw" alt="Миниатюра фасада бизнес-центра" class="lazy-media" width="320" height="179" loading="lazy" decoding="async"/>
                     <span class="media-tour-caption"><span class="font-headline font-bold text-white">Фасад</span></span>
                 </button>
-                <button class="media-tour-card text-left" type="button" data-tour-image="assets/office-interior.jpg" data-tour-title="Панорамные офисы" data-tour-description="Светлые офисы с мягким освещением, большим количеством воздуха и спокойной премиальной палитрой для ежедневной работы.">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/office-interior.jpg" alt="Миниатюра офисного интерьера" class="lazy-media" width="1376" height="768" loading="lazy" decoding="async"/>
+                <button class="media-tour-card text-left" type="button" data-tour-image="assets/optimized/office-interior-960.webp" data-tour-srcset="assets/optimized/office-interior-640.webp 640w, assets/optimized/office-interior-960.webp 960w, assets/optimized/office-interior-1376.webp 1376w" data-tour-title="Панорамные офисы" data-tour-description="Светлые офисы с мягким освещением, большим количеством воздуха и спокойной палитрой для ежедневной работы.">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/optimized/office-interior-320.webp" data-srcset="assets/optimized/office-interior-320.webp 320w, assets/optimized/office-interior-640.webp 640w" data-sizes="(max-width: 768px) 48vw, 14vw" alt="Миниатюра офисного интерьера" class="lazy-media" width="320" height="179" loading="lazy" decoding="async"/>
                     <span class="media-tour-caption"><span class="font-headline font-bold text-white">Офисы</span></span>
                 </button>
-                <button class="media-tour-card text-left" type="button" data-tour-image="assets/restaurant.jpg" data-tour-title="Sky Terrace" data-tour-description="Ресторан на верхнем этаже продолжает визуальный язык башни и добавляет бизнес-центру нужную hospitality-слойность.">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/restaurant.jpg" alt="Миниатюра ресторана Sky Terrace" class="lazy-media" width="1376" height="768" loading="lazy" decoding="async"/>
+                <button class="media-tour-card text-left" type="button" data-tour-image="assets/optimized/restaurant-960.webp" data-tour-srcset="assets/optimized/restaurant-640.webp 640w, assets/optimized/restaurant-960.webp 960w, assets/optimized/restaurant-1376.webp 1376w" data-tour-title="Sky Terrace" data-tour-description="Ресторан на верхнем этаже продолжает визуальный язык башни и добавляет бизнес-центру нужную hospitality-слойность.">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/optimized/restaurant-320.webp" data-srcset="assets/optimized/restaurant-320.webp 320w, assets/optimized/restaurant-640.webp 640w" data-sizes="(max-width: 768px) 48vw, 14vw" alt="Миниатюра ресторана Sky Terrace" class="lazy-media" width="320" height="179" loading="lazy" decoding="async"/>
                     <span class="media-tour-caption"><span class="font-headline font-bold text-white">Ресторан</span></span>
                 </button>
-                <button class="media-tour-card text-left" type="button" data-tour-image="assets/fitness.jpg" data-tour-title="Фитнес-клуб" data-tour-description="Фитнес и бассейн работают как сервисный якорь для резидентов и усиливают ощущение полноценной экосистемы внутри объекта.">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/fitness.jpg" alt="Миниатюра фитнес-клуба" class="lazy-media" width="1376" height="768" loading="lazy" decoding="async"/>
+                <button class="media-tour-card text-left" type="button" data-tour-image="assets/optimized/fitness-960.webp" data-tour-srcset="assets/optimized/fitness-640.webp 640w, assets/optimized/fitness-960.webp 960w, assets/optimized/fitness-1376.webp 1376w" data-tour-title="Фитнес-клуб" data-tour-description="Фитнес и бассейн работают как сервисный якорь для резидентов и усиливают ощущение полноценной экосистемы внутри объекта.">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/optimized/fitness-320.webp" data-srcset="assets/optimized/fitness-320.webp 320w, assets/optimized/fitness-640.webp 640w" data-sizes="(max-width: 768px) 48vw, 14vw" alt="Миниатюра фитнес-клуба" class="lazy-media" width="320" height="179" loading="lazy" decoding="async"/>
                     <span class="media-tour-caption"><span class="font-headline font-bold text-white">Фитнес</span></span>
                 </button>
-                <button class="media-tour-card text-left" type="button" data-tour-image="assets/gallery-lounge.jpg" data-tour-title="Resident lounge" data-tour-description="Камерное lounge-пространство создаёт более мягкую, приватную атмосферу для встреч, чтения и пауз в течение дня.">
-                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/gallery-lounge.jpg" alt="Миниатюра lounge-пространства" class="lazy-media" width="1376" height="768" loading="lazy" decoding="async"/>
+                <button class="media-tour-card text-left" type="button" data-tour-image="assets/optimized/gallery-lounge-960.webp" data-tour-srcset="assets/optimized/gallery-lounge-640.webp 640w, assets/optimized/gallery-lounge-960.webp 960w, assets/optimized/gallery-lounge-1376.webp 1376w" data-tour-title="Resident lounge" data-tour-description="Камерное lounge-пространство создаёт более мягкую, приватную атмосферу для встреч, чтения и пауз в течение дня.">
+                        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" data-src="assets/optimized/gallery-lounge-320.webp" data-srcset="assets/optimized/gallery-lounge-320.webp 320w, assets/optimized/gallery-lounge-640.webp 640w" data-sizes="(max-width: 768px) 48vw, 14vw" alt="Миниатюра lounge-пространства" class="lazy-media" width="320" height="179" loading="lazy" decoding="async"/>
                     <span class="media-tour-caption"><span class="font-headline font-bold text-white">Lounge</span></span>
                 </button>
             </div>
@@ -574,7 +697,35 @@
     </div>
 </div>
 
+<div class="modal fixed inset-0 z-[10020] flex items-center justify-center p-4 bg-black/60" id="analyticsModal" onclick="if(event.target===this)closeModal('analyticsModal')" aria-hidden="true">
+    <div class="modal-content analytics-panel glass-card rounded-xl max-w-4xl w-full" role="dialog" aria-modal="true" aria-labelledby="analyticsTitle">
+        <div class="modal-header analytics-panel-header">
+            <div>
+                <div class="section-kicker">Operator view</div>
+                <h3 class="font-headline font-bold text-3xl" id="analyticsTitle">Демо-аналитика</h3>
+            </div>
+            <button class="material-symbols-outlined modal-close" type="button" onclick="closeModal('analyticsModal')" aria-label="Закрыть демо-аналитику">close</button>
+        </div>
+        <p class="demo-notice analytics-notice" role="note">
+            Это базовая локальная аналитика для портфолио: она показывает клики, переходы по разделам и JS-ошибки. Поля форм и телефоны не сохраняются.
+        </p>
+        <div class="analytics-panel-body" id="analyticsPanelBody" aria-live="polite">
+            <p class="text-on-surface-variant">Событий пока нет.</p>
+        </div>
+        <div class="analytics-panel-actions">
+            <button class="calc-result-action" id="copyAnalyticsEvents" type="button">
+                <span class="material-symbols-outlined" aria-hidden="true">content_copy</span>
+                Скопировать JSON
+            </button>
+            <button class="calc-result-action" id="clearAnalyticsEvents" type="button">
+                <span class="material-symbols-outlined" aria-hidden="true">delete</span>
+                Очистить сессию
+            </button>
+        </div>
+    </div>
+</div>
+
 <!-- JavaScript -->
-<script src="assets/app.js"></script>
+<script src="assets/app.js?v=20260503-calc-summary"></script>
 </body>
 </html>
