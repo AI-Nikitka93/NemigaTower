@@ -196,6 +196,11 @@ function sanitizeAnalyticsText(value, fallback = 'unknown') {
 }
 
 function sendAnalyticsEvent(event) {
+    const isLocalAnalyticsEndpoint = ['localhost', '127.0.0.1', '::1'].includes(window.location.hostname);
+    if (!isLocalAnalyticsEndpoint) {
+        return;
+    }
+
     const body = JSON.stringify(event);
     if (navigator.sendBeacon) {
         const blob = new Blob([body], { type: 'application/json' });
